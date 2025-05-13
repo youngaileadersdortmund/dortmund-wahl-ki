@@ -1,0 +1,22 @@
+{
+    "prompt": "Erstelle ein realistisches Bild von Dortmund, das sowohl moderne Architektur als auch traditionelle Geb\u00e4ude zeigt. Integriere subtil Elemente, die auf das Wahlprogramm hinweisen: Fahrradabstellpl\u00e4tze in ausreichender Zahl, Bauarbeiten, die auf ein Investitionsprogramm f\u00fcr lokales Handwerk hindeuten, und im Hintergrund Wohnh\u00e4user, die bezahlbaren Wohnraum symbolisieren. Die Atmosph\u00e4re soll optimistisch und zukunftsorientiert sein, die Resilienz und den Aufbruch der Stadt Dortmund widerspiegeln.",
+    "image_paths": [
+        "/home/fischer/repos/ai-for-political-education/contents/stadtpanorama_volkswohlbund_01_roland_gorecki_1.jpg"
+    ],
+    "eval_json_path": null,
+    "offload": false,
+    "num_images_per_prompt": 2,
+    "model_type": "flux-dev",
+    "width": 512,
+    "height": 512,
+    "ref_size": 512,
+    "num_steps": 25,
+    "guidance": 10.0,
+    "seed": 3407,
+    "save_path": "/home/fischer/repos/ai-for-political-education/contents/2020/spd/images",
+    "only_lora": true,
+    "concat_refs": false,
+    "lora_rank": 512,
+    "data_resolution": 512,
+    "pe": "d"
+}
