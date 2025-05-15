@@ -7,6 +7,9 @@ gradio==5.22.0
 torch==2.4.0
 torchvision==0.19.0
 
+vllm
+mistral_common
+
 scipy
 diffusers
 transformers

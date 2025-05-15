@@ -1,0 +1,22 @@
+{
+    "prompt": "Erstelle ein Bild der Stadt Dortmund, das die Integration von Smart City Technologien zeigt, die Modernisierung der Westfalenhallen, die Neugestaltung des n\u00f6rdlichen Bahnhofsumfelds und des Signal Iduna Park mit neuen Anbauten und modernen architektonischen Elementen, die in die Stadtlandschaft passen. Zeige auch die Integration neuer Geb\u00e4ude, moderne Logistikparks, die Stadtkrone als Stadtk znak, den Orbahnweg, das Konzerthaus, Bed & Breakfasts, Bibliotheken und eine vergr\u00f6\u00dferte Plaza Hunken Park, sowie die erweiterte Waldparkway, die Hohem B\u00fcro - und Pals\u00f9gy\u00e1lag, moderne Technologieparks, das Smart-Rhino-Projekt, die IGA 2027 am Phoenix-See und die Olympischen Spiele 2032. Unterst\u00fctze Klimaschutzma\u00dfnahmen wie Solaranlagen, Baumwachst\u00fccher und Bus- und Radwegnetze, sowie Verbesserungen an Schulen und Hochschulen, die F\u00f6rderung des sozialen Miteinanders und die medizinische Wirtschaft, ebenso neue Kunstinstallationen und die Modernisierung des Regierungsbezirkes sowie die F\u00f6rderung der Gewerbegebiete.",
+    "image_paths": [
+        "/home/fischer/repos/ai-for-political-education/contents/stadtpanorama_volkswohlbund_01_roland_gorecki_1.jpg"
+    ],
+    "eval_json_path": null,
+    "offload": false,
+    "num_images_per_prompt": 2,
+    "model_type": "flux-dev",
+    "width": 512,
+    "height": 512,
+    "ref_size": 512,
+    "num_steps": 25,
+    "guidance": 10.0,
+    "seed": 3407,
+    "save_path": "/home/fischer/repos/ai-for-political-education/contents/2020/cdu/images",
+    "only_lora": true,
+    "concat_refs": false,
+    "lora_rank": 512,
+    "data_resolution": 512,
+    "pe": "d"
+}

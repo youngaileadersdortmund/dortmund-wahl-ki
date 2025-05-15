@@ -2,12 +2,7 @@ import os
 import sys
 import subprocess
 
-# import torch
-# from diffusers import StableDiffusionPipeline
-# from transformers import pipeline
-# from PyPDF2 import PdfReader
-
-print("Hello World", sys.version)
+from llm import generate_summary_and_prompt
 
 def run_gen_ai(prompt, image_gen_path, base_img, save_path, image_gen_call, n_images=2, guidance=10):
     image_gen_call = image_gen_call.format(prompt=prompt, base=base_img, dir=save_path, n_img=n_images, guid=guidance)
@@ -18,17 +13,25 @@ def run_gen_ai(prompt, image_gen_path, base_img, save_path, image_gen_call, n_im
         return False
     return True
 
+def process_program(base_path, image_gen_path, image_gen_call, base_img, llm_name='Ministral'):
+    for dirname in ['images', 'prompts']:
+        if not os.path.exists(os.path.join(base_path, dirname)):
+            os.makedirs(os.path.join(base_path, dirname))
+    # generate_summary_and_prompt(base_path, model_name=llm_name)
+    img_save_path = os.path.join(base_path, 'images')
+    with open(os.path.join(base_path, 'prompts', f'DE_{llm_name}.txt'), 'r') as f:
+        prompt = f.read()
+    run_gen_ai(prompt, image_gen_path, base_img, img_save_path, image_gen_call)
 
-prompt = 'Erstelle ein realistisches Bild von Dortmund, das sowohl moderne Architektur als auch traditionelle Gebäude zeigt. Integriere subtil Elemente, die auf das Wahlprogramm hinweisen: Fahrradabstellplätze in ausreichender Zahl, Bauarbeiten, die auf ein Investitionsprogramm für lokales Handwerk hindeuten, und im Hintergrund Wohnhäuser, die bezahlbaren Wohnraum symbolisieren. Die Atmosphäre soll optimistisch und zukunftsorientiert sein, die Resilienz und den Aufbruch der Stadt Dortmund widerspiegeln.'
-image_gen_path = "/home/fischer/repos/UNO"
+base_path = "/home/fischer/repos/ai-for-political-education/contents/2020/fdp"
+uno_path = "/home/fischer/repos/UNO"
 uno_call = 'python3 inference.py --prompt "{prompt}" --image_paths "{base}" --save_path "{dir}" --num_images_per_prompt {n_img} --guidance {guid}'
-base_img = "/home/fischer/repos/ai-for-political-education/contents/stadtpanorama_volkswohlbund_01_roland_gorecki_1.jpg"
-save_path = "/home/fischer/repos/ai-for-political-education/contents/2020/spd/images"
+base_img = "/home/fischer/repos/ai-for-political-education/contents/Herunterladen.jpg" # dortmund-stadt-skyline-100~_v-fullhd.jpg" # stadtpanorama_volkswohlbund_01_roland_gorecki_1.jpg"
 
-run_gen_ai(prompt, image_gen_path, base_img, save_path, uno_call)
+process_program(base_path, uno_path, uno_call, base_img, 'Ministral')
 
 
-base_path = "contents/2020/spd"
+
 
 
 # summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
