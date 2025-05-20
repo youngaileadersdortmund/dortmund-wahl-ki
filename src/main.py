@@ -1,11 +1,14 @@
+import argparse
 import os
-import sys
 import subprocess
 
-from llm import generate_summary_and_prompt
+from llm import find_visual_keys
 
-def run_gen_ai(prompt, image_gen_path, base_img, save_path, image_gen_call, n_images=2, guidance=10):
-    image_gen_call = image_gen_call.format(prompt=prompt, base=base_img, dir=save_path, n_img=n_images, guid=guidance)
+
+def run_gen_ai(prompt, image_gen_path, image_gen_call, save_path, base_img, n_images=2, guidance=10, num_steps=25):
+    subdir = os.path.join(save_path, f'img_{os.path.basename(base_img).split(".")[0]}_guid{guidance}_nsteps{num_steps}')
+    os.makedirs(subdir)
+    image_gen_call = image_gen_call.format(prompt=prompt, base=base_img, dir=subdir, n_img=n_images, guid=guidance, nsteps=num_steps)
     print(image_gen_call)
     exitcode = subprocess.run(image_gen_call, shell=True, cwd=image_gen_path)
     if exitcode.returncode != 0:
@@ -13,23 +16,41 @@ def run_gen_ai(prompt, image_gen_path, base_img, save_path, image_gen_call, n_im
         return False
     return True
 
-def process_program(base_path, image_gen_path, image_gen_call, base_img, llm_name='Ministral'):
-    for dirname in ['images', 'prompts']:
+
+def process_program(base_path, fname, image_gen_path, image_gen_call, base_imgs, n_images, guidance, num_steps):
+    for dirname in ['summaries', 'images', 'prompts']:
         if not os.path.exists(os.path.join(base_path, dirname)):
             os.makedirs(os.path.join(base_path, dirname))
-    # generate_summary_and_prompt(base_path, model_name=llm_name)
+    prompt = find_visual_keys(base_path, fname)
+    prompt = 'Generate a picture of Dortmund and add the following visual aspects:\n' + prompt
     img_save_path = os.path.join(base_path, 'images')
-    with open(os.path.join(base_path, 'prompts', f'DE_{llm_name}.txt'), 'r') as f:
-        prompt = f.read()
-    run_gen_ai(prompt, image_gen_path, base_img, img_save_path, image_gen_call)
+    run_gen_ai(prompt, image_gen_path, image_gen_call, img_save_path, base_imgs, n_images, guidance, num_steps)
 
-base_path = "/home/fischer/repos/ai-for-political-education/contents/2020/fdp"
-uno_path = "/home/fischer/repos/UNO"
-uno_call = 'python3 inference.py --prompt "{prompt}" --image_paths "{base}" --save_path "{dir}" --num_images_per_prompt {n_img} --guidance {guid}'
-base_img = "/home/fischer/repos/ai-for-political-education/contents/Herunterladen.jpg" # dortmund-stadt-skyline-100~_v-fullhd.jpg" # stadtpanorama_volkswohlbund_01_roland_gorecki_1.jpg"
 
-process_program(base_path, uno_path, uno_call, base_img, 'Ministral')
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Process program and generate images using AI.")
+    parser.add_argument("--base_path", type=str, default="/home/fischer/repos/ai-for-political-education/contents/2020/spd", help="Base path for contents")
+    parser.add_argument("--fname", type=str, default="program_en.pdf", help="PDF filename to process")
+    # image arguments
+    parser.add_argument("--uno_path", type=str, default="/home/fischer/repos/UNO", help="Path to UNO image generation")
+    parser.add_argument("--uno_call", type=str, default='python3 inference.py --prompt "{prompt}" --image_paths "{base}" --save_path "{dir}" --num_images_per_prompt {n_img} --guidance {guid} --num_steps {nsteps}', help="UNO image generation call template")
+    parser.add_argument("--base_imgs", type=str, default="/home/fischer/repos/ai-for-political-education/contents/Herunterladen.jpg", help="Base image path")
+    parser.add_argument("--n_images", type=int, default=3, help="Number of images to create")
+    parser.add_argument("--guidance", type=int, default=10, help="Guidance ")
+    parser.add_argument("--num_steps", type=int, default=25, help="Diffusion steps")
 
+    args = parser.parse_args()
+
+    process_program(
+        args.base_path,
+        args.fname,
+        args.uno_path,
+        args.uno_call,
+        args.base_imgs,
+        args.n_images,
+        args.guidance,
+        args.num_steps
+    )
 
 
 
