@@ -22,31 +22,33 @@ def process_program(base_path, fname, image_gen_path, image_gen_call, base_imgs,
         if not os.path.exists(os.path.join(base_path, dirname)):
             os.makedirs(os.path.join(base_path, dirname))
     prompt = find_visual_keys(base_path, fname)
-    prompt = 'Generate a picture of Dortmund and add the following visual aspects:\n' + prompt
+    prompt = 'Add the following visual aspects to Dortmund City:\n' + prompt
     img_save_path = os.path.join(base_path, 'images')
     run_gen_ai(prompt, image_gen_path, image_gen_call, img_save_path, base_imgs, n_images, guidance, num_steps)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process program and generate images using AI.")
-    parser.add_argument("--base_path", type=str, default="/home/fischer/repos/ai-for-political-education/contents/2020/spd", help="Base path for contents")
+    parser.add_argument("--base_path", type=str, default="contents/2020/spd", help="Base path for contents")
     parser.add_argument("--fname", type=str, default="program_en.pdf", help="PDF filename to process")
     # image arguments
     parser.add_argument("--uno_path", type=str, default="/home/fischer/repos/UNO", help="Path to UNO image generation")
     parser.add_argument("--uno_call", type=str, default='python3 inference.py --prompt "{prompt}" --image_paths "{base}" --save_path "{dir}" --num_images_per_prompt {n_img} --guidance {guid} --num_steps {nsteps}', help="UNO image generation call template")
-    parser.add_argument("--base_imgs", type=str, default="/home/fischer/repos/ai-for-political-education/contents/Herunterladen.jpg", help="Base image path")
+    parser.add_argument("--base_img", type=str, default="contents/Herunterladen.jpg", help="Base image path")
     parser.add_argument("--n_images", type=int, default=3, help="Number of images to create")
-    parser.add_argument("--guidance", type=int, default=10, help="Guidance ")
+    parser.add_argument("--guidance", type=int, default=10, help="Prompt guidance strength")
     parser.add_argument("--num_steps", type=int, default=25, help="Diffusion steps")
 
     args = parser.parse_args()
 
+    print(__file__)
+
     process_program(
-        args.base_path,
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), args.base_path),
         args.fname,
         args.uno_path,
         args.uno_call,
-        args.base_imgs,
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), args.base_img),
         args.n_images,
         args.guidance,
         args.num_steps

@@ -1,0 +1,22 @@
+{
+    "prompt": "Add the following visual aspects to Dortmund City:\nnew affordable housing developments, energy-efficient buildings, expanded green spaces, improved public transport infrastructure, more bike lanes, vibrant public spaces, cultural venues, cleaner streets, community centers, educational facilities, health facilities, climate-proof urban design, removal of coal-fired power plant",
+    "image_paths": [
+        "/home/fischer/repos/ai-for-political-education/contents/reinoldi.jpg"
+    ],
+    "eval_json_path": null,
+    "offload": false,
+    "num_images_per_prompt": 3,
+    "model_type": "flux-dev",
+    "width": 512,
+    "height": 512,
+    "ref_size": 512,
+    "num_steps": 15,
+    "guidance": 100.0,
+    "seed": 3407,
+    "save_path": "/home/fischer/repos/ai-for-political-education/contents/2020/spd/images/img_reinoldi_guid100_nsteps15",
+    "only_lora": true,
+    "concat_refs": false,
+    "lora_rank": 512,
+    "data_resolution": 512,
+    "pe": "d"
+}
