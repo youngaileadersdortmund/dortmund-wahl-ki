@@ -1,0 +1,22 @@
+{
+    "prompt": "Add the following visual aspects to Dortmund City:\ndigital classrooms, expanded cycle paths, green roofs, solar panel installations, modernized public transport stations, enhanced bike-friendly infrastructure, increased urban green spaces, accessible public facilities, digital kiosks, improved street lighting, revitalized urban areas, public art installations, barrier-free design elements, eco-friendly traffic systems, upgraded school buildings, community gardens, smart traffic signage, renewable energy infrastructure, enhanced public seating, and digital information displays.",
+    "image_paths": [
+        "/home/fischer/repos/ai-for-political-education/contents/reinoldi.jpg"
+    ],
+    "eval_json_path": null,
+    "offload": false,
+    "num_images_per_prompt": 3,
+    "model_type": "flux-dev",
+    "width": 512,
+    "height": 512,
+    "ref_size": 512,
+    "num_steps": 15,
+    "guidance": 1000.0,
+    "seed": 3407,
+    "save_path": "/home/fischer/repos/ai-for-political-education/contents/2020/fdp/images/img_reinoldi_guid1000_nsteps15",
+    "only_lora": true,
+    "concat_refs": false,
+    "lora_rank": 512,
+    "data_resolution": 512,
+    "pe": "d"
+}
