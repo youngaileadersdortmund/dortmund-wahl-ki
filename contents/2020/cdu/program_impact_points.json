@@ -1,0 +1,64 @@
+{
+  "impact_points": [
+    {
+      "identifier": "Climate_Environment",
+      "description": "Promotion of clean air and environmentally friendly transportation to ensure sustainable urban living",
+      "importance": 0.9,
+      "reasoning": "Climate action is central to the program's vision for a livable city and aligns with global sustainability goals. The emphasis on clean air and green mobility directly impacts public health and environmental quality."
+    },
+    {
+      "identifier": "Digitalization",
+      "description": "Advancement of Dortmund as a leading digital city through modern administrative and technological infrastructure",
+      "importance": 0.85,
+      "reasoning": "Digitalization is highlighted as a key competitive advantage. Modernizing services and infrastructure enhances efficiency and citizen engagement, crucial for urban development."
+    },
+    {
+      "identifier": "Housing_Urban",
+      "description": "Creation of diverse housing options to meet market demands and integrate living and working spaces",
+      "importance": 0.8,
+      "reasoning": "Addressing housing needs is vital for social stability and urban growth. The program's focus on social compatibility ensures equitable access to housing for all demographics."
+    },
+    {
+      "identifier": "Social_Policy",
+      "description": "Strengthening family support and social justice through childcare and anti-discrimination measures",
+      "importance": 0.8,
+      "reasoning": "Social policy underpins community well-being. Prioritizing family-friendliness and equality addresses long-term societal challenges and fosters inclusive growth."
+    },
+    {
+      "identifier": "Education_Schools",
+      "description": "Investment in modern schools and equitable access to quality education without compromising primary/secondary schools",
+      "importance": 0.75,
+      "reasoning": "Education is critical for future workforce development. The program's focus on innovation and fairness ensures long-term economic and social benefits."
+    },
+    {
+      "identifier": "Healthcare_Nursing",
+      "description": "Strengthening the Dortmund Clinic and expanding nursing education to meet aging population needs",
+      "importance": 0.7,
+      "reasoning": "Healthcare infrastructure is essential for public welfare. Targeted investments in medical facilities and training address demographic challenges and improve service quality."
+    },
+    {
+      "identifier": "Cultural_Promotion",
+      "description": "Support for Dortmund's cultural identity as a 'City of Music' and regional cultural hub",
+      "importance": 0.65,
+      "reasoning": "Cultural initiatives enhance the city's appeal and community cohesion. Preserving and promoting local heritage strengthens social identity and tourism."
+    },
+    {
+      "identifier": "Security_Cleanliness",
+      "description": "Zero-tolerance policies for crime and maintenance of public order and cleanliness",
+      "importance": 0.7,
+      "reasoning": "Safety and cleanliness are foundational for quality of life. Proactive measures ensure public trust and attract investment and residents."
+    },
+    {
+      "identifier": "Economic_Innovation",
+      "description": "Support for age-appropriate assistance systems (AAL) and local business development",
+      "importance": 0.7,
+      "reasoning": "Economic resilience is key to Dortmund's future. Innovation in healthcare tech and business support drives job creation and regional competitiveness."
+    },
+    {
+      "identifier": "Community_Sports",
+      "description": "Preservation of parks, leisure facilities, and support for amateur sports clubs",
+      "importance": 0.6,
+      "reasoning": "Community engagement through sports and green spaces fosters social bonds. Protecting these assets ensures inclusive recreational opportunities for all citizens."
+    }
+  ]
+}

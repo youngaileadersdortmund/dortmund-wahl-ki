@@ -1,0 +1,17 @@
+<think>
+Okay, let's tackle this query. The user wants me to extract 10 impact points from the Dortmund Free Democrats' election program. Each impact point needs a unique identifier, a short description, an importance weight between 0 and 1, and a reasoning explanation. The final output should be in JSON format without using quotation marks or other JSON syntax in the descriptions. 
+
+First, I need to read through the provided election program summary carefully. The user mentioned specific local aspects, so I should focus on areas like economy, education, digitalization, public services, transportation, etc. 
+
+Looking at the program, there are several key themes: supporting start-ups, reducing bureaucracy, digitalization of services, education reforms, cultural initiatives, housing, transportation, and social policies. I need to pick 10 distinct points from these areas.
+
+Let me start by listing possible points. For example, the start-up centers with simplified conditions. That's a specific local aspect. Then, the citizen app for digital services. Also, the digitalization of education, like equipping classrooms with digital media. 
+
+Another point could be the abolition of the entertainment tax on dance events. The reduction of bureaucracy for start-ups is another. The expansion of public transport, like the call-a-taxi service. The greening of roofs and facades for renewable energy. The barrier-free living initiatives. The cultural promotion through museums and town twinning. Lastly, the digitalization of the city administration.
+
+Now, I need to make sure each point is specific and relates to local aspects. Let me check if I have 10. Maybe the citizen app, start-up support, digital education, entertainment tax abolition, reduced bureaucracy, public transport expansion, green infrastructure, barrier-free living, cultural promotion, and digital administration. That's 10.
+
+Next, assign identifiers. Maybe something like "STARTUP_SUPPORT", "CITIZEN_APP", etc. Then, for each, a concise description. Importance weights: some are critical, like start-up support for the economy (0.9), digital education (0.8), while others like cultural promotion might be 0.7. The reasoning should explain why each is important based on the program's focus.
+
+I need to avoid JSON syntax in the descriptions. So, no quotes. Also, check that the JSON structure is correct, with commas and brackets properly placed. Let me verify each entry to ensure they're distinct and accurately reflect the program's content.
+</think>

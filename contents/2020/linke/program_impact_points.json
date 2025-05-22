@@ -1,0 +1,64 @@
+{
+  "impact_points": [
+    {
+      "id": "IMP-01",
+      "description": "Reduction of Dortmund's 2.6 billion euro debt through federal and state responsibility",
+      "importance": 0.9,
+      "reasoning": "The city's massive debt directly impacts residents through higher taxes and reduced public services, making debt reduction a critical priority for fiscal stability."
+    },
+    {
+      "id": "IMP-02",
+      "description": "Expansion of affordable housing stock to address homelessness and rising rents",
+      "importance": 0.85,
+      "reasoning": "Dortmund's housing shortage and 30% of low-income households spending on housing highlight the urgent need for publicly supported housing to ensure basic human rights."
+    },
+    {
+      "id": "IMP-03",
+      "description": "Climate change mitigation through reforestation, renewable energy, and reduced fossil fuel reliance",
+      "importance": 0.8,
+      "reasoning": "Dortmund's failure to meet climate goals and threats from industrial pollution demand immediate action to protect public health and environmental sustainability."
+    },
+    {
+      "id": "IMP-04",
+      "description": "Enforcement of 25% social housing quota in new developments",
+      "importance": 0.7,
+      "reasoning": "This policy directly addresses housing inequality and ensures affordable options for low-income residents, countering market-driven speculation."
+    },
+    {
+      "id": "IMP-05",
+      "description": "Transportation reforms including car-free zones and expanded cycling infrastructure",
+      "importance": 0.75,
+      "reasoning": "Reducing vehicle dependency lowers emissions and improves urban livability, aligning with climate goals and public health priorities."
+    },
+    {
+      "id": "IMP-06",
+      "description": "Poverty alleviation through minimum wage increases and job creation programs",
+      "importance": 0.8,
+      "reasoning": "With 23.9% poverty rate and 31,000 unemployed, addressing economic inequality is essential for social cohesion and reducing reliance on welfare."
+    },
+    {
+      "id": "IMP-07",
+      "description": "Improved elderly care and multi-generational housing options",
+      "importance": 0.7,
+      "reasoning": "An aging population and lack of accessible housing require targeted policies to ensure dignity and social inclusion for seniors."
+    },
+    {
+      "id": "IMP-08",
+      "description": "Inclusive public spaces with barrier-free access for disabled and elderly residents",
+      "importance": 0.65,
+      "reasoning": "Removing physical and systemic barriers is a human rights issue that directly impacts quality of life and participation in society."
+    },
+    {
+      "id": "IMP-09",
+      "description": "Transition to renewable energy and phasing out fossil fuel infrastructure",
+      "importance": 0.8,
+      "reasoning": "Dortmund's reliance on RWE and nuclear energy contradicts climate goals, making a shift to solar and community-owned energy critical."
+    },
+    {
+      "id": "IMP-10",
+      "description": "Increased citizen participation in municipal decision-making processes",
+      "importance": 0.6,
+      "reasoning": "Enhancing transparency and democratic engagement fosters trust and ensures policies reflect community needs rather than corporate interests."
+    }
+  ]
+}

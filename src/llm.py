@@ -1,60 +1,94 @@
 import os
+import re
+import json
 
 from PyPDF2 import PdfReader
-
 import transformers
 import torch
 
 
-def read_pdf(base_path, fname='program.pdf'):
-    reader = PdfReader(os.path.join(base_path, fname))
-    contents = {}
-    for p_idx, page in enumerate(reader.pages):
-        text = page.extract_text().replace('\n', ' ')
-        with open(os.path.join(base_path, 'summaries', f'{fname.replace(".pdf", "")}_content_p{str(p_idx).zfill(2)}.txt'), 'w') as f:
-            f.write(text)
-        n_words = len(text.split())
-        if n_words > 40:
-            print(f'Page {p_idx} has {n_words} words and {len(text)} characters and will be summarized')
-            contents[p_idx] = text
-    return contents
-
-
-def summarize_pdf_per_page(base_path, fname='program.pdf', model_id="facebook/bart-large-cnn"):
-    summarizer = transformers.pipeline("summarization", model=model_id)
-
-    contents = read_pdf(base_path, fname)
-    summaries = {}
-    summary_path = os.path.join(base_path, 'summaries', fname.replace('.pdf', '_summary.txt'))
-    if os.path.isfile(summary_path):
-        os.remove(summary_path)
-
-    for p_idx, content in contents.items():
-        print(f'Page {p_idx} has {len(content.split())} words and will be summarized')
-        result = summarizer(content[:3800], max_length=500, min_length=100, do_sample=False)
-        summaries[p_idx] = result[0]['summary_text']
-        with open(summary_path, 'a') as f:
-            f.write(f'Page {p_idx}:\n{summaries[p_idx]}\n\n\n')
-    return summaries
-
-
-def find_visual_keys(base_path, fname='program.pdf', model_name="Qwen/Qwen3-30B-A3B"):
-    prompt_fname = os.path.join(base_path, 'prompts', f"visual_keys_{model_name.split('/')[1]}.txt")
-
-    if os.path.isfile(prompt_fname): # load previous output
-        with open(prompt_fname, 'r') as f:
+def translate_pdf(fname, sentence_batch_size=10, break_after=None):
+    tr_fname = fname.replace('.pdf', '_en.txt')
+    if os.path.isfile(tr_fname):
+        with open(tr_fname, 'r') as f:
             content = f.read()
-        content = content.split('\n\n\n\n')[1].strip()
+        print(f'Loading pre-compiled translation of {len(content.split("\n"))} sentences from {tr_fname}')
     else:
-        summaries = summarize_pdf_per_page(base_path, fname)
-        print('Finishes summarization, not starting reasoning for identifying visual keys')
+        reader = PdfReader(fname)
+        full_text = []
+        for p_idx, page in enumerate(reader.pages):
+            text = page.extract_text()
+            lines = text.split('\n')
+            for line in lines:
+                if len(line) > 10 and not line.upper() == line:
+                    full_text.append(line.strip())
+            if break_after and len(full_text) > break_after:
+                break
+        full_text = ' '.join(full_text)
+        # Split the text into sentences using ., ?, or ! as delimiters
+        sentences = re.split(r'(?<=[.!?])\s+', full_text)
+        print(f'Number of sentences in {fname}: {len(sentences)}, to be processed in {len(sentences) // sentence_batch_size} batches')
+        # translate single paragraphs
+        translated = []
+        pipe = transformers.pipeline("text-generation", model="Unbabel/TowerInstruct-13B-v0.1", torch_dtype=torch.bfloat16, device_map="auto")
+        for i, s in enumerate(range(0, len(sentences), sentence_batch_size)):
+            paragraph = ' '.join(sentences[s:(s+sentence_batch_size)])
+            messages = [{"role": "user", "content": f"Translate the following text from German into English.\nGerman: {paragraph}\nEnglish:"},]
+            prompt = pipe.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+            outputs = pipe(prompt, max_new_tokens=256, do_sample=False)
+            translated.append(outputs[0]["generated_text"].split('<|im_start|>assistant')[1].strip())
+            print(f'\n\n\n\nParagraph {i+1} / {len(sentences)//sentence_batch_size+1}:\n{paragraph}\n\n{translated[-1]}')
+        # concat paragraphs, split sentences across lines, write into file
+        translated = ' '.join(translated).replace('e.g.', 'for example')
+        sentences = re.split(r'(?<=[.!?])\s+', translated)
+        content = '\n'.join(sentences)
+        with open(tr_fname, 'w') as f:
+            f.write(content)
+        print(f'Compiled translation of {len(sentences)} sentences into {tr_fname}')
+    return content
 
-        # load the tokenizer and the model
+
+def summarize_content(content, fname, sentence_batch_size=20, summarization_rate=0.25, model_id="facebook/bart-large-cnn"):
+    sum_fname = fname.replace('.pdf', '_sum.txt')
+    if os.path.isfile(sum_fname):
+        with open(sum_fname, 'r') as f:
+            summary = f.read()
+        print_str = f'Loading pre-compiled summary from {sum_fname}'
+    else:
+        sentences = content.split('\n')
+        summarizer = transformers.pipeline("summarization", model=model_id)
+        summary_sentences = []
+        for i, s in enumerate(range(0, len(sentences), sentence_batch_size)):
+            paragraph = ' '.join(sentences[s:(s+sentence_batch_size)])
+            maxl, minl = int(len(paragraph) * summarization_rate / 4), int(len(paragraph) * summarization_rate / 8)
+            summary = summarizer(paragraph, max_length=maxl, min_length=minl, do_sample=False)
+            summary = summary[0]['summary_text']
+            summary_splitted = re.split(r'(?<=[.!?])\s+', summary)
+            for sentence in summary_splitted:
+                summary_sentences.append(sentence.strip())
+            print(f'Summarized sentence batch {i+1} / {len(sentences)//sentence_batch_size+1}, summary has {len(summary)} characters instead of {len(paragraph)} ({len(summary)/len(paragraph)*100:4.2f}% of original size)')
+        summary = '\n'.join(summary_sentences)
+        with open(sum_fname, 'w') as f:
+            f.write(summary)
+        print_str = f'Compiled summary into {sum_fname}'
+    print(f'{print_str} - {len(summary)} characters, {len(summary)/len(content)*100:4.2f}% of the original translation ({len(content)} characters)')
+    return summary
+
+
+def reason_about_impact_points(summary, fname, model_name="Qwen/Qwen3-30B-A3B"):
+    point_fname, reasoning_fname = fname.replace('.pdf', '_impact_points.json'), fname.replace('.pdf', '_impact_point_reasoning.txt'), 
+    if os.path.isfile(point_fname):
+        with open(point_fname, 'r') as f:
+            impact_points = json.load(f)
+        with open(reasoning_fname, 'r') as f:
+            reasoning = f.read()
+        print_str = f'Loading pre-compiled impact points from {point_fname}'
+    else:
         tokenizer = transformers.AutoTokenizer.from_pretrained(model_name)
         model = transformers.AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
 
-        baseprompt = "From the following local election program summary, identify key aspects that would likely change about the visual appearance of the respective city. Only respond with a list of comma-separated visual aspects that would represent the changes resulting from the election program, without any additional information."
-        prompt = baseprompt + '\n\n' + '\n'.join(summaries.values())
+        baseprompt = 'From the following election program summary, identify 10 "impact points" relating to specific local aspects that would be affected or changed by the program. Find reasonable identifier strings that summarize each point and also formulate a short description for each of them. Based on the program descriptions, assign an importance weight betweeon 0 and 1 to each impact point, and formulate a short respective explanation. Return the results (impact points, descriptions, importance values, reasoning for importance) as a JSON-formatted string, making sure to not use quotation marks or other JSON-syntax symbols in the descriptions.'
+        prompt = baseprompt + '\n\n' + summary
 
         messages = [ {"role": "user", "content": prompt} ]
         text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True, enable_thinking=True)
@@ -71,16 +105,15 @@ def find_visual_keys(base_path, fname='program.pdf', model_name="Qwen/Qwen3-30B-
         except ValueError:
             index = 0
 
-        thinking_content = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
-        content = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
-            
-        print("thinking content:", thinking_content)
-        print("content:", content)
+        reasoning = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
+        impact_points = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
 
-        with open(prompt_fname, 'w') as f:
-            f.write(thinking_content + '\n\n\n\n\n\n' + content)
-    return content
-    
-    
-    
-    
+        with open(point_fname, 'w') as f:
+            f.write(impact_points)
+        with open(reasoning_fname, 'w') as f:
+            f.write(reasoning)
+
+        print_str = f'Compiled impact points into {point_fname}'
+        
+    print(print_str, '\n', "reasoning content:", reasoning, '\n', impact_points)
+    return impact_points, reasoning

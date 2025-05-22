@@ -1,0 +1,64 @@
+{
+  "impact_points": [
+    {
+      "identifier": "Cycling Infrastructure Expansion",
+      "description": "Development of cycle highways parking garages and improved pedestrian access to reduce car dependency and promote eco-friendly transport",
+      "importance": 0.9,
+      "reasoning": "Central to the program's traffic revolution and climate goals. Directly impacts urban mobility and reduces carbon emissions by encouraging cycling"
+    },
+    {
+      "identifier": "Public Transport Accessibility",
+      "description": "Free or subsidized public transport for students and apprentices combined with improved infrastructure to increase usage",
+      "importance": 0.85,
+      "reasoning": "Addresses social equity and climate goals by making sustainable transport affordable and accessible for vulnerable groups"
+    },
+    {
+      "identifier": "Climate Neutrality Initiatives",
+      "description": "Renewable energy expansion solar ordinances and district heating conversions to achieve carbon neutrality",
+      "importance": 0.9,
+      "reasoning": "Core to the program's environmental commitments. Directly impacts energy systems and long-term climate resilience"
+    },
+    {
+      "identifier": "Pedestrian-Friendly Zones",
+      "description": "Redistribution of road space to prioritize pedestrians with improved sidewalks and tram stop accessibility",
+      "importance": 0.8,
+      "reasoning": "Enhances urban livability and safety. Addresses current car-centric infrastructure that disadvantages pedestrians"
+    },
+    {
+      "identifier": "Green Spaces Preservation",
+      "description": "Protection of natural areas like Wickede-West and expansion of urban greenery through tree planting and green roofs",
+      "importance": 0.8,
+      "reasoning": "Improves biodiversity and quality of life. Addresses environmental degradation and urban heat island effects"
+    },
+    {
+      "identifier": "Social Housing Development",
+      "description": "Increased construction of subsidized housing to address affordability and homelessness",
+      "importance": 0.85,
+      "reasoning": "Tackles Dortmund's housing crisis and poverty issues. Directly impacts social equity and urban development"
+    },
+    {
+      "identifier": "Education and Youth Programs",
+      "description": "Expansion of childcare facilities and educational support for disadvantaged children and youth",
+      "importance": 0.8,
+      "reasoning": "Promotes educational justice and long-term social mobility. Addresses current gaps in childcare and school infrastructure"
+    },
+    {
+      "identifier": "Noise Reduction Measures",
+      "description": "Implementation of 30 km/h speed limits and airport noise mitigation strategies",
+      "importance": 0.75,
+      "reasoning": "Improves public health and quality of life. Addresses environmental and social concerns related to noise pollution"
+    },
+    {
+      "identifier": "Inclusive Community Policies",
+      "description": "Support for migrants LGBTQ+ communities and anti-discrimination initiatives to foster diversity",
+      "importance": 0.75,
+      "reasoning": "Strengthens social cohesion and equality. Addresses systemic issues in Dortmund's multicultural society"
+    },
+    {
+      "identifier": "Digital Participation Platforms",
+      "description": "Implementation of online services and citizen engagement tools to enhance transparency and governance",
+      "importance": 0.7,
+      "reasoning": "Modernizes civic participation and administrative efficiency. Addresses digital divide and accessibility issues"
+    }
+  ]
+}
