@@ -84,45 +84,67 @@ def reason_about_impact_points(summary, fname, model_name="Qwen/Qwen3-30B-A3B"):
             reasoning = f.read()
         print_str = f'Loading pre-compiled impact points from {point_fname}'
     else:
+        # init model
         tokenizer = transformers.AutoTokenizer.from_pretrained(model_name)
         model = transformers.AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
 
+        # generate prompt
         baseprompt = 'From the following election program summary, identify ten central "impact points" relating to specific local aspects that would be affected or changed if the program is coming into effect. Find meaningful identifier strings that summarize each point and also formulate a short description for each of them. Assign an importance weight betweeon 0 and 1 to each impact point, based on how pronounced and rich the point is discussed in the program, and formulate a short respective explanation. Return the results as a JSON-formatted string (list of impact points with "identifier", "description", "importance" and "importance_reasoning"). Make sure to not use quotation marks or other JSON-syntax symbols for the descriptions and reasoning.'
-        prompt = baseprompt + '\n\n' + summary
-
-        messages = [ {"role": "user", "content": prompt} ]
+        messages = [ {"role": "user", "content": baseprompt + '\n\n' + summary} ]
         text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True, enable_thinking=True)
         model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
 
-        # conduct text completion
+        # run and parse thinking content
         generated_ids = model.generate(**model_inputs, max_new_tokens=5000)
         output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
-
-        # parsing thinking content
         try:
-            # rindex finding 151668 (</think>)
-            index = len(output_ids) - output_ids[::-1].index(151668)
+            index = len(output_ids) - output_ids[::-1].index(151668) # rindex finding 151668 (</think>)
         except ValueError:
             index = 0
-
         reasoning = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
         impact_points = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
 
+        # write results
         with open(point_fname, 'w') as f:
             f.write(impact_points)
         with open(reasoning_fname, 'w') as f:
             f.write(reasoning)
 
         # check for json compatibility
-        # file_ok, iters = False, 5
-        # while not file_ok and iters > 0:
-        #     try:
-        #         with open(point_fname, 'r') as f:
-        #             impact_points = json.load(f)
-        #     except JSONDecodeError as e:
+        file_ok, iter = False, 5
+        while not file_ok and iter > 0:
+            try: # check if json is readble
+                with open(point_fname, 'r') as f:
+                    fstring = f.read()
+                impact_points = json.loads(fstring)
+                file_ok = True
+            except json.JSONDecodeError as e:
+                # try to fix it with the reasoning model
+                print(f'\n\nJSON ERROR! ITERATION {iter}\n\n')
+                prompt = 'The following JSON content is malformed and raises a JSONDecodeError, please fix it and only provide the correctly formatted json string:\n\n' + fstring
+                messages = [ {"role": "user", "content": prompt} ]
+                text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True, enable_thinking=True)
+                model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
+                generated_ids = model.generate(**model_inputs, max_new_tokens=5000)
+                output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
 
+                # split into reasoning and fixed json, and write to file
+                try:
+                    index = len(output_ids) - output_ids[::-1].index(151668) # rindex finding 151668 (</think>)
+                except ValueError:
+                    index = 0
+                json_reasoning = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
+                fixed_fstring = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
+                print(json_reasoning)
+                with open(point_fname, 'w') as f:
+                    f.write(fixed_fstring)
+                iter -= 1
+                
+        # finalize
         print_str = f'Compiled impact points into {point_fname}'
+        if not file_ok:
+            print_str = print_str + ', but with remaining json errors'
+            impact_points = fstring
 
-        
-    print(print_str, '\n', "reasoning content:", reasoning, '\n', impact_points)
+    print('\n', print_str, '\n', "reasoning content:", reasoning, '\n', str(impact_points))
     return impact_points, reasoning
