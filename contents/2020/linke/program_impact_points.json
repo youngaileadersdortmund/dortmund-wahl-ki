@@ -1,64 +1,64 @@
 {
   "impact_points": [
     {
-      "id": "IMP-01",
-      "description": "Reduction of Dortmund's 2.6 billion euro debt through federal and state responsibility",
+      "identifier": "Finance_01",
+      "description": "Addressing the city's 2.6 billion euro debt and stopping the cycle of financial burden on residents.",
       "importance": 0.9,
-      "reasoning": "The city's massive debt directly impacts residents through higher taxes and reduced public services, making debt reduction a critical priority for fiscal stability."
+      "importance_reasoning": "The program highlights the city's severe debt crisis, emphasizing the need to stop the debt cycle and hold federal and state governments accountable for unjust tax systems. This is a central issue for the party's financial policy."
     },
     {
-      "id": "IMP-02",
-      "description": "Expansion of affordable housing stock to address homelessness and rising rents",
+      "identifier": "Housing_02",
+      "description": "Tackling the housing shortage and homelessness through affordable housing initiatives and land speculation controls.",
+      "importance": 0.9,
+      "importance_reasoning": "The program repeatedly stresses the housing crisis, including 1,400 homeless individuals and rising rents. Specific measures like 1,000 annual affordable homes and land speculation prevention are emphasized."
+    },
+    {
+      "identifier": "Climate_03",
+      "description": "Implementing climate goals, protecting natural spaces, and transitioning to renewable energy.",
       "importance": 0.85,
-      "reasoning": "Dortmund's housing shortage and 30% of low-income households spending on housing highlight the urgent need for publicly supported housing to ensure basic human rights."
+      "importance_reasoning": "Climate change is a recurring theme, with calls to expand forests, reduce emissions, and phase out fossil fuels. The program links environmental and social justice directly."
     },
     {
-      "id": "IMP-03",
-      "description": "Climate change mitigation through reforestation, renewable energy, and reduced fossil fuel reliance",
+      "identifier": "Social_City_04",
+      "description": "Revitalizing the underfunded 'Social City' action plan to address poverty and social exclusion.",
       "importance": 0.8,
-      "reasoning": "Dortmund's failure to meet climate goals and threats from industrial pollution demand immediate action to protect public health and environmental sustainability."
+      "importance_reasoning": "The program criticizes the underfunded 'Social City' initiative and its reliance on volunteer work, stressing the need for systemic change to ensure all residents feel at home."
     },
     {
-      "id": "IMP-04",
-      "description": "Enforcement of 25% social housing quota in new developments",
-      "importance": 0.7,
-      "reasoning": "This policy directly addresses housing inequality and ensures affordable options for low-income residents, countering market-driven speculation."
+      "identifier": "Poverty_05",
+      "description": "Reducing poverty through employment policies, minimum wage increases, and social welfare reforms.",
+      "importance": 0.8,
+      "importance_reasoning": "With 23.9% of residents at risk of poverty and over 31,000 unemployed, the program prioritizes job creation, a 12 euro minimum wage, and targeted social support."
     },
     {
-      "id": "IMP-05",
-      "description": "Transportation reforms including car-free zones and expanded cycling infrastructure",
+      "identifier": "Transport_06",
+      "description": "Transforming mobility with car-free zones, expanded cycling infrastructure, and reduced HGV traffic.",
       "importance": 0.75,
-      "reasoning": "Reducing vehicle dependency lowers emissions and improves urban livability, aligning with climate goals and public health priorities."
+      "importance_reasoning": "The program outlines specific transport reforms, including pedestrian-friendly zones, bike infrastructure, and reducing reliance on fossil fuels, reflecting its environmental and social priorities."
     },
     {
-      "id": "IMP-06",
-      "description": "Poverty alleviation through minimum wage increases and job creation programs",
-      "importance": 0.8,
-      "reasoning": "With 23.9% poverty rate and 31,000 unemployed, addressing economic inequality is essential for social cohesion and reducing reliance on welfare."
-    },
-    {
-      "id": "IMP-07",
-      "description": "Improved elderly care and multi-generational housing options",
+      "identifier": "Education_07",
+      "description": "Improving education access and quality through smaller class sizes, language programs, and childcare expansion.",
       "importance": 0.7,
-      "reasoning": "An aging population and lack of accessible housing require targeted policies to ensure dignity and social inclusion for seniors."
+      "importance_reasoning": "The program addresses educational inequality, emphasizing reduced class sizes, language support for migrants, and expanding childcare to reduce social divides."
     },
     {
-      "id": "IMP-08",
-      "description": "Inclusive public spaces with barrier-free access for disabled and elderly residents",
+      "identifier": "Healthcare_08",
+      "description": "Strengthening public healthcare and nursing care with better staffing and funding.",
+      "importance": 0.7,
+      "importance_reasoning": "The program highlights staffing shortages in hospitals and nursing homes, advocating for a qualification offensive and public ownership of healthcare services."
+    },
+    {
+      "identifier": "Disability_09",
+      "description": "Ensuring full inclusion and accessibility for people with disabilities through barrier-free infrastructure and policies.",
       "importance": 0.65,
-      "reasoning": "Removing physical and systemic barriers is a human rights issue that directly impacts quality of life and participation in society."
+      "importance_reasoning": "The program emphasizes dismantling barriers in public spaces, expanding disabled transport services, and creating inclusive housing, reflecting its commitment to social equity."
     },
     {
-      "id": "IMP-09",
-      "description": "Transition to renewable energy and phasing out fossil fuel infrastructure",
-      "importance": 0.8,
-      "reasoning": "Dortmund's reliance on RWE and nuclear energy contradicts climate goals, making a shift to solar and community-owned energy critical."
-    },
-    {
-      "id": "IMP-10",
-      "description": "Increased citizen participation in municipal decision-making processes",
+      "identifier": "Renewable_10",
+      "description": "Accelerating the transition to renewable energy and phasing out fossil fuel dependence.",
       "importance": 0.6,
-      "reasoning": "Enhancing transparency and democratic engagement fosters trust and ensures policies reflect community needs rather than corporate interests."
+      "importance_reasoning": "While renewable energy is part of the climate agenda, the program's focus on fossil fuel phase-out and solar energy utilization is less detailed compared to other priorities."
     }
   ]
 }

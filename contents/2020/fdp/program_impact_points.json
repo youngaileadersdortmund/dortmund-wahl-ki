@@ -1,64 +1,64 @@
 {
-  "IMPACT_POINTS": [
+  "impact_points": [
     {
-      "IDENTIFIER": "STARTUP_SUPPORT",
-      "DESCRIPTION": "Simplified access to office spaces for start-ups through dedicated centres to reduce bureaucratic hurdles",
-      "IMPORTANCE": 0.9,
-      "REASONING": "The program emphasizes reducing administrative barriers for start-ups which are critical for economic growth and job creation in Dortmund"
+      "identifier": "Startup_Bureaucracy_Reduction",
+      "description": "Reducing bureaucratic barriers for start-ups to enable easier establishment and growth",
+      "importance": 0.85,
+      "importance_reasoning": "The program emphasizes the need to simplify administrative processes for start-ups, highlighting that bureaucracy often hinders their success after initial establishment. This is a recurring theme in the document."
     },
     {
-      "IDENTIFIER": "CITIZEN_APP",
-      "DESCRIPTION": "Development of a digital platform to streamline city services and improve citizen-administration interaction",
-      "IMPORTANCE": 0.8,
-      "REASONING": "Digital transformation of public services is a key priority to enhance efficiency and accessibility for residents"
+      "identifier": "Global_Economic_Development",
+      "description": "Promoting global and European-focused economic strategies to enhance Dortmund's appeal as a business location",
+      "importance": 0.75,
+      "importance_reasoning": "The program stresses the importance of global thinking in economic development, including town twinning and international marketing, which is a key priority for the party."
     },
     {
-      "IDENTIFIER": "DIGITAL_EDUCATION",
-      "DESCRIPTION": "Equipping classrooms with digital tools and prioritizing digital literacy from early education",
-      "IMPORTANCE": 0.8,
-      "REASONING": "The program highlights technology as essential for future workforce readiness and educational equity"
+      "identifier": "Cultural_Museum_Rebranding",
+      "description": "Improving the visibility and professional management of Dortmund's museums to align with the city's self-image",
+      "importance": 0.7,
+      "importance_reasoning": "The document criticizes the current lack of awareness about museums and calls for professionalization, indicating a need for strategic cultural investment."
     },
     {
-      "IDENTIFIER": "ENTERTAINMENT_TAX_ABOLITION",
-      "DESCRIPTION": "Suspension of the 362 entertainment tax on dance events to boost cultural and creative sectors",
-      "IMPORTANCE": 0.75,
-      "REASONING": "This measure aims to support Dortmund's cultural economy and attract young people to the city"
+      "identifier": "Immigrant_Integration_Policy",
+      "description": "Creating a welcoming environment for immigrants through improved municipal services and social integration",
+      "importance": 0.8,
+      "importance_reasoning": "The program explicitly mentions a 'culture of welcome' and restructuring social services to support immigrants, reflecting a strong emphasis on inclusivity."
     },
     {
-      "IDENTIFIER": "REDUCED_BUREAUCRACY",
-      "DESCRIPTION": "Streamlining administrative processes to create a more business-friendly environment",
-      "IMPORTANCE": 0.85,
-      "REASONING": "The program directly addresses bureaucratic challenges faced by businesses which hinder innovation and growth"
+      "identifier": "Diversity_Workplace_Enforcement",
+      "description": "Actively promoting diversity in the workplace through collaboration with businesses and municipalities",
+      "importance": 0.7,
+      "importance_reasoning": "The document highlights the need to consistently work on diversity in both administration and companies, showing a commitment to inclusive policies."
     },
     {
-      "IDENTIFIER": "PUBLIC_TRANSPORT_EXPANSION",
-      "DESCRIPTION": "Modernizing mobility solutions including digital taxi services and expanding cycling infrastructure",
-      "IMPORTANCE": 0.7,
-      "REASONING": "Improving transportation is vital for accessibility and sustainability while addressing youth mobility needs"
+      "identifier": "Youth_Support_Framework",
+      "description": "Providing physical and social spaces for young people to foster community engagement and development",
+      "importance": 0.65,
+      "importance_reasoning": "Youth policy is mentioned as requiring city support, with a focus on creating safe spaces and contact points for young citizens."
     },
     {
-      "IDENTIFIER": "GREEN_INFRASTRUCTURE",
-      "DESCRIPTION": "Promoting rooftop greening and renewable energy generation through urban planning",
-      "IMPORTANCE": 0.7,
-      "REASONING": "This aligns with climate goals and enhances urban livability through sustainable development"
+      "identifier": "Digital_Education_Infrastructure",
+      "description": "Modernizing schools with digital tools and ensuring equitable access to education",
+      "importance": 0.9,
+      "importance_reasoning": "The program prioritizes digitalization of education, including equipping classrooms with technology and ensuring all children can achieve basic skills like swimming."
     },
     {
-      "IDENTIFIER": "BARRIER_FREE_LIVING",
-      "DESCRIPTION": "Increasing city funding for accessible urban planning and infrastructure",
-      "IMPORTANCE": 0.75,
-      "REASONING": "Ensuring equal access for all residents is a core principle for inclusive city development"
+      "identifier": "Smart_City_Citizen_App",
+      "description": "Developing a centralized digital platform to streamline access to municipal services",
+      "importance": 0.7,
+      "importance_reasoning": "The citizen app is proposed as a key initiative to improve administrative efficiency, though it is discussed in a less detailed manner compared to other points."
     },
     {
-      "IDENTIFIER": "CULTURAL_PROMOTION",
-      "DESCRIPTION": "Enhancing Dortmund's global image through museum marketing and international town twinning",
-      "IMPORTANCE": 0.65,
-      "REASONING": "Improving cultural visibility is seen as crucial for attracting talent and investment"
+      "identifier": "Public_Transport_Expansion",
+      "description": "Enhancing mobility through improved public transport, cycling infrastructure, and parking management",
+      "importance": 0.8,
+      "importance_reasoning": "The program outlines specific measures for public transport, including cycling city initiatives and traffic control systems, indicating a strong focus on urban mobility."
     },
     {
-      "IDENTIFIER": "DIGITAL_ADMINISTRATION",
-      "DESCRIPTION": "Outsourcing and modernizing city services to improve efficiency and data security",
-      "IMPORTANCE": 0.7,
-      "REASONING": "Digital transformation of governance is essential for modernizing public services and reducing costs"
+      "identifier": "Tax_Policy_Reform",
+      "description": "Abolishing or reducing taxes such as the entertainment tax and dog tax to ease financial burdens",
+      "importance": 0.7,
+      "importance_reasoning": "The document explicitly mentions tax reforms, including the suspension of the entertainment tax and abolition of the dog tax, showing a clear policy stance."
     }
   ]
 }

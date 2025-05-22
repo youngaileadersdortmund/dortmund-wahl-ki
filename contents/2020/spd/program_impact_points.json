@@ -1,64 +1,64 @@
 {
   "impact_points": [
     {
-      "identifier": "Non-Profit Housing Sector",
-      "description": "Establishing a legally defined non-profit sector to separate profit interests from housing development ensuring affordability",
+      "identifier": "HousingAffordability",
+      "description": "Reducing profit-driven construction and supporting individual homeowners through new non-profit housing models",
       "importance": 0.95,
-      "reasoning": "Directly addresses housing affordability which is critical for social equity and aligns with the city's claim of being 'affordable for everyone'"
+      "importance_reasoning": "The program emphasizes eliminating profit pressure in housing and creating a non-profit sector, indicating a strong focus on affordability and long-term housing stability"
     },
     {
-      "identifier": "Climate-Proof Urban Planning",
-      "description": "Implementing measures to adapt infrastructure and green spaces to climate change including heatwave and flood resilience",
-      "importance": 0.9,
-      "reasoning": "Essential for long-term sustainability and meets the 55% CO2 reduction target while protecting vulnerable populations"
+      "identifier": "ClimateActionTargets",
+      "description": "Achieving 55% CO2 reduction by 2030 through climate-proof urban planning and renewable energy transitions",
+      "importance": 0.92,
+      "importance_reasoning": "Specific CO2 reduction targets and climate adaptation measures for green spaces are explicitly outlined, showing detailed commitment to environmental goals"
     },
     {
-      "identifier": "Public Transport Expansion",
-      "description": "Creating a 365-euro regional ticket and improving public transit and cycling infrastructure for sustainable mobility",
+      "identifier": "UrbanLogisticsInnovation",
+      "description": "Transforming Dortmund into a model for sustainable city logistics with reduced traffic burdens and expanded public transport",
+      "importance": 0.89,
+      "importance_reasoning": "The program highlights Dortmund's logistics expertise and sets concrete traffic reduction goals, emphasizing mobility as a key climate challenge"
+    },
+    {
+      "identifier": "DigitalInfrastructureExpansion",
+      "description": "Implementing fiber optics, 5G, and open WLAN to create a high-speed digital city",
+      "importance": 0.88,
+      "importance_reasoning": "Digital infrastructure is explicitly prioritized as a core city development goal with specific technological investments outlined"
+    },
+    {
+      "identifier": "CommunityHealthcareExpansion",
+      "description": "Expanding neighborhood doctor centers and care cooperatives for localized medical services",
       "importance": 0.85,
-      "reasoning": "Key to reducing traffic congestion and emissions while improving accessibility for all citizens"
+      "importance_reasoning": "The program dedicates significant attention to healthcare accessibility through community-based solutions and care quality improvements"
     },
     {
-      "identifier": "Digital Infrastructure Development",
-      "description": "Expanding fiber optics 5G and open WLAN to make Dortmund a high-speed city with digitalized municipal services",
-      "importance": 0.85,
-      "reasoning": "Critical for economic competitiveness and modernizing public services to meet 2030 digitalization goals"
+      "identifier": "YouthAndWorkforceDevelopment",
+      "description": "Early intervention in education and job training to address unemployment and lack of opportunities",
+      "importance": 0.83,
+      "importance_reasoning": "The text emphasizes school-based initiatives and lifelong learning programs to combat unemployment, showing strategic focus on human capital"
     },
     {
-      "identifier": "Social Inclusion Initiatives",
-      "description": "Creating permanent police bike patrols and combating neo-Nazism through community engagement and safety programs",
-      "importance": 0.8,
-      "reasoning": "Addresses social cohesion and safety concerns while reinforcing Dortmund's identity as a tolerant city"
+      "identifier": "CulturalDevelopmentInitiatives",
+      "description": "Creating new cultural spaces and experimenting with payment models for accessibility",
+      "importance": 0.80,
+      "importance_reasoning": "The program proposes innovative cultural programs and accessibility measures, indicating a commitment to cultural vibrancy and inclusivity"
     },
     {
-      "identifier": "Youth and Education Access",
-      "description": "Providing free swimming pool access for children and seniors and transforming libraries into community learning centers",
+      "identifier": "SocialInclusionAndSecurity",
+      "description": "Addressing neo-Nazi threats and creating safe public spaces through police presence and community mapping",
+      "importance": 0.78,
+      "importance_reasoning": "The text directly addresses social cohesion issues and outlines specific security measures, reflecting a priority on community safety"
+    },
+    {
+      "identifier": "ChildcareAndEducationQuality",
+      "description": "Improving childcare options and expanding free summer programs for children",
       "importance": 0.75,
-      "reasoning": "Supports child development and lifelong learning while addressing inequality in access to recreational facilities"
+      "importance_reasoning": "The program details specific educational initiatives and childcare investments, showing a focus on child development and family support"
     },
     {
-      "identifier": "Public Service Accessibility",
-      "description": "Digitizing all municipal services by 2030 to ensure equitable access for all citizens",
-      "importance": 0.75,
-      "reasoning": "Improves efficiency and inclusivity of public services while reducing bureaucratic barriers"
-    },
-    {
-      "identifier": "Traffic Reduction Strategies",
-      "description": "Implementing annual 5% reductions in heavy traffic burden with infrastructure improvements and road damage mitigation",
-      "importance": 0.7,
-      "reasoning": "Directly impacts air quality and quality of life while supporting climate goals through reduced emissions"
-    },
-    {
-      "identifier": "Loneliness Reduction Programs",
-      "description": "Establishing the first German staff unit to combat loneliness through community engagement and social support networks",
-      "importance": 0.65,
-      "reasoning": "Addresses mental health and social isolation which are growing concerns in urban environments"
-    },
-    {
-      "identifier": "Cultural Accessibility Initiatives",
-      "description": "Expanding cultural offerings with free access for children and testing pay-what-you-can models for events",
-      "importance": 0.6,
-      "reasoning": "Enhances cultural participation and economic accessibility while supporting local creative industries"
+      "identifier": "DigitalPublicServices",
+      "description": "Digitizing all municipal services by 2030 for easier citizen access",
+      "importance": 0.72,
+      "importance_reasoning": "The explicit 2030 deadline and emphasis on digital transformation indicate a significant focus on administrative efficiency and accessibility"
     }
   ]
 }

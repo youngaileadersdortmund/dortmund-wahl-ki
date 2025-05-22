@@ -87,7 +87,7 @@ def reason_about_impact_points(summary, fname, model_name="Qwen/Qwen3-30B-A3B"):
         tokenizer = transformers.AutoTokenizer.from_pretrained(model_name)
         model = transformers.AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
 
-        baseprompt = 'From the following election program summary, identify 10 "impact points" relating to specific local aspects that would be affected or changed by the program. Find reasonable identifier strings that summarize each point and also formulate a short description for each of them. Based on the program descriptions, assign an importance weight betweeon 0 and 1 to each impact point, and formulate a short respective explanation. Return the results (impact points, descriptions, importance values, reasoning for importance) as a JSON-formatted string, making sure to not use quotation marks or other JSON-syntax symbols in the descriptions.'
+        baseprompt = 'From the following election program summary, identify ten central "impact points" relating to specific local aspects that would be affected or changed if the program is coming into effect. Find meaningful identifier strings that summarize each point and also formulate a short description for each of them. Assign an importance weight betweeon 0 and 1 to each impact point, based on how pronounced and rich the point is discussed in the program, and formulate a short respective explanation. Return the results as a JSON-formatted string (list of impact points with "identifier", "description", "importance" and "importance_reasoning"). Make sure to not use quotation marks or other JSON-syntax symbols for the descriptions and reasoning.'
         prompt = baseprompt + '\n\n' + summary
 
         messages = [ {"role": "user", "content": prompt} ]
@@ -113,7 +113,16 @@ def reason_about_impact_points(summary, fname, model_name="Qwen/Qwen3-30B-A3B"):
         with open(reasoning_fname, 'w') as f:
             f.write(reasoning)
 
+        # check for json compatibility
+        # file_ok, iters = False, 5
+        # while not file_ok and iters > 0:
+        #     try:
+        #         with open(point_fname, 'r') as f:
+        #             impact_points = json.load(f)
+        #     except JSONDecodeError as e:
+
         print_str = f'Compiled impact points into {point_fname}'
+
         
     print(print_str, '\n', "reasoning content:", reasoning, '\n', impact_points)
     return impact_points, reasoning
