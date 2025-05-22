@@ -117,11 +117,21 @@ def reason_about_impact_points(summary, fname, model_name="Qwen/Qwen3-30B-A3B"):
                 with open(point_fname, 'r') as f:
                     fstring = f.read()
                 impact_points = json.loads(fstring)
+                if ('impact_points' not in impact_points) or \
+                        (not isinstance(impact_points['impact_points'], list)) or \
+                        ('identifier' not in impact_points['impact_points'][0]) or \
+                        ('description' not in impact_points['impact_points'][0]) or \
+                        ('importance' not in impact_points['impact_points'][0]) or \
+                        ('importance_reasoning' not in impact_points['impact_points'][0]):
+                    raise RuntimeError
                 file_ok = True
-            except json.JSONDecodeError as e:
+            except json.JSONDecodeError:
+                prompt = 'The following JSON content is malformed and raises a JSONDecodeError, please fix it and only provide the correctly formatted json string:\n\n' + fstring
+            except RuntimeError:
+                prompt = 'The JSON content does not have the desired structure, on root level, it should contain the "impact_points" as a list, with each element having an "identifier" (str), "description" (str), "importance" (float between 0.0 - 1.0) and "importance_reasoning" (str). Please fix it and only provide the correctly formatted json string:\n\n' + fstring
+            if not file_ok:
                 # try to fix it with the reasoning model
                 print(f'\n\nJSON ERROR! ITERATION {iter}\n\n')
-                prompt = 'The following JSON content is malformed and raises a JSONDecodeError, please fix it and only provide the correctly formatted json string:\n\n' + fstring
                 messages = [ {"role": "user", "content": prompt} ]
                 text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True, enable_thinking=True)
                 model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
