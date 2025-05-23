@@ -75,6 +75,23 @@ def summarize_content(content, fname, sentence_batch_size=20, summarization_rate
     return summary
 
 
+def reason(model, tokenizer, prompt, max_new_tokens=5000, end_of_reasoning_token=151668):
+    # construct query
+    messages = [ {"role": "user", "content": prompt} ]
+    text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True, enable_thinking=True)
+    model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
+    # run and parse output
+    generated_ids = model.generate(**model_inputs, max_new_tokens=max_new_tokens)
+    output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
+    try:
+        index = len(output_ids) - output_ids[::-1].index(end_of_reasoning_token) # rindex finding 151668 (</think>)
+    except ValueError:
+        index = 0
+    reasoning = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
+    answer = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
+    return reasoning, answer
+
+
 def reason_about_impact_points(summary, fname, model_name="Qwen/Qwen3-30B-A3B"):
     point_fname, reasoning_fname = fname.replace('.pdf', '_impact_points.json'), fname.replace('.pdf', '_impact_point_reasoning.txt'), 
     if os.path.isfile(point_fname):
@@ -87,23 +104,9 @@ def reason_about_impact_points(summary, fname, model_name="Qwen/Qwen3-30B-A3B"):
         # init model
         tokenizer = transformers.AutoTokenizer.from_pretrained(model_name)
         model = transformers.AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
-
-        # generate prompt
+        # run model
         baseprompt = 'From the following election program summary, identify ten central "impact points" relating to specific local aspects that would be affected or changed if the program is coming into effect. Find meaningful identifier strings that summarize each point and also formulate a short description for each of them. Assign an importance weight betweeon 0 and 1 to each impact point, based on how pronounced and rich the point is discussed in the program, and formulate a short respective explanation. Return the results as a JSON-formatted string (list of impact points with "identifier", "description", "importance" and "importance_reasoning"). Make sure to not use quotation marks or other JSON-syntax symbols for the descriptions and reasoning.'
-        messages = [ {"role": "user", "content": baseprompt + '\n\n' + summary} ]
-        text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True, enable_thinking=True)
-        model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
-
-        # run and parse thinking content
-        generated_ids = model.generate(**model_inputs, max_new_tokens=5000)
-        output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
-        try:
-            index = len(output_ids) - output_ids[::-1].index(151668) # rindex finding 151668 (</think>)
-        except ValueError:
-            index = 0
-        reasoning = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
-        impact_points = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
-
+        reasoning, impact_points = reason(model, tokenizer, baseprompt + '\n\n' + summary)
         # write results
         with open(point_fname, 'w') as f:
             f.write(impact_points)
@@ -130,21 +133,9 @@ def reason_about_impact_points(summary, fname, model_name="Qwen/Qwen3-30B-A3B"):
             except RuntimeError:
                 prompt = 'The JSON content does not have the desired structure, on root level, it should contain the "impact_points" as a list, with each element having an "identifier" (str), "description" (str), "importance" (float between 0.0 - 1.0) and "importance_reasoning" (str). Please fix it and only provide the correctly formatted json string:\n\n' + fstring
             if not file_ok:
-                # try to fix it with the reasoning model
+                # try to fix JSON with the reasoning model
                 print(f'\n\nJSON ERROR! ITERATION {iter}\n\n')
-                messages = [ {"role": "user", "content": prompt} ]
-                text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True, enable_thinking=True)
-                model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
-                generated_ids = model.generate(**model_inputs, max_new_tokens=5000)
-                output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
-
-                # split into reasoning and fixed json, and write to file
-                try:
-                    index = len(output_ids) - output_ids[::-1].index(151668) # rindex finding 151668 (</think>)
-                except ValueError:
-                    index = 0
-                json_reasoning = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
-                fixed_fstring = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
+                json_reasoning, fixed_fstring = reason(model, tokenizer, prompt)
                 print(json_reasoning)
                 with open(point_fname, 'w') as f:
                     f.write(fixed_fstring)
@@ -158,3 +149,40 @@ def reason_about_impact_points(summary, fname, model_name="Qwen/Qwen3-30B-A3B"):
 
     print('\n', print_str, '\n', "reasoning content:", reasoning, '\n', str(impact_points))
     return impact_points, reasoning
+
+def impact_point_comparison_analysis(dirname, model_name="Qwen/Qwen3-30B-A3B"):
+    fname_analysis, fname_analysis_reasons = os.path.join(dirname, 'impact_analysis.txt'), os.path.join(dirname, 'impact_analysis_reasoning.txt')
+    if os.path.isfile(fname_analysis):
+        with open(fname_analysis, 'r') as f:
+            analysis = f.read()
+        with open(fname_analysis_reasons, 'r') as f:
+            reasoning = f.read()
+        print_str = f'Loading pre-compiled impact point analysis from {fname_analysis}'
+    else:
+        # load impact points from all parties
+        impact_points = {}
+        for root, _, files in os.walk(dirname):
+            for f in files:
+                if '_impact_points.json' in f:
+                    if root in impact_points:
+                        raise RuntimeError('Found two impact point files in ' + root)
+                    try:
+                        with open(os.path.join(root, f), 'r') as content:
+                            impact_points[root] = json.load(content)['impact_points']
+                    except:
+                        raise RuntimeError('Could not load impact points from ' + os.path.join(root, f))
+        points_txt = '\n'.join([f'Program {program_idx} Point {p_idx}: {p["identifier"]} - {p["description"]} (Importance: {p["importance"]})' for program_idx, plist in enumerate(impact_points.values()) for p_idx, p in enumerate(plist)])
+        print('Analyzing Impact Points:\n' + points_txt)
+        # init model
+        tokenizer = transformers.AutoTokenizer.from_pretrained(model_name)
+        model = transformers.AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
+        # analyze the impact points
+        prompt = 'Analyze the following impact points obtained from different political programs. Investigate common points and highlight notable differences in the programs. For each political program, identify the top three points that stand out from the others. Formulate ideas for how these three points might visually impact the region if the program comes into place. The final answer should only consist of a short description of these visual changes for each program, in the order of the original numbering, separated by linebreaks.'
+        reasoning, analysis = reason(model, tokenizer, prompt + '\n' + points_txt)
+        with open(fname_analysis, 'w') as f:
+            f.write(analysis)
+        with open(fname_analysis_reasons, 'w') as f:
+            f.write(reasoning)
+        print_str = f'Compiled impact point analysis into {fname_analysis}'
+    print(print_str)
+    return analysis

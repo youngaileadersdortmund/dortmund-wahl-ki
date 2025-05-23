@@ -1,60 +1,64 @@
 {
-  "identifier": "climate_environment",
-  "description": "Implementation of sustainable urban policies focusing on clean air, environmentally friendly transportation, and climate resilience.",
-  "importance": 0.7,
-  "importance_reasoning": "The program emphasizes the need for climate-friendly measures but does not elaborate in great detail on specific initiatives."
-},
-{
-  "identifier": "digital_infrastructure",
-  "description": "Expansion of digital technologies in municipal services and administration to improve citizen accessibility and efficiency.",
-  "importance": 0.9,
-  "importance_reasoning": "Dortmund is explicitly recognized as the 'most digital city' and the program highlights modern technologies as a core component of governance."
-},
-{
-  "identifier": "housing_development",
-  "description": "Creation of diverse and socially compatible housing options to meet varying market demands and integrate living and working spaces.",
-  "importance": 0.8,
-  "importance_reasoning": "The program prioritizes housing as a central issue, emphasizing both economic and social compatibility in urban planning."
-},
-{
-  "identifier": "education_reforms",
-  "description": "Focus on school development, equitable access to education, and maintaining primary/secondary school structures over comprehensive schools.",
-  "importance": 0.8,
-  "importance_reasoning": "Education is a key priority with specific policies on school construction, registration dates, and opposition to expanding comprehensive schools."
-},
-{
-  "identifier": "social_policy_support",
-  "description": "Strengthening family support, childcare, and social justice to ensure equal opportunities for all citizens.",
-  "importance": 0.9,
-  "importance_reasoning": "Social policy is described as a broad field with detailed commitments to family welfare, education, and combating inequality."
-},
-{
-  "identifier": "cultural_promotion",
-  "description": "Enhancement of Dortmund's cultural identity as the 'City of Music' and support for free cultural expression.",
-  "importance": 0.7,
-  "importance_reasoning": "Cultural initiatives are highlighted as essential for community engagement and regional influence but are not the program's primary focus."
-},
-{
-  "identifier": "security_cleanliness",
-  "description": "Zero-tolerance policies against crime, extremism, and disorder to ensure public safety and urban order.",
-  "importance": 0.8,
-  "importance_reasoning": "Security is a central pillar of the CDU's agenda, with specific strategies outlined to address criminal activity and maintain cleanliness."
-},
-{
-  "identifier": "healthcare_nursing",
-  "description": "Strengthening the Dortmund Clinic as a maximum care facility and expanding nursing education through the Canisius Campus.",
-  "importance": 0.8,
-  "importance_reasoning": "Healthcare is addressed with specific projects, including the nursing school and clinic upgrades, indicating moderate emphasis."
-},
-{
-  "identifier": "economic_innovation",
-  "description": "Promotion of age-appropriate assistance systems (AAL) and support for innovative company locations to drive economic growth.",
-  "importance": 0.7,
-  "importance_reasoning": "Economic initiatives are mentioned as part of broader innovation goals but lack detailed elaboration on implementation."
-},
-{
-  "identifier": "community_sports",
-  "description": "Support for amateur sports clubs, parks, and leisure facilities to foster community engagement and social cohesion.",
-  "importance": 0.7,
-  "importance_reasoning": "The program acknowledges the role of sports and leisure in community life but does not provide extensive details on specific measures."
+  "impact_points": [
+    {
+      "identifier": "climate_environment_impact",
+      "description": "Focus on climate, clean air, and environmentally friendly transportation to position Dortmund as a model city for sustainability",
+      "importance": 0.95,
+      "importance_reasoning": "The program emphasizes climate leadership as a core priority, linking it directly to the city's future identity and quality of life"
+    },
+    {
+      "identifier": "digitalization_advancement",
+      "description": "Leveraging Dortmund's status as the 'most digital city' to modernize administration and municipal services",
+      "importance": 0.9,
+      "importance_reasoning": "Digitalization is highlighted as a foundational element for modern governance, with specific mention of technological infrastructure and citizen accessibility"
+    },
+    {
+      "identifier": "housing_urban_integration",
+      "description": "Strategic integration of housing, work, and urban development to address housing needs and social compatibility",
+      "importance": 0.9,
+      "importance_reasoning": "The program dedicates significant attention to balancing economic and social aspects of housing, reflecting its centrality to urban planning"
+    },
+    {
+      "identifier": "social_family_support",
+      "description": "Strengthening family policies, childcare, and social welfare to ensure equitable opportunities for all citizens",
+      "importance": 0.85,
+      "importance_reasoning": "Social policy is framed as a broad, cross-cutting priority with specific commitments to family support and education"
+    },
+    {
+      "identifier": "education_school_reforms",
+      "description": "Balancing school development with preservation of primary and secondary education structures",
+      "importance": 0.8,
+      "importance_reasoning": "The program outlines detailed educational priorities including school construction and enrollment policies, indicating substantial focus"
+    },
+    {
+      "identifier": "healthcare_nursing_infrastructure",
+      "description": "Enhancing healthcare services through municipal ownership of facilities and expanding nursing education",
+      "importance": 0.8,
+      "importance_reasoning": "Healthcare is explicitly prioritized with specific investments in infrastructure and workforce development"
+    },
+    {
+      "identifier": "cultural_community_engagement",
+      "description": "Promoting Dortmund's identity as a cultural hub through arts, music, and community events",
+      "importance": 0.85,
+      "importance_reasoning": "Cultural initiatives are positioned as essential for social cohesion and regional influence, with explicit references to music and free culture"
+    },
+    {
+      "identifier": "security_cleanliness_priorities",
+      "description": "Zero tolerance strategies for crime, extremism, and maintaining public order and cleanliness",
+      "importance": 0.8,
+      "importance_reasoning": "Security is framed as a foundational element of urban life, with specific measures against criminal activity and public disorder"
+    },
+    {
+      "identifier": "sports_leisure_facilities",
+      "description": "Supporting amateur sports clubs and preserving parks and recreational spaces",
+      "importance": 0.75,
+      "importance_reasoning": "While not as extensively detailed as other areas, sports and leisure are explicitly mentioned as vital to community life"
+    },
+    {
+      "identifier": "economic_innovation_growth",
+      "description": "Fostering innovation in assistive technologies and supporting age-appropriate care industries",
+      "importance": 0.8,
+      "importance_reasoning": "Economic development is tied to technological innovation and sector-specific growth strategies, reflecting strategic priorities"
+    }
+  ]
 }

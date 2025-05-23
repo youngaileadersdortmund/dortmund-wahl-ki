@@ -1,64 +1,64 @@
 {
   "impact_points": [
     {
-      "identifier": "HousingAffordability",
-      "description": "Reducing profit-driven construction and supporting individual homeowners through new non-profit housing models",
+      "identifier": "HousingNonProfitSector",
+      "description": "Establishing a legally defined non-profit sector in housing to separate profit interests from social housing needs",
       "importance": 0.95,
-      "importance_reasoning": "The program emphasizes eliminating profit pressure in housing and creating a non-profit sector, indicating a strong focus on affordability and long-term housing stability"
+      "importance_reasoning": "This is a foundational policy goal emphasized as critical for addressing affordability and ensuring equitable housing access. The program explicitly ties this to Dortmund's claim of being a city 'everyone can afford.'"
     },
     {
-      "identifier": "ClimateActionTargets",
-      "description": "Achieving 55% CO2 reduction by 2030 through climate-proof urban planning and renewable energy transitions",
-      "importance": 0.92,
-      "importance_reasoning": "Specific CO2 reduction targets and climate adaptation measures for green spaces are explicitly outlined, showing detailed commitment to environmental goals"
+      "identifier": "ClimateResilienceInitiatives",
+      "description": "Implementing climate-proof infrastructure and adapting green spaces to handle extreme weather events",
+      "importance": 0.9,
+      "importance_reasoning": "Climate protection is a central theme with specific targets like CO2 reduction and heatwave preparedness. The program highlights Dortmund's role as a model for climate action."
     },
     {
-      "identifier": "UrbanLogisticsInnovation",
-      "description": "Transforming Dortmund into a model for sustainable city logistics with reduced traffic burdens and expanded public transport",
-      "importance": 0.89,
-      "importance_reasoning": "The program highlights Dortmund's logistics expertise and sets concrete traffic reduction goals, emphasizing mobility as a key climate challenge"
+      "identifier": "MobilityReductionTargets",
+      "description": "Reducing heavy traffic burden by 5% annually and introducing a regional 365-euro public transport ticket",
+      "importance": 0.85,
+      "importance_reasoning": "The program dedicates significant attention to mobility as a climate and quality-of-life issue, with clear numerical goals and a focus on urban logistics innovation."
     },
     {
       "identifier": "DigitalInfrastructureExpansion",
-      "description": "Implementing fiber optics, 5G, and open WLAN to create a high-speed digital city",
-      "importance": 0.88,
-      "importance_reasoning": "Digital infrastructure is explicitly prioritized as a core city development goal with specific technological investments outlined"
-    },
-    {
-      "identifier": "CommunityHealthcareExpansion",
-      "description": "Expanding neighborhood doctor centers and care cooperatives for localized medical services",
+      "description": "Expanding fiber optics, 5G, and open WLAN to make Dortmund a 'high-speed city'",
       "importance": 0.85,
-      "importance_reasoning": "The program dedicates significant attention to healthcare accessibility through community-based solutions and care quality improvements"
+      "importance_reasoning": "Digital infrastructure is framed as a priority for economic and social development, with specific mentions of public access in key areas like the city center and trade fair."
     },
     {
-      "identifier": "YouthAndWorkforceDevelopment",
-      "description": "Early intervention in education and job training to address unemployment and lack of opportunities",
-      "importance": 0.83,
-      "importance_reasoning": "The text emphasizes school-based initiatives and lifelong learning programs to combat unemployment, showing strategic focus on human capital"
+      "identifier": "SocialInclusionAndSafety",
+      "description": "Addressing fear in public spaces through police presence, combating neo-Nazism, and expanding support for marginalized groups",
+      "importance": 0.8,
+      "importance_reasoning": "The program emphasizes social cohesion and safety with concrete measures like mapping 'fearful spaces' and creating a police bike unit, reflecting a strong focus on community well-being."
     },
     {
-      "identifier": "CulturalDevelopmentInitiatives",
-      "description": "Creating new cultural spaces and experimenting with payment models for accessibility",
-      "importance": 0.80,
-      "importance_reasoning": "The program proposes innovative cultural programs and accessibility measures, indicating a commitment to cultural vibrancy and inclusivity"
+      "identifier": "YouthAndEducationSupport",
+      "description": "Expanding free summer programs, children's access to swimming pools, and transforming libraries into 'citizens' schools of the future'",
+      "importance": 0.8,
+      "importance_reasoning": "Education and youth development are recurring themes with specific initiatives targeting children's access to resources, health, and cultural opportunities."
     },
     {
-      "identifier": "SocialInclusionAndSecurity",
-      "description": "Addressing neo-Nazi threats and creating safe public spaces through police presence and community mapping",
-      "importance": 0.78,
-      "importance_reasoning": "The text directly addresses social cohesion issues and outlines specific security measures, reflecting a priority on community safety"
-    },
-    {
-      "identifier": "ChildcareAndEducationQuality",
-      "description": "Improving childcare options and expanding free summer programs for children",
+      "identifier": "CulturalInnovationAndAccessibility",
+      "description": "Increasing cultural offerings, testing pay-what-you-can models, and revitalizing nightlife",
       "importance": 0.75,
-      "importance_reasoning": "The program details specific educational initiatives and childcare investments, showing a focus on child development and family support"
+      "importance_reasoning": "Cultural development is highlighted as a way to foster community identity, with innovative approaches to accessibility and local creativity."
     },
     {
-      "identifier": "DigitalPublicServices",
-      "description": "Digitizing all municipal services by 2030 for easier citizen access",
-      "importance": 0.72,
-      "importance_reasoning": "The explicit 2030 deadline and emphasis on digital transformation indicate a significant focus on administrative efficiency and accessibility"
+      "identifier": "HealthcareAccessibilityImprovement",
+      "description": "Expanding neighborhood doctor centers and care cooperatives for elderly and vulnerable populations",
+      "importance": 0.75,
+      "importance_reasoning": "The program emphasizes proximity-based healthcare solutions, reflecting a commitment to equitable medical services for all age groups."
+    },
+    {
+      "identifier": "EmploymentAndTrainingInitiatives",
+      "description": "Creating early intervention programs for education-to-career transitions and reducing long-term unemployment",
+      "importance": 0.7,
+      "importance_reasoning": "Unemployment is described as a 'most pressing task,' with the program proposing systemic solutions from school-level support to job training."
+    },
+    {
+      "identifier": "RegionalLogisticsLeadership",
+      "description": "Positioning Dortmund as a model for urban logistics and sustainable transportation systems",
+      "importance": 0.7,
+      "importance_reasoning": "As Europe's top logistics research hub, Dortmund's plans for city logistics innovation are framed as both an economic and environmental priority."
     }
   ]
 }

@@ -2,7 +2,7 @@ import argparse
 import os
 import subprocess
 
-from llm import translate_pdf, summarize_content, reason_about_impact_points
+from llm import translate_pdf, summarize_content, reason_about_impact_points, impact_point_comparison_analysis
 
 
 def run_gen_ai(prompt, image_gen_path, image_gen_call, save_path, base_img, n_images=2, guidance=10, num_steps=25):
@@ -17,24 +17,26 @@ def run_gen_ai(prompt, image_gen_path, image_gen_call, save_path, base_img, n_im
     return True
 
 
-def process_program(fname, image_gen_path, image_gen_call, base_imgs, n_images, guidance, num_steps):
-    # initialize folder structure
-    base_path = os.path.dirname(fname)
-    for dirname in ['images', 'prompts']:
-        if not os.path.exists(os.path.join(base_path, dirname)):
-            os.makedirs(os.path.join(base_path, dirname))
-    translated_content = translate_pdf(fname)
-    summary = summarize_content(translated_content, fname)
-    key_points, reasoning = reason_about_impact_points(summary, fname)
-    # prompt = find_visual_keys(base_path, fname)
-    # prompt = 'Add the following visual aspects to Dortmund City:\n' + prompt
-    # img_save_path = os.path.join(base_path, 'images')
-    # run_gen_ai(prompt, image_gen_path, image_gen_call, img_save_path, base_imgs, n_images, guidance, num_steps)
+def process_program(input, image_gen_path, image_gen_call, base_imgs, n_images, guidance, num_steps):
+    if os.path.isfile(input):
+        # initialize subfolder structure
+        base_path = os.path.dirname(input)
+        for dirname in ['images', 'prompts']:
+            if not os.path.exists(os.path.join(base_path, dirname)):
+                os.makedirs(os.path.join(base_path, dirname))
+        # translate and summarize the content and analyze key impact points
+        translated_content = translate_pdf(input)
+        summary = summarize_content(translated_content, input)
+        key_points, reasoning = reason_about_impact_points(summary, input)
+    elif os.path.isdir(input):
+        # find and compare key impact points in the subfolders
+        analysis = impact_point_comparison_analysis(input)
+        print(analysis)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process program and generate images using AI.")
-    parser.add_argument("--fname", type=str, default="contents/2020/spd/program.pdf", help="Base path for contents")
+    parser.add_argument("--input", type=str, default="contents/2020", help="Either a single program (PDF) or a folder containing previously processed programs")
     # image arguments
     parser.add_argument("--uno_path", type=str, default="/home/fischer/repos/UNO", help="Path to UNO image generation")
     parser.add_argument("--uno_call", type=str, default='python3 inference.py --prompt "{prompt}" --image_paths "{base}" --save_path "{dir}" --num_images_per_prompt {n_img} --guidance {guid} --num_steps {nsteps}', help="UNO image generation call template")
@@ -46,7 +48,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     process_program(
-        args.fname,
+        args.input,
         args.uno_path,
         args.uno_call,
         os.path.join(os.path.dirname(os.path.dirname(__file__)), args.base_img),

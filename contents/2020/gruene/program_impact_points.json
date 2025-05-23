@@ -1,64 +1,64 @@
 {
   "impact_points": [
     {
-      "identifier": "TrafficRevolutionWithSpeed",
-      "description": "Reduction of car traffic and prioritization of cycling, pedestrian, and public transport infrastructure through measures like 30 km/h speed limits, cycle highways, and pedestrian-friendly urban planning.",
+      "identifier": "TrafficRevolution",
+      "description": "Reduction of car traffic through speed limits, pedestrian-friendly infrastructure, and cycling prioritization",
       "importance": 0.95,
-      "importance_reasoning": "The program emphasizes traffic restructuring as a core pillar, with detailed plans for cycling infrastructure, pedestrian zones, and reduced car dependency, indicating high priority."
+      "importance_reasoning": "The program extensively details traffic reforms, including 30 km/h zones, cycle highways, and redistribution of road space. This is a core priority for the Greens, with specific targets and measures outlined."
     },
     {
-      "identifier": "PublicTransportAccessibility",
-      "description": "Free public transport for students and apprentices, improved accessibility for people with disabilities, and expansion of mobility stations to reduce car reliance.",
+      "identifier": "PublicTransportAccess",
+      "description": "Free public transport for students, apprentices, and improved accessibility for disabled and elderly citizens",
       "importance": 0.9,
-      "importance_reasoning": "Public transport is highlighted as a climate-friendly solution, with specific targets like free student tickets and mobility station investments, showing significant focus."
+      "importance_reasoning": "The program emphasizes free public transport for youth, barrier-free infrastructure, and expanded services. It directly addresses social equity and climate goals through transportation accessibility."
     },
     {
-      "identifier": "ClimateNeutralityEnergy",
-      "description": "Transition to renewable energy, solar ordinances, and district heating reforms to achieve climate neutrality, including public energy company oversight.",
-      "importance": 0.95,
-      "importance_reasoning": "Climate neutrality is a central goal, with detailed strategies for energy production, storage, and municipal energy company reforms, reflecting high emphasis."
+      "identifier": "ClimateNeutralityInitiatives",
+      "description": "Transition to renewable energy, solar ordinances, and district heating upgrades",
+      "importance": 0.92,
+      "importance_reasoning": "The program outlines concrete steps for climate neutrality, including energy supply reforms, solar mandates, and CO2 reduction targets. This is a central theme with detailed technical proposals."
     },
     {
-      "identifier": "GreenSpacesBiodiversity",
-      "description": "Preservation of open spaces, tree planting, green roofs, and biodiversity strategies to enhance urban ecology and climate resilience.",
+      "identifier": "GreenSpacePreservation",
+      "description": "Expansion of green spaces, tree planting, and biodiversity protection through urban planning",
+      "importance": 0.88,
+      "importance_reasoning": "The program prioritizes green spaces for climate adaptation, biodiversity, and quality of life. Specific measures like green roofs and tree planting are highlighted as key strategies."
+    },
+    {
+      "identifier": "HousingEquityInitiatives",
+      "description": "Increased subsidized housing, homelessness support, and affordable rental policies",
       "importance": 0.85,
-      "importance_reasoning": "The program includes specific actions like green roofs and biodiversity planning, though less detailed than traffic or energy policies, indicating moderate importance."
+      "importance_reasoning": "The program addresses housing shortages, poverty, and social inclusion through subsidized housing projects and policies to prevent displacement. This is a critical issue for Dortmund's social fabric."
     },
     {
-      "identifier": "SocialHousingEquity",
-      "description": "Expansion of subsidized housing, barrier-free living, and addressing homelessness to ensure housing as a basic right for all residents.",
-      "importance": 0.9,
-      "importance_reasoning": "Housing is framed as a social justice issue, with explicit goals for subsidized housing and homelessness support, showing strong emphasis."
+      "identifier": "EducationalJustice",
+      "description": "Free school transport, inclusive education, and expanded childcare facilities",
+      "importance": 0.87,
+      "importance_reasoning": "The program focuses on reducing educational disparities through free transport, early childhood education, and inclusive school systems. It ties education to social mobility and equity."
     },
     {
-      "identifier": "EducationalJusticeYouth",
-      "description": "Improving educational opportunities for children, expanding early childhood care, and creating inclusive schools to reduce poverty-related educational disparities.",
-      "importance": 0.9,
-      "importance_reasoning": "Education is a recurring theme, with detailed plans for schools, daycare, and inclusive learning, indicating high priority for social equity."
+      "identifier": "DiversityInclusion",
+      "description": "Migrant integration, anti-discrimination policies, and support for LSBTTIQ communities",
+      "importance": 0.82,
+      "importance_reasoning": "The program emphasizes diversity as a strength, with specific measures for refugee support, anti-racism initiatives, and inclusive public services. This reflects a broad commitment to social cohesion."
     },
     {
-      "identifier": "SocialInclusionAntiDiscrimination",
-      "description": "Promotion of diversity, refugee integration, anti-racism measures, and support for LGBTQ+ and migrant communities through policy and funding.",
-      "importance": 0.85,
-      "importance_reasoning": "The program addresses social inclusion across multiple areas, including refugees, LGBTQ+ rights, and anti-discrimination, though less detailed than other pillars."
+      "identifier": "PublicHealthSafety",
+      "description": "Noise reduction, air quality improvement, and drug prevention programs",
+      "importance": 0.83,
+      "importance_reasoning": "The program addresses health through traffic calming, pollution control, and drug policy reforms. These measures are framed as essential for public well-being and safety."
     },
     {
-      "identifier": "DigitalParticipationTransparency",
-      "description": "Implementation of digital participation tools, open data, and transparent governance to involve citizens in decision-making and municipal services.",
-      "importance": 0.8,
-      "importance_reasoning": "Digital initiatives are mentioned as part of modern governance, though not as central as other issues, reflecting moderate importance."
+      "identifier": "DigitalParticipation",
+      "description": "Online administrative services, citizen budgets, and open data initiatives",
+      "importance": 0.78,
+      "importance_reasoning": "The program includes digital transformation goals like e-governance and participatory platforms. While less detailed than other areas, it's positioned as a key tool for transparency and engagement."
     },
     {
-      "identifier": "SustainableEconomicDevelopment",
-      "description": "Support for local businesses, regional cooperation, and sustainable industrial practices to foster a green economy and fair labor conditions.",
-      "importance": 0.8,
-      "importance_reasoning": "Economic development is tied to sustainability, with focus on local businesses and green industry, but less elaborated than social or environmental policies."
-    },
-    {
-      "identifier": "HealthcareSocialServices",
-      "description": "Improved healthcare access, drug prevention programs, and support for the elderly and homeless, including expanded shelters and medical services.",
-      "importance": 0.8,
-      "importance_reasoning": "Healthcare and social services are addressed in the context of poverty and inclusion, with specific measures for homeless and elderly populations, though not the program's primary focus."
+      "identifier": "SustainableEconomy",
+      "description": "Support for local businesses, green jobs, and fair procurement practices",
+      "importance": 0.81,
+      "importance_reasoning": "The program promotes regional economic development through sustainable business practices and fair procurement. It links economic growth to environmental and social responsibility."
     }
   ]
 }

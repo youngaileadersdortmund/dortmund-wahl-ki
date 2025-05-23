@@ -1,64 +1,64 @@
 {
   "impact_points": [
     {
-      "identifier": "Finance_01",
-      "description": "Addressing the city's 2.6 billion euro debt and stopping the cycle of financial burden on residents.",
-      "importance": 0.9,
-      "importance_reasoning": "The program highlights the city's severe debt crisis, emphasizing the need to stop the debt cycle and hold federal and state governments accountable for unjust tax systems. This is a central issue for the party's financial policy."
+      "identifier": "HOUSING_SHORTAGE",
+      "description": "Addressing the critical housing shortage and rising costs affecting low-income residents and the 1,400 homeless in Dortmund",
+      "importance": 0.95,
+      "importance_reasoning": "The program emphasizes the urgency of affordable housing as a human right, with specific targets for 1,000 new affordable homes annually and measures to stop land speculation. The housing crisis is a central issue directly impacting 30% of low-income households' budgets."
     },
     {
-      "identifier": "Housing_02",
-      "description": "Tackling the housing shortage and homelessness through affordable housing initiatives and land speculation controls.",
-      "importance": 0.9,
-      "importance_reasoning": "The program repeatedly stresses the housing crisis, including 1,400 homeless individuals and rising rents. Specific measures like 1,000 annual affordable homes and land speculation prevention are emphasized."
+      "identifier": "DEBT_REDUCTION",
+      "description": "Reducing Dortmund's 2.6 billion euro debt burden on residents and stopping the cycle of financial instability",
+      "importance": 0.92,
+      "importance_reasoning": "The program explicitly states that the city cannot repay its debt alone and criticizes the federal/state tax system as the root cause. This issue is central to the party's call for a fair financial policy and communal economy."
     },
     {
-      "identifier": "Climate_03",
-      "description": "Implementing climate goals, protecting natural spaces, and transitioning to renewable energy.",
+      "identifier": "CLIMATE_ACTION",
+      "description": "Achieving climate goals through renewable energy, forest preservation, and reducing fossil fuel dependency",
+      "importance": 0.90,
+      "importance_reasoning": "The program outlines multiple climate initiatives, including reforestation, phasing out fossil fuels by 2030, and expanding green infrastructure. It links climate action directly to Dortmund's environmental and public health challenges."
+    },
+    {
+      "identifier": "SOCIAL_INEQUALITY",
+      "description": "Tackling the deep social divide between Dortmund's classes and reducing the 23.9% poverty rate",
+      "importance": 0.88,
+      "importance_reasoning": "The program highlights the city's extreme social stratification, with a shrinking middle class and rising poverty. It emphasizes the need for a 'social city' where all residents feel included and supported."
+    },
+    {
+      "identifier": "TRANSPORT_REVOLUTION",
+      "description": "Creating car-free zones, expanding cycling infrastructure, and reducing HGV traffic in the city",
       "importance": 0.85,
-      "importance_reasoning": "Climate change is a recurring theme, with calls to expand forests, reduce emissions, and phase out fossil fuels. The program links environmental and social justice directly."
+      "importance_reasoning": "The program advocates for a mobility shift away from fossil fuels, including pedestrian-friendly zones, barrier-free public transport, and reducing the environmental impact of the Dortmund airport. This is a key part of the climate and urban planning agenda."
     },
     {
-      "identifier": "Social_City_04",
-      "description": "Revitalizing the underfunded 'Social City' action plan to address poverty and social exclusion.",
-      "importance": 0.8,
-      "importance_reasoning": "The program criticizes the underfunded 'Social City' initiative and its reliance on volunteer work, stressing the need for systemic change to ensure all residents feel at home."
+      "identifier": "EDUCATION_ACCESS",
+      "description": "Improving education equity through smaller class sizes, language programs, and free childcare for low-income families",
+      "importance": 0.83,
+      "importance_reasoning": "The program links education to social mobility, emphasizing reduced class sizes, language support for migrants, and expanding childcare access. It criticizes overcrowded classrooms and unequal opportunities between districts."
     },
     {
-      "identifier": "Poverty_05",
-      "description": "Reducing poverty through employment policies, minimum wage increases, and social welfare reforms.",
-      "importance": 0.8,
-      "importance_reasoning": "With 23.9% of residents at risk of poverty and over 31,000 unemployed, the program prioritizes job creation, a 12 euro minimum wage, and targeted social support."
+      "identifier": "HEALTHCARE_ACCESS",
+      "description": "Strengthening public healthcare with more nursing staff and reducing privatization of medical services",
+      "importance": 0.82,
+      "importance_reasoning": "The program highlights staffing shortages in hospitals and care facilities, advocating for public ownership of healthcare and increased training for nursing staff. This is tied to the broader goal of social justice."
     },
     {
-      "identifier": "Transport_06",
-      "description": "Transforming mobility with car-free zones, expanded cycling infrastructure, and reduced HGV traffic.",
+      "identifier": "INCLUSION_ACCESS",
+      "description": "Ensuring barrier-free public spaces and support for disabled and elderly residents through multi-generational housing",
+      "importance": 0.80,
+      "importance_reasoning": "The program prioritizes accessibility, including disabled transport services, barrier-free infrastructure, and inclusive housing. It directly addresses systemic barriers faced by marginalized groups."
+    },
+    {
+      "identifier": "PUBLIC_SERVICES",
+      "description": "Preserving public ownership of essential services like energy, water, and childcare while opposing privatization",
+      "importance": 0.78,
+      "importance_reasoning": "The program stresses the importance of public services for social equity, including re-municipalizing energy supply and expanding childcare. It opposes privatization that risks cutting essential services for vulnerable groups."
+    },
+    {
+      "identifier": "CULTURAL_EQUITY",
+      "description": "Expanding access to cultural and recreational opportunities for all residents, including migrants and low-income families",
       "importance": 0.75,
-      "importance_reasoning": "The program outlines specific transport reforms, including pedestrian-friendly zones, bike infrastructure, and reducing reliance on fossil fuels, reflecting its environmental and social priorities."
-    },
-    {
-      "identifier": "Education_07",
-      "description": "Improving education access and quality through smaller class sizes, language programs, and childcare expansion.",
-      "importance": 0.7,
-      "importance_reasoning": "The program addresses educational inequality, emphasizing reduced class sizes, language support for migrants, and expanding childcare to reduce social divides."
-    },
-    {
-      "identifier": "Healthcare_08",
-      "description": "Strengthening public healthcare and nursing care with better staffing and funding.",
-      "importance": 0.7,
-      "importance_reasoning": "The program highlights staffing shortages in hospitals and nursing homes, advocating for a qualification offensive and public ownership of healthcare services."
-    },
-    {
-      "identifier": "Disability_09",
-      "description": "Ensuring full inclusion and accessibility for people with disabilities through barrier-free infrastructure and policies.",
-      "importance": 0.65,
-      "importance_reasoning": "The program emphasizes dismantling barriers in public spaces, expanding disabled transport services, and creating inclusive housing, reflecting its commitment to social equity."
-    },
-    {
-      "identifier": "Renewable_10",
-      "description": "Accelerating the transition to renewable energy and phasing out fossil fuel dependence.",
-      "importance": 0.6,
-      "importance_reasoning": "While renewable energy is part of the climate agenda, the program's focus on fossil fuel phase-out and solar energy utilization is less detailed compared to other priorities."
+      "importance_reasoning": "The program calls for a broader Dortmund Pass, anti-racism measures, and inclusive cultural policies. It addresses segregation and the need for equitable access to arts and community spaces."
     }
   ]
 }

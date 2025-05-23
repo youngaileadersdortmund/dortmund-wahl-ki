@@ -1,59 +1,31 @@
 <think>
-Okay, I need to figure out ten central impact points from the Dortmund Programme 2020-2025. Let me start by reading through the provided text carefully. The user wants specific local aspects that would be affected or changed if the program is implemented. Each impact point needs an identifier, description, importance weight (0-1), and reasoning. The output should be JSON without quotes or other syntax symbols.
+Okay, I need to figure out ten central "impact points" from the Dortmund Programme 2020-2025 of the CDU. The user wants specific local aspects that would be affected or changed if the program is implemented. Each impact point needs an identifier, description, importance weight (0-1), and reasoning. The final output should be a JSON list.
 
-First, I'll scan the text for key themes. The program mentions climate, digitalization, housing, education, social policy, security, culture, and more. Let me list possible points:
+First, I'll read through the provided text carefully. The program mentions several areas: climate, digitalization, housing, urban development, social policy, education, healthcare, sports, culture, and security. Let me list possible points.
 
-1. **Climate and Environment**: The program talks about clean air, environmentally friendly transport, and sustainability. That's a major point. Importance might be high.
-2. **Digitalization**: Dortmund is called the "most digital city," so digital initiatives are important. High importance.
-3. **Housing and Urban Development**: They want to create sufficient living space and integrate living/working areas. Important.
-4. **Education and Schools**: School development, no expansion of comprehensive schools, common registration date. Important.
-5. **Social Policy and Family Support**: Emphasis on families, childcare, social justice. High importance.
-6. **Cultural Promotion**: As a "City of Music," supporting culture. Important.
-7. **Security and Cleanliness**: The CDU's focus on security. High importance.
-8. **Healthcare and Nursing**: Strengthening the clinic, nursing school. Important.
-9. **Economic and Job Creation**: AAL systems, company locations. Important.
-10. **Community and Sports**: Supporting clubs and leisure facilities. Important.
+1. **Climate and Environment**: The CDU wants to lead in climate, clean air, and eco-friendly transport. This is a key point, so high importance. Identifier: "climate_environment_impact".
 
-Now, I need to check if these are all covered in the text. Let me verify each point:
+2. **Digitalization**: Dortmund is already the "most digital city." They mention modern tech in administration. Importance might be high. Identifier: "digitalization_advancement".
 
-- **Climate and Environment**: Yes, "good climate, clean air, environmentally friendly transportation."
-- **Digitalization**: "Most digital city," "modern technologies in administration."
-- **Housing**: "Sufficient living space," "living and working together."
-- **Education**: School construction, no new comprehensive schools, common registration.
-- **Social Policy**: Families, childcare, social justice.
-- **Culture**: "City of Music," free culture promotion.
-- **Security**: Zero tolerance for crime, security, order.
-- **Healthcare**: Dortmund Clinic, nursing school.
-- **Economy**: AAL systems, company locations.
-- **Community/Sports**: Clubs, parks, leisure facilities.
+3. **Housing and Urban Development**: They want to integrate living and working, ensure sufficient housing. High importance. Identifier: "housing_urban_integration".
 
-That's ten. Now, for each, create an identifier. Maybe something like "climate_environment", "digital_infrastructure", etc. Descriptions should be concise. Importance weights: climate and digitalization might be 0.9, education 0.8, social policy 0.8, culture 0.7, security 0.8, healthcare 0.7, economy 0.7, housing 0.8, community 0.7. Wait, but the text mentions "zero tolerance strategy against criminal clans" which is security, so maybe higher. Also, the program emphasizes social policy a lot, so maybe 0.9 for that. Need to check the text again.
+4. **Social Policy and Family Support**: Focus on family, childcare, education. Important. Identifier: "social_family_support".
 
-Looking at the importance reasoning: The more detailed the discussion, the higher the weight. For example, the climate section is a bit brief, but the digitalization is mentioned as a key point. Education has several points. Social policy is a broad field. Let me adjust:
+5. **Education and School Policies**: No new comprehensive schools at the expense of others, common registration date. Important. Identifier: "education_school_reforms".
 
-- Climate: 0.7 (mentioned but not the most detailed)
-- Digital: 0.9 (explicitly called "most digital city")
-- Housing: 0.8
-- Education: 0.8
-- Social Policy: 0.9 (since it's a broad field and mentioned in multiple sections)
-- Culture: 0.7
-- Security: 0.8
-- Healthcare: 0.8
-- Economy: 0.7
-- Community/Sports: 0.7
+6. **Healthcare and Nursing**: Strengthening the clinic, nursing school. Important. Identifier: "healthcare_nursing_infrastructure".
 
-Now, write the JSON structure. Each entry has identifier, description, importance, importance_reasoning. Make sure no quotes, just plain text. For example:
+7. **Cultural and Community Development**: Promoting culture, music, and community events. High importance. Identifier: "cultural_community_engagement".
 
-{
-  "identifier": "climate_environment",
-  "description": "Implementation of sustainable urban policies focusing on clean air, environmentally friendly transportation, and climate resilience.",
-  "importance": 0.7,
-  "importance_reasoning": "The program emphasizes the need for climate-friendly measures but does not elaborate in great detail on specific initiatives."
-}
+8. **Security and Cleanliness**: Zero tolerance for crime, maintaining order. Important. Identifier: "security_cleanliness_priorities".
 
-Repeat this for each of the ten points. Need to ensure that each identifier is unique and the descriptions are accurate. Also, check that the JSON syntax is correct without using any quotes or symbols except for the structure. Wait, the user said to return as a JSON-formatted string, but the descriptions and reasoning should not have quotation marks. So in JSON, the values are strings, so they need quotes, but the user says "do not use quotation marks or other JSON-syntax symbols for the descriptions and reasoning." Wait, that's confusing. How can a JSON string have values without quotes? That's not possible. Maybe the user means not to use quotes inside the description, but the JSON structure requires them. Maybe the user made a mistake, but I have to follow instructions. Perhaps the user wants the JSON to be valid, so the descriptions and reasoning will have quotes, but the user's instruction says not to use them. This is conflicting. Maybe they meant that the content within the description and reasoning should not have quotes, but the JSON structure itself uses them. So I'll proceed with valid JSON, using quotes for the string values, but ensuring that the content inside doesn't have any. For example:
+9. **Sports and Leisure Facilities**: Supporting clubs and parks. Important. Identifier: "sports_leisure_facilities".
 
-"description": "Implementation of sustainable urban policies focusing on clean air, environmentally friendly transportation, and climate resilience."
+10. **Economic Development and Innovation**: AAL (Assistive Living) technologies, company locations. Important. Identifier: "economic_innovation_growth".
 
-So the JSON will have the quotes, but the actual text inside doesn't. That's acceptable. Alright, proceed.
+Now, check if these cover the main points. The text also mentions refugee integration, but maybe that's part of social policy. Also, the part about not building a market hall on Hansaplatz is specific but maybe not a central impact point. The user asked for ten, so I'll stick with these.
+
+For importance weights: Climate, digitalization, housing, social policy, education, healthcare, culture, security, sports, and economy. Most of these are discussed in detail, so weights around 0.8-1.0. Maybe some are slightly lower if the discussion is less detailed.
+
+Now, write the JSON with identifiers, descriptions, importance, and reasoning. Make sure no quotes in the descriptions and reasoning. Use proper JSON syntax. Check for any errors.
 </think>
