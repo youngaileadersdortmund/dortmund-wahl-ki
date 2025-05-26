@@ -35,6 +35,7 @@ def process_program(input, image_gen_path, image_gen_call, base_img, n_images, g
         if os.path.isfile(prompt_fname):
             with open(prompt_fname, 'r') as f:
                 visual_details = f.read()
+            prompt = f"Add {visual_details}"
             run_gen_ai(visual_details, image_gen_path, image_gen_call, os.path.join(base_path, 'images'), base_img, n_images, guidance, num_steps)
     elif os.path.isdir(input):
         # find and compare key impact points in the subfolders
