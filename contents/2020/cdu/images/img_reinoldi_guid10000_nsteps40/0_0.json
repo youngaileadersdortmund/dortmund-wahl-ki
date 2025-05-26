@@ -1,0 +1,22 @@
+{
+    "prompt": "climate_environment_impact would prioritize green energy installations and car-free zones. Digitalization_advancement would enhance smart infrastructure, like interactive public displays. Economic_innovation_growth could introduce tech-driven facilities, such as AI research centers or age-care innovation labs.",
+    "image_paths": [
+        "/home/fischer/repos/ai-for-political-education/contents/reinoldi.jpg"
+    ],
+    "eval_json_path": null,
+    "offload": false,
+    "num_images_per_prompt": 5,
+    "model_type": "flux-dev",
+    "width": 512,
+    "height": 512,
+    "ref_size": 512,
+    "num_steps": 40,
+    "guidance": 10000.0,
+    "seed": 3407,
+    "save_path": "/home/fischer/repos/ai-for-political-education/contents/2020/cdu/images/img_reinoldi_guid10000_nsteps40",
+    "only_lora": true,
+    "concat_refs": false,
+    "lora_rank": 512,
+    "data_resolution": 512,
+    "pe": "d"
+}

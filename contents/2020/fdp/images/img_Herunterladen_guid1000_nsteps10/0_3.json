@@ -1,0 +1,22 @@
+{
+    "prompt": "StartupSupport_BureaucracyReduction would foster innovation hubs and co-working spaces. DigitalAdmin_CitizenApp would integrate smart city tech, such as digital kiosks and real-time service portals. EconomicGlobalThinking could bring international cultural exchanges and global business centers.  ",
+    "image_paths": [
+        "/home/fischer/repos/ai-for-political-education/contents/Herunterladen.jpg"
+    ],
+    "eval_json_path": null,
+    "offload": false,
+    "num_images_per_prompt": 5,
+    "model_type": "flux-dev",
+    "width": 512,
+    "height": 512,
+    "ref_size": 512,
+    "num_steps": 10,
+    "guidance": 1000.0,
+    "seed": 3407,
+    "save_path": "/home/fischer/repos/ai-for-political-education/contents/2020/fdp/images/img_Herunterladen_guid1000_nsteps10",
+    "only_lora": true,
+    "concat_refs": false,
+    "lora_rank": 512,
+    "data_resolution": 512,
+    "pe": "d"
+}

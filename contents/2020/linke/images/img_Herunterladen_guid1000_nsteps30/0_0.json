@@ -1,0 +1,22 @@
+{
+    "prompt": "HOUSING_SHORTAGE initiatives would see rapid construction of high-density, affordable housing blocks. DEBT_REDUCTION might free funds for public projects, but visual changes are less direct. PUBLIC_SERVICES preservation would maintain traditional public buildings, emphasizing continuity over innovation.  ",
+    "image_paths": [
+        "/home/fischer/repos/ai-for-political-education/contents/Herunterladen.jpg"
+    ],
+    "eval_json_path": null,
+    "offload": false,
+    "num_images_per_prompt": 5,
+    "model_type": "flux-dev",
+    "width": 512,
+    "height": 512,
+    "ref_size": 512,
+    "num_steps": 30,
+    "guidance": 1000.0,
+    "seed": 3407,
+    "save_path": "/home/fischer/repos/ai-for-political-education/contents/2020/linke/images/img_Herunterladen_guid1000_nsteps30",
+    "only_lora": true,
+    "concat_refs": false,
+    "lora_rank": 512,
+    "data_resolution": 512,
+    "pe": "d"
+}

@@ -7,7 +7,8 @@ from llm import translate_pdf, summarize_content, reason_about_impact_points, im
 
 def run_gen_ai(prompt, image_gen_path, image_gen_call, save_path, base_img, n_images=2, guidance=10, num_steps=25):
     subdir = os.path.join(save_path, f'img_{os.path.basename(base_img).split(".")[0]}_guid{guidance}_nsteps{num_steps}')
-    os.makedirs(subdir)
+    if not os.path.isdir(subdir):
+        os.makedirs(subdir)
     image_gen_call = image_gen_call.format(prompt=prompt, base=base_img, dir=subdir, n_img=n_images, guid=guidance, nsteps=num_steps)
     print(image_gen_call)
     exitcode = subprocess.run(image_gen_call, shell=True, cwd=image_gen_path)
@@ -17,7 +18,7 @@ def run_gen_ai(prompt, image_gen_path, image_gen_call, save_path, base_img, n_im
     return True
 
 
-def process_program(input, image_gen_path, image_gen_call, base_imgs, n_images, guidance, num_steps):
+def process_program(input, image_gen_path, image_gen_call, base_img, n_images, guidance, num_steps):
     if os.path.isfile(input):
         # initialize subfolder structure
         base_path = os.path.dirname(input)
@@ -28,6 +29,13 @@ def process_program(input, image_gen_path, image_gen_call, base_imgs, n_images, 
         translated_content = translate_pdf(input)
         summary = summarize_content(translated_content, input)
         key_points, reasoning = reason_about_impact_points(summary, input)
+        print(key_points)
+        # if analysis already performed
+        prompt_fname = os.path.join(base_path, 'prompts', 'visual_impact_points.txt')
+        if os.path.isfile(prompt_fname):
+            with open(prompt_fname, 'r') as f:
+                visual_details = f.read()
+            run_gen_ai(visual_details, image_gen_path, image_gen_call, os.path.join(base_path, 'images'), base_img, n_images, guidance, num_steps)
     elif os.path.isdir(input):
         # find and compare key impact points in the subfolders
         analysis = impact_point_comparison_analysis(input)
@@ -41,14 +49,14 @@ if __name__ == "__main__":
     parser.add_argument("--uno_path", type=str, default="/home/fischer/repos/UNO", help="Path to UNO image generation")
     parser.add_argument("--uno_call", type=str, default='python3 inference.py --prompt "{prompt}" --image_paths "{base}" --save_path "{dir}" --num_images_per_prompt {n_img} --guidance {guid} --num_steps {nsteps}', help="UNO image generation call template")
     parser.add_argument("--base_img", type=str, default="contents/Herunterladen.jpg", help="Base image path")
-    parser.add_argument("--n_images", type=int, default=3, help="Number of images to create")
+    parser.add_argument("--n_images", type=int, default=5, help="Number of images to create")
     parser.add_argument("--guidance", type=int, default=10, help="Prompt guidance strength")
     parser.add_argument("--num_steps", type=int, default=25, help="Diffusion steps")
 
     args = parser.parse_args()
 
     process_program(
-        args.input,
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), args.input),
         args.uno_path,
         args.uno_call,
         os.path.join(os.path.dirname(os.path.dirname(__file__)), args.base_img),

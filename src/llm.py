@@ -171,18 +171,41 @@ def impact_point_comparison_analysis(dirname, model_name="Qwen/Qwen3-30B-A3B"):
                             impact_points[root] = json.load(content)['impact_points']
                     except:
                         raise RuntimeError('Could not load impact points from ' + os.path.join(root, f))
-        points_txt = '\n'.join([f'Program {program_idx} Point {p_idx}: {p["identifier"]} - {p["description"]} (Importance: {p["importance"]})' for program_idx, plist in enumerate(impact_points.values()) for p_idx, p in enumerate(plist)])
+        points_txt = '\n'.join([f'Program {program_idx} Point {p_idx}: {p["identifier"]} - {p["description"]}' for program_idx, plist in enumerate(impact_points.values()) for p_idx, p in enumerate(plist)])
         print('Analyzing Impact Points:\n' + points_txt)
         # init model
         tokenizer = transformers.AutoTokenizer.from_pretrained(model_name)
         model = transformers.AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
         # analyze the impact points
-        prompt = 'Analyze the following impact points obtained from different political programs. Investigate common points and highlight notable differences in the programs. For each political program, identify the top three points that stand out from the others. Formulate ideas for how these three points might visually impact the region if the program comes into place. The final answer should only consist of a short description of these visual changes for each program, in the order of the original numbering, separated by linebreaks.'
+        prompt = 'Analyze the following impact points obtained from different political programs. Investigate common points and highlight notable differences in the programs. For each political program, identify the top three points that stand out from the other programs. Formulate ideas for how these points might visually impact the region if the program comes into place. The final answer should consist of a summary of the analysis in the first textline, followed by individual textlines for every program, with a description of the most distinctive visual changes. Accordingly, the response format should be "Summary: ... \nProgram 1: ... \nProgram 2: ... \nProgram 3: ...")'
         reasoning, analysis = reason(model, tokenizer, prompt + '\n' + points_txt)
         with open(fname_analysis, 'w') as f:
             f.write(analysis)
         with open(fname_analysis_reasons, 'w') as f:
             f.write(reasoning)
+        # check for output compatibility
+        file_ok, iter = False, 5
+        while not file_ok and iter > 0:
+            try: # check if json is readble
+                per_program = analysis.split('\n')[1:]
+                assert len(per_program) == len(impact_points)
+                for ana, root in zip(per_program, impact_points.keys()):
+                    with open(os.path.join(root, 'prompts', 'visual_impact_points.txt'), 'w') as f:
+                        f.write(re.sub(r'Program \d: ', '', ana))
+                file_ok = True
+            except:
+                prompt = 'The formatting is not correct, the response format should be "Summary: ... \nProgram 1: ... \nProgram 2: ... \nProgram 3: ...") Please fix it:\n\n' + analysis
+            if not file_ok:
+                # try to fix JSON with the reasoning model
+                print(f'\n\nJSON ERROR! ITERATION {iter}\n\n')
+                fix_reasoning, fixed_analysis = reason(model, tokenizer, prompt)
+                print(fix_reasoning)
+                with open(fname_analysis, 'w') as f:
+                    f.write(fixed_analysis)
+                iter -= 1
         print_str = f'Compiled impact point analysis into {fname_analysis}'
+        if not file_ok:
+            print_str.append(', but could not extract the individual program prompts!')
+
     print(print_str)
     return analysis
