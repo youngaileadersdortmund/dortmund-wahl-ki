@@ -8,6 +8,7 @@ from dash import Dash, dcc, html, Input, Output
 from PIL import Image
 from io import BytesIO
 import plotly.graph_objects as go
+from tqdm import tqdm
 
 def split_text(text, n=10):
     words = text.split()
@@ -42,7 +43,7 @@ def load_for_party(party):
     print(f'loading data for {party}')
     CURRENT_STATE['party'] = party
     # load summary, reasoning and impact points
-    files = {'summary': 'program_sum.txt', 'reasoning': 'program_impact_point_reasoning.txt', 'impact_points': 'program_impact_points.json'}
+    files = {'prompt': 'prompts/visual_impact_points.txt', 'summary': 'program_sum.txt', 'reasoning': 'program_impact_point_reasoning.txt', 'impact_points': 'program_impact_points.json'}
     for key, fname in files.items():
         try:
             with open(f'contents/2020/{party}/{fname}', 'r', encoding='utf-8') as f:
@@ -50,15 +51,16 @@ def load_for_party(party):
         except:
             CURRENT_STATE[key] = None
     # load images
-    CURRENT_STATE['images'], config_values = find_images(f'contents/2020/{party}/images')
+    CURRENT_STATE['images'], config_values = find_images(os.path.join('contents', '2020', party, 'images'))
     unique_configs = {}
     for idx, value in enumerate(config_values):
         unique_configs[value] = list(set([key[idx] for key in CURRENT_STATE['images'].keys()]))
     # set defaults to display
-    CURRENT_STATE['config'] = [option[0] for option in list(unique_configs.values())]
+    if CURRENT_STATE['config'] is None or tuple(CURRENT_STATE['config']) not in CURRENT_STATE['images']:
+        CURRENT_STATE['config'] = [option[0] for option in list(unique_configs.values())]
+        CURRENT_STATE['base_pic'] = CURRENT_STATE['encoded'][(os.path.join('contents', '2020', f"{CURRENT_STATE['config'][0]}.jpg"))]
     CURRENT_STATE['gen_pic_path'] = CURRENT_STATE['images'][tuple(CURRENT_STATE['config'])]
-    CURRENT_STATE['gen_pic'] = encode(CURRENT_STATE['images'][tuple(CURRENT_STATE['config'])])
-    CURRENT_STATE['base_pic'] = encode(os.path.join('contents', f"{CURRENT_STATE['config'][0]}.jpg"))
+    CURRENT_STATE['gen_pic'] = CURRENT_STATE['encoded'][(CURRENT_STATE['images'][tuple(CURRENT_STATE['config'])])]
     return unique_configs
 
 def construct_for_party(party):
@@ -80,11 +82,11 @@ def construct_for_party(party):
             html.Label('Guidance:', style={'marginRight': '8px', 'width': '150px', 'display': 'inline-block'}),
             html.Div(dcc.Slider(
                 id='guidance-slider',
-                min=min(unique_configs['guidance']),
-                max=max(unique_configs['guidance']),
+                min=min(np.log10(unique_configs['guidance'])),
+                max=max(np.log10(unique_configs['guidance'])),
                 step=1,
-                value=CURRENT_STATE['config'][1],
-                marks={i: str(i) for i in unique_configs['guidance']},
+                value=np.log10(CURRENT_STATE['config'][1]),
+                marks={np.log10(i): str(i) for i in unique_configs['guidance']},
                 tooltip={"placement": "bottom", "always_visible": True},
                 updatemode='drag',
             ), style={'width': '600px', 'display': 'inline-block'})
@@ -96,7 +98,7 @@ def construct_for_party(party):
                 id='nsteps-slider',
                 min=min(unique_configs['nsteps']),
                 max=max(unique_configs['nsteps']),
-                step=1,
+                step=5,
                 value=CURRENT_STATE['config'][2],
                 marks={i: str(i) for i in unique_configs['nsteps']},
                 tooltip={"placement": "bottom", "always_visible": True},
@@ -124,8 +126,18 @@ def construct_for_party(party):
 ########################### INITIALIZATION
 app = Dash(__name__)
 regex = r'.*img_(.*)_guid(\d*)_nsteps(\d*).*_(\d*).png'
-PARTY_OPTIONS = ['spd', 'fdp', 'cdu']
-CURRENT_STATE = {'party': PARTY_OPTIONS[0], 'impact_points': None, 'images': None, 'config': None, 'gen_pic': None, 'gen_pic_path': None, 'base_pic': None}
+PARTY_OPTIONS = ['spd', 'fdp', 'cdu', 'linke', 'gruene']
+CURRENT_STATE = {'party': PARTY_OPTIONS[0], 'impact_points': None, 'images': None, 'config': None, 'gen_pic': None, 'gen_pic_path': None, 'base_pic': None, 'encoded': {}}
+# pre-encode images
+for subdir in tqdm(os.listdir('contents/2020'), desc='Encoding images'):
+    # store base images
+    if os.path.isfile(os.path.join('contents', '2020', subdir)) and (subdir.endswith('.png') or subdir.endswith('.jpg')):
+        CURRENT_STATE['encoded'][os.path.join('contents', '2020', subdir)] = encode(os.path.join('contents', '2020', subdir))
+    # store images in subdirectories
+    for root, _, files in os.walk(os.path.join('contents', '2020', subdir)):
+        for fname in files:
+            if fname.endswith('.png') or fname.endswith('.jpg'):
+                CURRENT_STATE['encoded'][os.path.join(root, fname)] = encode(os.path.join(root, fname))
 app.layout = html.Div([
     html.Div([
         html.Div([
@@ -142,7 +154,8 @@ app.layout = html.Div([
             # Party Program tabs
             html.Div([
                 dcc.Tabs(id="tabs", value='tab-1', children=[
-                    dcc.Tab(label='Impact Points', value='visual-tab'),
+                    dcc.Tab(label='Visual Aspects', value='visual-tab'),
+                    dcc.Tab(label='Impact Points', value='impact-tab'),
                     dcc.Tab(label='Reasoning', value='reasoning-tab'),
                     dcc.Tab(label='Summary', value='summary-tab'),
                 ]),
@@ -186,6 +199,8 @@ def render_content(tab):
     global CURRENT_STATE
     try:
         if tab == 'visual-tab': # plot
+            content = CURRENT_STATE['prompt']
+        elif tab == 'impact-tab': # plot
             try:                
                 x, y, d = [], [], []
                 for point in reversed(CURRENT_STATE['impact_points']):
@@ -203,7 +218,6 @@ def render_content(tab):
                 config={'responsive': True},
                 style={'height': '100%', 'width': '100%'}
             )
-
         elif tab == 'summary-tab':
             content = CURRENT_STATE['summary']
         elif tab == 'reasoning-tab':
@@ -222,14 +236,16 @@ def render_content(tab):
 def update_image(party_plot, base, guidance, nsteps, variant):
     global CURRENT_STATE
     for idx, field in enumerate([base, guidance, nsteps, variant]):
+        if idx == 1: # rescale guidance
+            field = int(10 ** field)
         if field != CURRENT_STATE['config'][idx]:
             CURRENT_STATE['config'][idx] = field
             if idx == 0:
-                CURRENT_STATE['base_pic'] = encode(os.path.join('contents', f'{base}.jpg'))
+                CURRENT_STATE['base_pic'] = CURRENT_STATE['encoded'][os.path.join('contents', '2020', f'{base}.jpg')]
     config = tuple(CURRENT_STATE['config'])
     if config in CURRENT_STATE['images']:
         CURRENT_STATE['gen_pic_path'] = CURRENT_STATE['images'][config]
-        CURRENT_STATE['gen_pic'] = encode(CURRENT_STATE['images'][config])
+        CURRENT_STATE['gen_pic'] = CURRENT_STATE['encoded'][(CURRENT_STATE['images'][config])]
     gen = html.Img(src='data:image/png;base64,{}'.format(CURRENT_STATE['gen_pic']), style={'height': '500px'})
     base = html.Img(src='data:image/png;base64,{}'.format(CURRENT_STATE['base_pic']), style={'height': '500px'})
     return gen, base, CURRENT_STATE['gen_pic_path']
