@@ -178,3 +178,5 @@ cython_debug/
 .vscode/
 
 node_modules/
+
+src/frontend/public/contents/*
