@@ -1,25 +1,42 @@
 import React from 'react';
+import CustomBox from './CustomBox';
 
-export default function PartyCard({ party }) {
-    return (
-        <div className="flex flex-col sm:flex-row bg-gray-200 rounded-lg shadow p-4 mb-4">
-            <div className="sm:w-2/3 mb-4 sm:mb-0 sm:pr-4">
-                <h2 className="text-2xl font-bold mb-2 capitalize">{party.metadata.displayName || party.name}</h2>
-                <p className="text-gray-700">{party.metadata.description || 'Keine Beschreibung vorhanden.'}</p>
-            </div>  
-            <div className="sm:w-1/3 flex items-center justify-center">
-                {party.images.length > 0 ? (
-                    <img
-                        src={party.images[0]}
-                        alt={`${party.name} Hauptbild`}
-                        className="w-full h-auto rounded-md object-contain"
-                    />
-                ) : (
-                    <div className="w-full h-48 bg-gray-300 flex items-center justify-center rounded-md">
-                        <span className="text-gray-500">Kein Bild</span>
-                    </div>
-                )}
+export default function PartyCard({ party, align = 'left', selectedImageIndex = 0 }) {
+  const selectedImage = party.images[selectedImageIndex];
+  const isLeft = align === 'left';
+
+  const keypoints = (party.texts || '').split(',').map(point => point.trim());
+
+  return (
+    <CustomBox title={party.metadata.displayName || party.name} align={align}>
+      <div className={`flex flex-col sm:flex-row items-center gap-4 ${isLeft ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}>
+
+      <div className="text-black text-center sm:text-left w-full sm:w-1/2 space-y-2">
+        {keypoints.length > 0 && keypoints[0] !== '' ? (
+          keypoints.map((point, idx) => (
+            <div key={idx} className="bg-white border-l-4 border-primary pl-3 py-1 rounded shadow-sm">
+              • {point}
             </div>
-        </div>
-    );
+          ))
+        ) : (
+          <p className="text-gray-500">Keine Beschreibung vorhanden.</p>
+        )}
+      </div>
+
+        {selectedImage ? (
+          <div className="overflow-hidden rounded-md w-full sm:w-1/2 transition-all duration-500">
+            <img
+              src={selectedImage}
+              alt={`${party.name} Bild ${selectedImageIndex + 1}`}
+              className="w-full h-auto object-cover rounded shadow-md"
+            />
+          </div>
+        ) : (
+          <div className="w-full sm:w-1/2 h-48 bg-gray-300 flex items-center justify-center rounded-md">
+            <span className="text-gray-500">Kein Bild</span>
+          </div>
+        )}
+      </div>
+    </CustomBox>
+  );
 }
