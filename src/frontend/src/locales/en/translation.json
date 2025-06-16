@@ -1,0 +1,9 @@
+{
+    "title": "Dortmund Local Election",
+    "description": {
+        "title": "What is this about?",
+        "intro": "We analyzed the visual impact of campaign posters and compared how they communicate ideas.",
+        "sampleTitle": "Example Prompt We Used",
+        "sampleText": "Please describe how this poster visually communicates the party’s main messages and values."
+    }
+}

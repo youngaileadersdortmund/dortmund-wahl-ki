@@ -2,38 +2,24 @@ import { Party } from '../type/party';
 
 export async function loadParties() {
     const basePath = '/images';
-    // Explicitly declare party folders
     const folders = ['cdu', 'fdp', 'gruene', 'linke', 'spd'];
     const parties = [];
-    
-    // Import all image and text files statically
-    const allImageImports = import.meta.glob('/public/images/*/image/*', { as: 'url' });
-    const allTextImports = import.meta.glob('/public/images/*/text/*', { as: 'raw' });
 
     for (const folder of folders) {
+        // Fetch JSON metadata
         const metadata = await fetch(`${basePath}/${folder}/metafile.json`).then(res => res.json());
 
-        // Filter image imports for this folder
-        const images = [];
-        for (const path in allImageImports) {
-            if (path.includes(`/images/${folder}/image/`)) {
-                const imgUrl = await allImageImports[path]();
-                images.push(imgUrl);
-            }
-        }
+        // Build image URLs manually
+        const images = [1, 2, 3].map(num => `${basePath}/${folder}/image/${num}.png`);
 
-        // Filter text imports for this folder
-        const texts = [];
-        for (const path in allTextImports) {
-            if (path.includes(`/images/${folder}/text/`)) {
-                const textContent = await allTextImports[path]();
-                texts.push(textContent);
-            }
-        }
+        // Fetch text file (visual_impact_points.txt)
+        const visualImpactText = await fetch(`${basePath}/${folder}/visual_impact_points.txt`).then(res => res.text());
 
-        const party = new Party(folder, metadata, images, texts);
+        const party = new Party(metadata.name, metadata, images, visualImpactText);
         parties.push(party);
     }
+
+    console.log(parties);
 
     return parties;
 }

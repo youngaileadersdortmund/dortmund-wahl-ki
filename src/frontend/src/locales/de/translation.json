@@ -1,0 +1,9 @@
+{
+    "title": "Dortmunder Kommunalwahl",
+    "description": {
+        "title": "Worum geht es hier?",
+        "intro": "Wir haben aufgrund der Wahlprogramme der Parteien eine Anfrage an ein LLM gestellt und die Kernaussagen visuell dargestellt.",
+        "sampleTitle": "Beispielprompt, den wir verwendet haben",
+        "sampleText": "Bitte beschreiben Sie, wie dieses Plakat die Hauptbotschaften und Werte der Partei visuell vermittelt."
+    }
+}
