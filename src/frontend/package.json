@@ -10,10 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/montserrat": "^5.2.6",
+    "audit": "^0.0.6",
+    "fix": "^0.0.6",
+    "i18next": "^25.2.1",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-i18next": "^15.5.2"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.27.1",
     "@eslint/js": "^9.25.0",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
