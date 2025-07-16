@@ -5,11 +5,11 @@ import subprocess
 from llm import translate_pdf, summarize_content, reason_about_impact_points, impact_point_comparison_analysis
 
 
-def run_gen_ai(prompt, image_gen_path, image_gen_call, save_path, base_img, n_images=2, guidance=10, num_steps=25):
+def generate_images_uno(visual_details, image_gen_path, image_gen_call, save_path, base_img, n_images=2, guidance=10, num_steps=25):
     subdir = os.path.join(save_path, f'img_{os.path.basename(base_img).split(".")[0]}_guid{guidance}_nsteps{num_steps}')
     if not os.path.isdir(subdir):
         os.makedirs(subdir)
-    image_gen_call = image_gen_call.format(prompt=prompt, base=base_img, dir=subdir, n_img=n_images, guid=guidance, nsteps=num_steps)
+    image_gen_call = image_gen_call.format(prompt=f"Add {visual_details}", base=base_img, dir=subdir, n_img=n_images, guid=guidance, nsteps=num_steps)
     print(image_gen_call)
     exitcode = subprocess.run(image_gen_call, shell=True, cwd=image_gen_path)
     if exitcode.returncode != 0:
@@ -17,8 +17,30 @@ def run_gen_ai(prompt, image_gen_path, image_gen_call, save_path, base_img, n_im
         return False
     return True
 
+def generate_images_diffusers(visual_details, model_name, save_path, guidance=0., num_steps=4, n_images=4):
+    import torch
+    from diffusers import FluxPipeline
+    pipe = FluxPipeline.from_pretrained(model_name, device_map="balanced")
+    subdir = os.path.join(save_path, f'img_{model_name.replace("/", "_")}_guid{guidance}_nsteps{num_steps}')
+    if not os.path.isdir(subdir):
+        os.makedirs(subdir)
+    prompt = "Dortmund city, with additional " + visual_details
+    images = pipe(
+        prompt,
+        height=512,
+        width=512,
+        max_sequence_length=256,
+        generator=[torch.Generator("cuda").manual_seed(i) for i in range(n_images)],  # 4 images, different seeds
+        num_images_per_prompt=n_images,
+        num_inference_steps=num_steps,
+        guidance_scale=guidance
+    )
+    for idx, image in enumerate(images.images):
+        image.save(os.path.join(subdir, f"0_{idx}.png"))
+    return True
 
-def process_program(input, image_gen_path, image_gen_call, base_img, n_images, guidance, num_steps):
+
+def process_program(input, image_gen, image_gen_call, base_img, n_images, guidance, num_steps):
     if os.path.isfile(input):
         # initialize subfolder structure
         base_path = os.path.dirname(input)
@@ -35,8 +57,10 @@ def process_program(input, image_gen_path, image_gen_call, base_img, n_images, g
         if os.path.isfile(prompt_fname):
             with open(prompt_fname, 'r') as f:
                 visual_details = f.read()
-            prompt = f"Add {visual_details}"
-            run_gen_ai(prompt, image_gen_path, image_gen_call, os.path.join(base_path, 'images'), base_img, n_images, guidance, num_steps)
+            if os.path.isdir(image_gen):
+                generate_images_uno(visual_details, image_gen, image_gen_call, os.path.join(base_path, 'images'), base_img, n_images, guidance, num_steps)
+            else:
+                generate_images_diffusers(visual_details, image_gen, os.path.join(base_path, 'images'), guidance, num_steps, n_images)
     elif os.path.isdir(input):
         # find and compare key impact points in the subfolders
         analysis = impact_point_comparison_analysis(input)
@@ -47,18 +71,18 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process program and generate images using AI.")
     parser.add_argument("--input", type=str, default="contents/2020", help="Either a single program (PDF) or a folder containing previously processed programs")
     # image arguments
-    parser.add_argument("--uno_path", type=str, default="/home/fischer/repos/UNO", help="Path to UNO image generation")
+    parser.add_argument("--image_generator", type=str, default="black-forest-labs/FLUX.1-schnell", help="Either the path to UNO software, or model name")
     parser.add_argument("--uno_call", type=str, default='python3 inference.py --prompt "{prompt}" --image_paths "{base}" --save_path "{dir}" --num_images_per_prompt {n_img} --guidance {guid} --num_steps {nsteps}', help="UNO image generation call template")
     parser.add_argument("--base_img", type=str, default="contents/Herunterladen.jpg", help="Base image path")
     parser.add_argument("--n_images", type=int, default=5, help="Number of images to create")
-    parser.add_argument("--guidance", type=int, default=10, help="Prompt guidance strength")
-    parser.add_argument("--num_steps", type=int, default=25, help="Diffusion steps")
+    parser.add_argument("--guidance", type=float, default=0., help="Prompt guidance strength")
+    parser.add_argument("--num_steps", type=int, default=4, help="Diffusion steps")
 
     args = parser.parse_args()
 
     process_program(
         os.path.join(os.path.dirname(os.path.dirname(__file__)), args.input),
-        args.uno_path,
+        args.image_generator,
         args.uno_call,
         os.path.join(os.path.dirname(os.path.dirname(__file__)), args.base_img),
         args.n_images,
