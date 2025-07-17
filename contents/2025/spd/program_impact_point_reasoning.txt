@@ -1,0 +1,27 @@
+<think>
+Okay, I need to identify ten central "impact points" from the given election program summary of SPD Dortmund. Each impact point should be a specific local aspect that would be affected or changed. I need to create an identifier, a short description, an importance weight between 0 and 1, and an explanation for each. Let me start by reading through the text carefully.
+
+First, the program mentions affordable housing, public subsidized housing quota, and the DSG's role. That's a key point. Identifier could be "AffordableHousingExpansion". Importance might be high because it's discussed in detail with specific numbers and projects.
+
+Next, there's a lot about daycare centers and abolishing fees. The identifier could be "DaycareFeeAbolition". Importance is high since it's a major policy and mentions funding and expansion of FABIDO.
+
+Then, schools and the "Dortmund movement model" for sports and youth activities. Identifier: "SchoolModernizationAndYouthSports". Importance is high because it's about education and youth development.
+
+Public transport and cycling infrastructure are mentioned multiple times. Identifier: "PublicTransportAndCyclingNetworks". Importance is high due to the detailed plans and integration with other services.
+
+Youth centers and meeting places are highlighted. Identifier: "YouthCenterExpansion". Importance is moderate but specific mentions of lack of centers and plans to extend Nordstadtliga.
+
+Health and volunteer work are addressed. Identifier: "HealthAndVolunteerSupport". Importance is medium, as it's part of social services but not as detailed as others.
+
+Economic development and job creation. Identifier: "EconomicDiversificationAndJobCreation". High importance because of the focus on the economy and specific strategies like the steel site and technology centers.
+
+Green spaces and climate initiatives. Identifier: "GreenSpaceAndClimateInitiatives". High importance due to the detailed environmental policies and sponge city concept.
+
+Digitalization and smart city initiatives. Identifier: "DigitalInfrastructureAndSmartCity". High importance with specific projects like the digital map and IoT sensors.
+
+Community engagement and volunteer work. Identifier: "CommunityVolunteerSupport". Medium importance, as it's part of social cohesion but not the most emphasized.
+
+Wait, I need to check if these are ten. Let me count. Yes, that's ten. Now, assign importance weights. Affordable housing is very detailed, so 0.9. Daycare fee abolition is also detailed, 0.8. School modernization and youth sports are detailed, 0.9. Public transport and cycling are extensive, 0.9. Youth centers, 0.7. Health and volunteer, 0.7. Economic development, 0.8. Green spaces, 0.9. Digitalization, 0.8. Community volunteer, 0.7. 
+
+Need to make sure the descriptions are concise and the identifiers are meaningful. Also, ensure the JSON structure is correct without quotes in descriptions and reasoning. Avoid any markdown. Let me structure the JSON accordingly.
+</think>

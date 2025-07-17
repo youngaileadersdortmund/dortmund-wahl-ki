@@ -1,0 +1,6 @@
+Summary: The programs share common goals like public transport expansion, green space development, and affordable housing, but differ in emphasis on climate action, digitalization, social equity, and economic policies. Visual changes reflect these priorities, with climate-focused programs showing renewable energy infrastructure, while others prioritize urban renewal, digital services, or social infrastructure.  
+Program 0: Solar panels on buildings, expanded bike lanes, public housing developments, urban tree planting, renewable energy cooperatives  
+Program 1: Modernized schools with full-day facilities, cycling infrastructure, youth centers, digital kiosks in public spaces, green roofs on buildings  
+Program 2: Revitalized industrial sites with green spaces, streamlined administrative offices, tech startup hubs, reduced building density in urban areas, community volunteer centers  
+Program 3: Social housing complexes, emergency shelters, pedestrian-friendly streets, public art installations, solar-powered community facilities  
+Program 4: Upgraded road networks, new transit stations, expanded healthcare clinics, green energy installations, vocational training centers

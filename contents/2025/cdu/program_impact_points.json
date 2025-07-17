@@ -1,0 +1,64 @@
+{
+  "impact_points": [
+    {
+      "identifier": "INFRASTRUCTURE_INVESTMENT",
+      "description": "Investment in local infrastructure projects such as road repairs and public transit upgrades",
+      "importance": 0.9,
+      "importance_reasoning": "The program emphasizes large-scale infrastructure improvements as a core priority, with detailed plans for funding and timelines"
+    },
+    {
+      "identifier": "EDUCATION_FUNDING",
+      "description": "Increased financial support for local schools and educational programs",
+      "importance": 0.85,
+      "importance_reasoning": "Education is highlighted as a key area for resource allocation with specific budgetary commitments outlined"
+    },
+    {
+      "identifier": "HEALTHCARE_ACCESS",
+      "description": "Expansion of local healthcare services and facilities",
+      "importance": 0.8,
+      "importance_reasoning": "The program dedicates significant attention to improving healthcare availability with concrete proposals for new clinics"
+    },
+    {
+      "identifier": "ENVIRONMENTAL_SUSTAINABILITY",
+      "description": "Initiatives to promote green energy and reduce local carbon footprints",
+      "importance": 0.75,
+      "importance_reasoning": "Environmental policies are presented with measurable goals and community engagement strategies"
+    },
+    {
+      "identifier": "JOBS_CREATION",
+      "description": "Programs to stimulate local employment through small business support and vocational training",
+      "importance": 0.7,
+      "importance_reasoning": "Job growth is addressed through multiple initiatives with specific target metrics mentioned"
+    },
+    {
+      "identifier": "HOUSING_DEVELOPMENT",
+      "description": "New housing projects to address local affordability and homelessness issues",
+      "importance": 0.65,
+      "importance_reasoning": "Housing is discussed with both immediate and long-term solutions including public-private partnerships"
+    },
+    {
+      "identifier": "PUBLIC_SAFETY",
+      "description": "Enhanced community policing and crime prevention programs",
+      "importance": 0.6,
+      "importance_reasoning": "Safety measures are outlined with a focus on community-based approaches and resource allocation"
+    },
+    {
+      "identifier": "COMMUNITY_PROGRAMS",
+      "description": "Funding for local cultural and social initiatives",
+      "importance": 0.55,
+      "importance_reasoning": "Cultural and social programs are mentioned as important for community cohesion with specific examples"
+    },
+    {
+      "identifier": "TRANSPORTATION_ACCESS",
+      "description": "Improvements to local transportation networks and accessibility",
+      "importance": 0.5,
+      "importance_reasoning": "Transportation is addressed with plans for both infrastructure upgrades and service expansions"
+    },
+    {
+      "identifier": "TAX_REFORM",
+      "description": "Proposed changes to local tax policies to benefit residents",
+      "importance": 0.45,
+      "importance_reasoning": "Tax policies are discussed with specific adjustments outlined but with less detailed implementation plans"
+    }
+  ]
+}

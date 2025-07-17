@@ -1,0 +1,64 @@
+{
+  "impact_points": [
+    {
+      "identifier": "CLIMATE_NEUTRALITY_2035",
+      "description": "Achieving climate neutrality by 2035 through renewable energy, sustainable construction, and energy efficiency measures",
+      "importance": 0.95,
+      "importance_reasoning": "This is the central overarching goal of the program, with detailed strategies across energy, construction, and transportation sectors. The timeline and comprehensive approach indicate high priority."
+    },
+    {
+      "identifier": "RENEWABLE_ENERGY_EXPANSION",
+      "description": "Accelerating the transition to renewable energy sources and empowering citizen energy cooperatives",
+      "importance": 0.9,
+      "importance_reasoning": "The program emphasizes decentralized energy production, renewable infrastructure development, and community involvement, reflecting significant investment in both technological and social aspects."
+    },
+    {
+      "identifier": "PUBLIC_TRANSPORT_IMPROVEMENT",
+      "description": "Expanding and modernizing public transportation networks with increased frequency, accessibility, and integration",
+      "importance": 0.9,
+      "importance_reasoning": "Detailed plans for buses, trams, night services, and reduced car dependency show a strong commitment to transforming mobility systems as a core urban priority."
+    },
+    {
+      "identifier": "AFFORDABLE_HOUSING_INITIATIVES",
+      "description": "Ensuring housing affordability through rent controls, municipal housing development, and preventing speculative land use",
+      "importance": 0.88,
+      "importance_reasoning": "The program addresses housing crises with specific measures like rent caps, housing cooperatives, and land policy reforms, indicating critical social and economic focus."
+    },
+    {
+      "identifier": "GREEN_SPACE_ENHANCEMENT",
+      "description": "Increasing urban greenery, biodiversity, and climate-resilient landscapes through tree planting and ecological restoration",
+      "importance": 0.85,
+      "importance_reasoning": "Extensive proposals for green roofs, tree planting, and habitat preservation demonstrate a strong emphasis on environmental and public health benefits."
+    },
+    {
+      "identifier": "WASTE_MANAGEMENT_REFORM",
+      "description": "Implementing zero-waste strategies, recycling programs, and reducing single-use plastics through community initiatives",
+      "importance": 0.8,
+      "importance_reasoning": "The program includes concrete measures like free bulky waste collection, second-hand stores, and waste separation systems, showing practical environmental focus."
+    },
+    {
+      "identifier": "DIGITAL_ADMINISTRATION",
+      "description": "Modernizing municipal services through open-source software, digital participation, and transparent budgeting",
+      "importance": 0.8,
+      "importance_reasoning": "The initiative prioritizes technological innovation with specific goals for digital infrastructure, open-source adoption, and citizen engagement platforms."
+    },
+    {
+      "identifier": "INCLUSIVE_EDUCATION_ACCESS",
+      "description": "Expanding quality childcare, school infrastructure, and inclusive education for all socio-economic and cultural backgrounds",
+      "importance": 0.8,
+      "importance_reasoning": "Comprehensive plans for early education, school safety, and inclusive learning environments reflect a strong commitment to social equity."
+    },
+    {
+      "identifier": "SOCIAL_EQUITY_POLICIES",
+      "description": "Promoting gender equality, LGBTQ+ rights, migrant integration, and anti-discrimination measures across all city services",
+      "importance": 0.8,
+      "importance_reasoning": "The program includes targeted initiatives for marginalized groups, indicating a broad approach to social justice and inclusion."
+    },
+    {
+      "identifier": "CLIMATE_RESILIENT_INFRASTRUCTURE",
+      "description": "Developing district heating networks, energy storage, and climate-adaptive urban planning to withstand environmental challenges",
+      "importance": 0.78,
+      "importance_reasoning": "The focus on resilient infrastructure through renewable energy systems and adaptive planning shows strategic long-term thinking for climate adaptation."
+    }
+  ]
+}
