@@ -113,7 +113,7 @@ def reason(model, tokenizer, prompt, max_new_tokens=5000, end_of_reasoning_token
 
 def reason_about_visual_points(input, fname, model_name="Qwen/Qwen3-30B-A3B", out_fname='visual_points.txt', type_of_input='election program summary',
                                prompt='Identify the five most important visual aspects that would be affected or impacted if this political program comes into effect. Describe each aspect in an informative and concise way, with a focus on the resulting visual appearance. Return these five visual descriptions as a comma-separated list, which in total should contain about 25 words.'):
-    point_fname, reasoning_fname = os.path.join(os.path.dirname(fname), 'prompts', out_fname), fname.replace('.pdf', out_fname.replace('.txt', '_reasoning.txt'))
+    point_fname, reasoning_fname = os.path.join(os.path.dirname(fname), 'prompts', out_fname), os.path.join(os.path.dirname(fname), 'prompts', out_fname.replace('.txt', '_reasoning.txt'))
     
     if os.path.isfile(point_fname):
         with open(point_fname, 'r') as f:
