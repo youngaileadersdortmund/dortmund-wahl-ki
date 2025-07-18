@@ -2,45 +2,10 @@ import argparse
 import os
 import subprocess
 
-from llm import translate_pdf, summarize_content, reason_about_impact_points, impact_point_comparison_analysis
+from llm import translate_pdf, summarize_content, reason_about_impact_points, impact_point_comparison_analysis, reason_about_visual_points
+from images import generate_images_uno, generate_images_diffusers
 
-
-def generate_images_uno(visual_details, image_gen_path, image_gen_call, save_path, base_img, n_images=2, guidance=10, num_steps=25):
-    subdir = os.path.join(save_path, f'img_{os.path.basename(base_img).split(".")[0]}_guid{guidance}_nsteps{num_steps}')
-    if not os.path.isdir(subdir):
-        os.makedirs(subdir)
-    image_gen_call = image_gen_call.format(prompt=f"Add {visual_details}", base=base_img, dir=subdir, n_img=n_images, guid=guidance, nsteps=num_steps)
-    print(image_gen_call)
-    exitcode = subprocess.run(image_gen_call, shell=True, cwd=image_gen_path)
-    if exitcode.returncode != 0:
-        print("Error in generating image")
-        return False
-    return True
-
-def generate_images_diffusers(visual_details, model_name, save_path, guidance=0., num_steps=4, n_images=4):
-    import torch
-    from diffusers import FluxPipeline
-    pipe = FluxPipeline.from_pretrained(model_name, device_map="balanced")
-    subdir = os.path.join(save_path, f'img_{model_name.replace("/", "_")}_guid{guidance}_nsteps{num_steps}')
-    if not os.path.isdir(subdir):
-        os.makedirs(subdir)
-    prompt = "Dortmund city, with additional " + visual_details
-    images = pipe(
-        prompt,
-        height=512,
-        width=512,
-        max_sequence_length=256,
-        generator=[torch.Generator("cuda").manual_seed(i) for i in range(n_images)],  # 4 images, different seeds
-        num_images_per_prompt=n_images,
-        num_inference_steps=num_steps,
-        guidance_scale=guidance
-    )
-    for idx, image in enumerate(images.images):
-        image.save(os.path.join(subdir, f"0_{idx}.png"))
-    return True
-
-
-def process_program(input, image_gen, image_gen_call, base_img, n_images, guidance, num_steps):
+def process_program_collective(input, image_gen, image_gen_call, base_img, n_images, guidance, num_steps):
     if os.path.isfile(input):
         # initialize subfolder structure
         base_path = os.path.dirname(input)
@@ -67,6 +32,23 @@ def process_program(input, image_gen, image_gen_call, base_img, n_images, guidan
         print(analysis)
 
 
+def process_program_individual(input, image_gen, image_gen_call, base_img, n_images, guidance, num_steps):
+    if os.path.isfile(input):
+        # initialize subfolder structure
+        base_path = os.path.dirname(input)
+        for dirname in ['images_direct', 'prompts']:
+            if not os.path.exists(os.path.join(base_path, dirname)):
+                os.makedirs(os.path.join(base_path, dirname))
+        # translate and summarize the content and analyze key impact points
+        translated_content = translate_pdf(input)
+        summary = summarize_content(translated_content, input)
+        visual_points, reasoning = reason_about_visual_points(summary, input, out_fname='direct_visual_points.txt')
+        if os.path.isdir(image_gen):
+            generate_images_uno(visual_points, image_gen, image_gen_call, os.path.join(base_path, 'images_direct'), base_img, n_images, guidance, num_steps)
+        else:
+            generate_images_diffusers(visual_points, image_gen, os.path.join(base_path, 'images_direct'), guidance, num_steps, n_images)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process program and generate images using AI.")
     parser.add_argument("--input", type=str, default="contents/2020", help="Either a single program (PDF) or a folder containing previously processed programs")
@@ -80,7 +62,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    process_program(
+    process_program_individual(
         os.path.join(os.path.dirname(os.path.dirname(__file__)), args.input),
         args.image_generator,
         args.uno_call,
@@ -89,9 +71,6 @@ if __name__ == "__main__":
         args.guidance,
         args.num_steps
     )
-
-
-
 
 # summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 

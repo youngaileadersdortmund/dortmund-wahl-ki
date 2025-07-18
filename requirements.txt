@@ -1,3 +1,4 @@
+accelerate
 transformers
 einops==0.8.0
 # transformers==4.43.3
@@ -16,3 +17,4 @@ diffusers
 transformers
 PyPDF2
 pycryptodome
+openpyxl
