@@ -3,7 +3,7 @@ import os
 import subprocess
 
 from llm import translate_pdf, summarize_content, reason_about_impact_points, impact_point_comparison_analysis, reason_about_visual_points
-from images import generate_images_uno, generate_images_diffusers
+from images import generate_images_uno, load_model_diffusers, generate_images_diffusers
 
 def process_program_collective(input, image_gen, image_gen_call, base_img, n_images, guidance, num_steps):
     if os.path.isfile(input):
@@ -46,7 +46,9 @@ def process_program_individual(input, image_gen, image_gen_call, base_img, n_ima
         if os.path.isdir(image_gen):
             generate_images_uno(visual_points, image_gen, image_gen_call, os.path.join(base_path, 'images_direct'), base_img, n_images, guidance, num_steps)
         else:
-            generate_images_diffusers(visual_points, image_gen, os.path.join(base_path, 'images_direct'), guidance, num_steps, n_images)
+            model = load_model_diffusers(image_gen)
+            save_path = os.path.join(base_path, 'images_direct', f'img_{image_gen.replace("/", "_")}_guid{guidance}_nsteps{num_steps}')
+            generate_images_diffusers(visual_points, model, save_path, guidance, num_steps, n_images)
 
 
 if __name__ == "__main__":

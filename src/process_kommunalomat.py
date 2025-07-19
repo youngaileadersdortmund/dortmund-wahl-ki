@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 from llm import translate, reason_about_visual_points
-from images import generate_images_uno, generate_images_diffusers
+from images import generate_images_uno, load_model_diffusers, generate_images_diffusers
 
 
 def translate_kommunalomat(fname):
@@ -85,6 +85,8 @@ if __name__ == '__main__':
     base_path = os.path.dirname(args.input)
     per_party = translate_kommunalomat(args.input)
 
+    model = load_model_diffusers(image_gen)
+
     for party, responses in per_party.items():
         responses = '\n\n'.join(responses)
         
@@ -96,9 +98,11 @@ if __name__ == '__main__':
         with open(os.path.join(base_path, party, 'kommunalomat_responses.txt'), 'w') as f:
             f.write(responses)
 
-        # generate prompt and images
+        # generate images
         visual_points, reasoning = reason_about_visual_points(responses, os.path.join(base_path, party, 'dummy.txt'), out_fname='kommunalomat_visual_points.txt', type_of_input='open election compass answers')
+        print(f'Generating images for {party}')
         if os.path.isdir(image_gen):
-            generate_images_uno(visual_points, image_gen, image_gen_call, os.path.join(base_path, 'images_direct'), base_img, n_images, guidance, num_steps)
+            generate_images_uno(visual_points, image_gen, image_gen_call, os.path.join(base_path, party, 'images_kommunalomat'), base_img, n_images, guidance, num_steps)
         else:
-            generate_images_diffusers(visual_points, image_gen, os.path.join(base_path, 'images_direct'), guidance, num_steps, n_images)
+            save_path = os.path.join(base_path, party, 'images_kommunalomat', f'img_{image_gen.replace("/", "_")}_guid{guidance}_nsteps{num_steps}')
+            generate_images_diffusers(visual_points, model, save_path, guidance, num_steps, n_images)

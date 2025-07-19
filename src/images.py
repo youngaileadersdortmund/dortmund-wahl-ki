@@ -15,15 +15,19 @@ def generate_images_uno(visual_details, image_gen_path, image_gen_call, save_pat
     return True
 
 
-def generate_images_diffusers(visual_details, model_name, save_path, guidance=0., num_steps=4, n_images=4):
-    import torch
+def load_model_diffusers(model_name):
     from diffusers import FluxPipeline
+    import torch
     pipe = FluxPipeline.from_pretrained(model_name, device_map="balanced")
-    subdir = os.path.join(save_path, f'img_{model_name.replace("/", "_")}_guid{guidance}_nsteps{num_steps}')
-    if not os.path.isdir(subdir):
-        os.makedirs(subdir)
+    return pipe
+
+
+def generate_images_diffusers(visual_details, diffuser_pipe, save_path, guidance=0., num_steps=4, n_images=4):
+    import torch
+    if not os.path.isdir(save_path):
+        os.makedirs(save_path)
     prompt = "Dortmund city, with additional " + visual_details
-    images = pipe(
+    images = diffuser_pipe(
         prompt,
         height=512,
         width=512,
@@ -34,5 +38,5 @@ def generate_images_diffusers(visual_details, model_name, save_path, guidance=0.
         guidance_scale=guidance
     )
     for idx, image in enumerate(images.images):
-        image.save(os.path.join(subdir, f"0_{idx}.png"))
+        image.save(os.path.join(save_path, f"0_{idx}.png"))
     return True
