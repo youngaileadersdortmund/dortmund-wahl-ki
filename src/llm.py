@@ -1,10 +1,36 @@
 import os
 import re
 import json
+import tqdm
 
 from PyPDF2 import PdfReader
 import transformers
 import torch
+transformers.utils.logging.set_verbosity_error()
+
+
+def translate(input, sentence_batch_size=-1, source_lan='German', target_lan='English', model_name="Unbabel/TowerInstruct-13B-v0.1"):
+    pipe = transformers.pipeline("text-generation", model="Unbabel/TowerInstruct-13B-v0.1", torch_dtype=torch.bfloat16, device_map="auto")
+
+    if isinstance(input, str):
+        paragraphs = [input]
+    else:
+        if not isinstance(input, list) or not isinstance(input[0], str):
+            raise TypeError('Input must be a string or a list of strings.')
+        if sentence_batch_size < 0:
+            paragraphs = input
+        else: # create paragraphs of individual sentences
+            paragraphs = []
+            for i, s in enumerate(range(0, len(input), sentence_batch_size)):
+                paragraphs.append(' '.join(input[s:(s+sentence_batch_size)]))
+    
+    translated = []
+    for paragraph in tqdm.tqdm(paragraphs, desc=f'Translating {len(paragraphs)} paragraphs from {source_lan} to {target_lan}'):
+        messages = [{"role": "user", "content": f"Translate the following sentences from {source_lan} into {target_lan}.\n{source_lan}: {paragraph}\n{target_lan}:"},]
+        prompt = pipe.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        outputs = pipe(prompt, max_new_tokens=256, do_sample=False)
+        translated.append(outputs[0]["generated_text"].split('<|im_start|>assistant')[1].strip())
+    return translated if len(translated) > 1 else translated[0]
 
 
 def translate_pdf(fname, sentence_batch_size=10, break_after=None):
@@ -29,15 +55,8 @@ def translate_pdf(fname, sentence_batch_size=10, break_after=None):
         sentences = re.split(r'(?<=[.!?])\s+', full_text)
         print(f'Number of sentences in {fname}: {len(sentences)}, to be processed in {len(sentences) // sentence_batch_size} batches')
         # translate single paragraphs
-        translated = []
-        pipe = transformers.pipeline("text-generation", model="Unbabel/TowerInstruct-13B-v0.1", torch_dtype=torch.bfloat16, device_map="auto")
-        for i, s in enumerate(range(0, len(sentences), sentence_batch_size)):
-            paragraph = ' '.join(sentences[s:(s+sentence_batch_size)])
-            messages = [{"role": "user", "content": f"Translate the following text from German into English.\nGerman: {paragraph}\nEnglish:"},]
-            prompt = pipe.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-            outputs = pipe(prompt, max_new_tokens=256, do_sample=False)
-            translated.append(outputs[0]["generated_text"].split('<|im_start|>assistant')[1].strip())
-            print(f'\n\n\n\nParagraph {i+1} / {len(sentences)//sentence_batch_size+1}:\n{paragraph}\n\n{translated[-1]}')
+        translated = translate(sentences, sentence_batch_size=sentence_batch_size)
+
         # concat paragraphs, split sentences across lines, write into file
         translated = ' '.join(translated).replace('e.g.', 'for example')
         sentences = re.split(r'(?<=[.!?])\s+', translated)
@@ -90,6 +109,36 @@ def reason(model, tokenizer, prompt, max_new_tokens=5000, end_of_reasoning_token
     reasoning = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
     answer = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
     return reasoning, answer
+
+
+def reason_about_visual_points(input, fname, model_name="Qwen/Qwen3-30B-A3B", out_fname='visual_points.txt', type_of_input='election program summary',
+                               prompt='Identify the five most important visual aspects that would be affected or impacted if this political program comes into effect. Describe each aspect in an informative and concise way, with a focus on the resulting visual appearance. Return these five visual descriptions as a comma-separated list, which in total should contain about 25 words.'):
+    point_fname, reasoning_fname = os.path.join(os.path.dirname(fname), 'prompts', out_fname), os.path.join(os.path.dirname(fname), 'prompts', out_fname.replace('.txt', '_reasoning.txt'))
+    
+    if os.path.isfile(point_fname):
+        with open(point_fname, 'r') as f:
+            impact_points = f.read()
+        with open(reasoning_fname, 'r') as f:
+            reasoning = f.read()
+        print_str = f'Loading pre-compiled direct visual points from {point_fname}'
+    else:
+        # init model
+        tokenizer = transformers.AutoTokenizer.from_pretrained(model_name)
+        model = transformers.AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
+        # run model
+        full_prompt = f'Analyze the following {type_of_input}. {prompt}\n\n{input}'
+        reasoning, impact_points = reason(model, tokenizer, full_prompt)
+        # write results
+        with open(point_fname, 'w') as f:
+            f.write(impact_points)
+        with open(reasoning_fname, 'w') as f:
+            f.write(reasoning)
+                
+        # finalize
+        print_str = f'Compiled direct visual points into {point_fname}'
+
+    print('\n', print_str, '\n', "reasoning content:", reasoning, '\n', str(impact_points))
+    return impact_points, reasoning
 
 
 def reason_about_impact_points(summary, fname, model_name="Qwen/Qwen3-30B-A3B"):
