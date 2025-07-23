@@ -8,7 +8,7 @@ do
     # do
     #     for g in "1" "10" "100" "1000" "10000"
     #     do
-    python3 src/process.py --input $p
+    python3 src/main.py --input $p
     #     done
     # done
 done
