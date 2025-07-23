@@ -1,0 +1,143 @@
+<think>
+Okay, let's tackle this query. The user wants me to analyze the open election compass answers and identify 5 important visual aspects of a city's appearance affected by the political program. Each aspect needs to be a concise 3-6 word description, separated by commas.
+
+First, I need to go through each of the provided answers and look for mentions that relate to the physical appearance of the city. Let me start scanning each point.
+
+1. "All classrooms... equipped with same furniture and digital equipment" – This might affect the uniformity of school buildings, but maybe not the city's overall appearance. Not sure yet.
+
+2. "Students receive school materials free" – Not directly a visual aspect.
+
+3. "Students at secondary schools should not receive free iPads" – Again, more about education resources, not visual.
+
+4. "City should provide school buses" – Rejected. School buses might affect traffic but not the city's visual aspects directly.
+
+5. "10th graders get info about professions" – Not visual.
+
+6. "City inform schools about leisure activities" – Not visual.
+
+7. "Outside areas of schools cleaned regularly" – This could relate to cleanliness, which is a visual aspect. Maybe "Clean school exteriors" or something similar.
+
+8. "Free lunch for all children" – Not visual.
+
+9. "Free learning opportunities in every district" – Not visual.
+
+10. "Establish more public learning spaces like libraries" – Neutral. Libraries are part of the city's appearance. Maybe "Expanded library facilities" or "More public libraries".
+
+11. "Every school has tandem of social work and psychologists" – Not visual.
+
+12. "Mental health offers for young people" – Not visual.
+
+13. "Bike rental free for under 18" – Rejected. Bike rental is more about transportation, but maybe bike infrastructure. However, the answer says "Strong Rejection", so maybe not a focus.
+
+14. "More bike parking spaces" – Approved. This would affect the city's appearance with more bike racks. "Increased bike parking infrastructure".
+
+15. "Cycle paths safer" – Approved. Safer cycle paths might involve better signage, lighting, or physical barriers. "Safer cycling infrastructure".
+
+16. "Public transport financial support" – Rejected. Not visual.
+
+17. "Buses and trains more frequent" – Approved. More frequent transport might mean more buses/trains on the streets, but not sure if that's a visual aspect. Maybe "Enhanced public transport presence".
+
+18. "Free student travel" – Neutral. Not directly visual.
+
+19. "Better tram connections" – Approved. New trams or tracks could be a visual aspect. "Improved tram networks".
+
+20. "Parent taxis restricted" – Approved. Not visual.
+
+21. "Emergency call buttons at stations" – Approved. These are physical installations, so "Emergency call stations".
+
+22. "Avoid flashing lights" – Rejected. Flashing lights might relate to traffic signals, but not sure.
+
+23. "Traffic lights checked monthly" – Rejected. Not visual.
+
+24. "Safe routes for pedestrians/cyclists expanded" – Approved. This could involve new sidewalks, bike lanes, etc. "Expanded pedestrian/cycling paths".
+
+25. "Public multi-purpose sports field at every school" – Neutral. Sports fields are visible, so "School sports facilities".
+
+26. "Sports boxes in every district" – Neutral. Sports boxes might be structures, so "District sports facilities".
+
+27. "Each district gets own swimming pool" – Strong Rejection. Not a focus here.
+
+28. "Provide plots for clubs and discos" – Neutral. Not directly visual.
+
+29. "Free Wi-Fi in central areas" – Strong Approval. Wi-Fi infrastructure might not be visual, but maybe "Public Wi-Fi access points".
+
+30. "Online portal for leisure offers" – Not visual.
+
+31. "Promote restaurants in outskirts" – Strong Approval. Restaurants are buildings, so "Expanded restaurant areas".
+
+32. "Participation formats for all groups" – Not visual.
+
+33. "Young people in town planning" – Not visual.
+
+34. "Digital offers for politics" – Not visual.
+
+35. "Employ people with disabilities in urban businesses" – Not visual.
+
+36. "Separate homes for trainees" – Strong Approval. These would be buildings, so "Trainee housing units".
+
+37. "Tighten social housing regulations" – Rejected. Not visual.
+
+38. "Rise basic tax" – Not visual.
+
+39. "Offers for young people in every district" – Strong Approval. Could relate to community spaces, "Youth community centers".
+
+40. "City provide rooms for all groups" – Rejected. Not visual.
+
+41. "Acquire funding for social measures" – Not visual.
+
+42. "Information in English, Turkish, Arabic, simple language" – Not visual.
+
+43. "More public litter bins" – Strong Approval. Litter bins are visible, so "Increased litter bins".
+
+44. "Hygienic drinking fountains" – Strong Approval. Drinking fountains are visible, "Hygienic public fountains".
+
+45. "Plant trees for shade" – Approval. Trees in public spaces, "Tree-lined public areas".
+
+46. "Solar panels on schools and buildings" – Approval. Solar panels are visible, "Solar panel installations".
+
+47. "Additional public toilets in city center" – Strong Approval. Toilets are buildings, "More public restrooms".
+
+48. "Security forces on patrol in underground trains" – Approval. Security presence, but not sure about visual aspect.
+
+49. "Police training on racism" – Not visual.
+
+50. "Safe places for queer youth" – Strong Approval. Safe spaces, maybe "LGBTQ+ safe zones".
+
+51. "Drop-in centers for gay youths" – Rejected. Not a focus.
+
+52. "Training on diversity in schools" – Not visual.
+
+53. "Inclusive offers for children with disabilities" – Neutral. Inclusive facilities, "Inclusive school environments".
+
+54. "Leisure facilities barrier-free" – Strong Approval. Accessible facilities, "Barrier-free leisure spaces".
+
+55. "More inclusive holiday offers" – Approval. Not visual.
+
+56. "Targeted support for career choices" – Not visual.
+
+57. "Care and transport costs accessible" – Strong Approval. Not visual.
+
+Now, I need to pick the top 5 visual aspects. Let's see which ones are most directly related to the city's appearance:
+
+1. **Increased bike parking infrastructure** – From the bike parking answer.
+2. **Expanded pedestrian/cycling paths** – From safe routes.
+3. **Tree-lined public areas** – From planting trees.
+4. **Solar panel installations** – On schools and buildings.
+5. **More public restrooms** – From additional toilets.
+
+Alternatively, "School sports facilities" from the sports field answer, "Barrier-free leisure spaces" from the accessibility, "Hygienic public fountains", "Tree-lined public areas", "Solar panel installations", "Expanded library facilities", "More public litter bins", "Increased bike parking infrastructure", "Safer cycling infrastructure".
+
+Wait, the user wants 5. Let me check which are most impactful. The answer mentions "cycle paths made safer" and "safe routes expanded", which could be "Safer cycling infrastructure" or "Expanded cycling paths". Also, "more bike parking spaces" is a separate point. "Tree-lined public areas" is another. "Solar panels on buildings" is a visual aspect. "More public restrooms" and "hygienic fountains" are also visual. 
+
+But maybe the top 5 are:
+
+- Expanded bike parking infrastructure
+- Safer cycling infrastructure
+- Tree-lined public areas
+- Solar panel installations
+- More public restrooms
+
+Alternatively, "Barrier-free leisure spaces" and "School sports facilities" could be considered. But I need to ensure they are directly related to the city's appearance. Let me verify each.
+
+Yes, bike parking, cycling paths, trees, solar panels, and public restrooms are all visible aspects. So those five.
+</think>

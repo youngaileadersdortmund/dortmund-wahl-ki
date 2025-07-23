@@ -17,7 +17,6 @@ def generate_images_uno(visual_details, image_gen_path, image_gen_call, save_pat
 
 def load_model_diffusers(model_name):
     from diffusers import FluxPipeline
-    import torch
     pipe = FluxPipeline.from_pretrained(model_name, device_map="balanced")
     return pipe
 
