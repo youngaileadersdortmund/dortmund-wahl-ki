@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "CDF",
+    "image": "./images/cdu/2025/0_0.png",
+    "bullets": [
+      "Smart city tech (sensors, digital signage)",
+      "Mixed-use housing complexes",
+      "Educational facility expansions",
+      "Healthcare infrastructure",
+      "Cultural venue revitalization"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Bob",
+    "image": "https://via.placeholder.com/150?text=Bob",
+    "bullets": ["Point A", "Point B", "Point C"]
+  },
+  {
+    "id": 3,
+    "name": "Charlie",
+    "image": "https://via.placeholder.com/150?text=Charlie",
+    "bullets": ["Point X", "Point Y", "Point Z"]
+  },
+  {
+    "id": 4,
+    "name": "Diana",
+    "image": "https://via.placeholder.com/150?text=Diana",
+    "bullets": ["Info 1", "Info 2", "Info 3"]
+  },
+  {
+    "id": 5,
+    "name": "Eve",
+    "image": "https://via.placeholder.com/150?text=Eve",
+    "bullets": ["Detail A", "Detail B", "Detail C"]
+  },
+  {
+    "id": 6,
+    "name": "Frank",
+    "image": "https://via.placeholder.com/150?text=Frank",
+    "bullets": ["Item 1", "Item 2", "Item 3"]
+  },
+  {
+    "id": 7,
+    "name": "Grace",
+    "image": "https://via.placeholder.com/150?text=Grace",
+    "bullets": ["Feature A", "Feature B", "Feature C"]
+  },
+  {
+    "id": 8,
+    "name": "Henry",
+    "image": "https://via.placeholder.com/150?text=Henry",
+    "bullets": ["Aspect 1読み", "Aspect 2", "Aspect 3"]
+  },
+  {
+    "id": 9,
+    "name": "Isabel",
+    "image": "https://via.placeholder.com/150?text=Isabel",
+    "bullets": ["Element X", "Element Y", "Element Z"]
+  },
+  {
+    "id": 10,
+    "name": "Jack",
+    "image": "https://via.placeholder.com/150?text=Jack",
+    "bullets": ["Factor 1", "Factor 2", "Factor 3"]
+  }
+]

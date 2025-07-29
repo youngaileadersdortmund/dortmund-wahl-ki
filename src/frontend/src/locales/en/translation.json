@@ -1,9 +1,32 @@
 {
-    "title": "Dortmund Local Election",
-    "description": {
-        "title": "What is this about?",
-        "intro": "We analyzed the visual impact of campaign posters and compared how they communicate ideas.",
-        "sampleTitle": "Example Prompt We Used",
-        "sampleText": "Please describe how this poster visually communicates the party’s main messages and values."
-    }
+  "title": "Dortmund Local Election",
+  "description": {
+    "title": "What is this about?",
+    "intro": "We analyzed the visual impact of campaign posters and compared how they communicate ideas.",
+    "sampleTitle": "Example Prompt We Used",
+    "sampleText": "Please describe how this poster visually communicates the party’s main messages and values."
+  },
+  "nav_bar": {
+    "Whalprogramm": "Election program",
+    "about_project": "About the project",
+    "members": "Members"
+  },
+  "gen_ai_box": {
+    "title": "What is GenAI",
+    "text_p1": "Our project is about preparing the election programs for the Dortmund local election on",
+    "text_p2": "using AI.",
+    "text_p3": "The election programs were provided to a generative language model (our AI), which was tasked with identifying similarities and differences between the programs. These findings were then passed on to an image-generating AI with the goal of illustrating the core points of the election programs using images from Dortmund.",
+    "pipeline": {
+      "1": "Election Programs",
+      "2": "AI for Text Analysis",
+      "3": "Summarized Election Programs",
+      "4": "AI for Image Generation",
+      "5": "Images of the Programs"
+    },
+    "image_select": "Select an image to see the results:"
+  },
+  "disclaimer": {
+    "title": "Disclaimer"
+  },
+  "scroll_to_top_button": "Scroll to top"
 }

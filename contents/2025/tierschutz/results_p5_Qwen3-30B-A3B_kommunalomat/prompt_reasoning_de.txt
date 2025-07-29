@@ -1,0 +1,10 @@
+<denken>
+Okay, wir gehen diese Abfrage an. Der Benutzer möchte, dass ich die offenen Wahlkompass-Antworten analysiere und 5 wichtige visuelle Aspekte der Stadtgestaltung identifiziere, die vom politischen Programm betroffen sind. Jeder Aspekt muss in 3-6 Wörtern beschrieben werden, als eine durch Kommas getrennte Liste.
+
+Zuerst muss ich die Liste der Richtlinien durchgehen und sehen, welche davon sich auf die visuellen Aspekte der Stadt beziehen. Lassen Sie mich zunächst alle Punkte durchgehen.
+
+"Schulen sollen Schulbusse haben" - das ist ein Verkehrsthema, das möglicherweise die Anzahl der Busse auf der Straße beeinflusst, aber ich bin mir nicht sicher, ob das ein visueller Aspekt ist.
+
+"Mehr Fahrradstellplätze" - definitiv ein visueller Aspekt, wie mehr Fahrradständer.
+
+"Radwege sollen sicherer werden" - sicherere Wege kön

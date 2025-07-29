@@ -1,9 +1,32 @@
 {
-    "title": "Dortmunder Kommunalwahl",
-    "description": {
-        "title": "Worum geht es hier?",
-        "intro": "Wir haben aufgrund der Wahlprogramme der Parteien eine Anfrage an ein LLM gestellt und die Kernaussagen visuell dargestellt.",
-        "sampleTitle": "Beispielprompt, den wir verwendet haben",
-        "sampleText": "Bitte beschreiben Sie, wie dieses Plakat die Hauptbotschaften und Werte der Partei visuell vermittelt."
-    }
+  "title": "Dortmunder Kommunalwahl",
+  "description": {
+    "title": "Worum geht es hier?",
+    "intro": "Wir haben aufgrund der Wahlprogramme der Parteien eine Anfrage an ein LLM gestellt und die Kernaussagen visuell dargestellt.",
+    "sampleTitle": "Beispielprompt, den wir verwendet haben",
+    "sampleText": "Bitte beschreiben Sie, wie dieses Plakat die Hauptbotschaften und Werte der Partei visuell vermittelt."
+  },
+  "nav_bar": {
+    "Whalprogramm": "Wahlprogramm",
+    "about_project": "Uber das Projekt",
+    "members": "Mitglieder"
+  },
+  "gen_ai_box": {
+    "title": "Was ist GenAI",
+    "text_p1": "In unserem Projekt geht es darum, die Wahlprogramme zu Dortmunder Kommunalwahl am",
+    "text_p2": "durch eine KI aufzubereiten.",
+    "text_p3": "Die Wahlprogramme wurden einem generativen Sprachmodell (Unserer KI) gegeben und es sollten Gemeinsamkeiten und Unterschiede der Programme herausgestellt werden. Diese wurden dann einer KI zu Bildgenerierung übergeben mit dem Ziel die Kernpunkte der Wahlprogramme anhand Bilder aus Dortmund zu verdeutlichen.",
+    "pipeline":{
+      "1": "Wahlprogramme",
+      "2": "KI fur Textanalyse",
+      "3": "Wahlprogramme Zusammengefasst",
+      "4": "KI fur Bildgenerierung",
+      "5": "Bilder der Programme"
+    },
+    "image_select": "Wähle ein Bild aus um die Ergebnisse zu sehen:"
+  },
+  "disclaimer": {
+    "title": "Disclaimer"
+  },
+  "scroll_to_top_button": "Nach oben scrollen"
 }
