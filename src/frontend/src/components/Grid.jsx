@@ -1,10 +1,16 @@
 import { useState } from "react";
-import cards_info from "../../public/cards_info.json";
+import parties_metadata from "../../public/parties_metadata.json";
 import { FaCheckCircle } from "react-icons/fa";
 import { Button } from "./ui/button";
+import { useTranslation } from "react-i18next";
 
 function Card({ card }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [randomIndex] = useState(() => Math.floor(Math.random() * 5));
+
+  const { i18n } = useTranslation();
+  const currentLanguage = i18n.language;
+  const visualImpactPoints = card[currentLanguage]?.visual_impact_points || card.de.visual_impact_points;
 
   return (
     <div
@@ -15,7 +21,7 @@ function Card({ card }) {
       <div className="p-2">
         <div className="relative w-full h-72">
           <img
-            src={card.image}
+            src={`./2025/${card.name.toLowerCase()}/0_${randomIndex}.png`}
             alt={card.name}
             className="w-full h-full object-cover rounded-md"
           />
@@ -25,14 +31,14 @@ function Card({ card }) {
             }`}
           >
             <div className="space-y-2">
-              {card.bullets.map((bullet, index) => (
+              {visualImpactPoints.map((bullet, index) => (
                 <div key={index} className="flex items-start">
                   <FaCheckCircle className=" text-secondary mr-2 flex-shrink-0 mt-0.5" />
                   <span className="text-gray-700 text-sm">{bullet}</span>
                 </div>
               ))}
             </div>
-            <Button className="active:scale-95 transition duration-100 bg-pink-600 hover:bg-pink-700 w-full">
+            <Button className="active:scale-95 transition-transform duration-150 bg-pink-600 hover:bg-pink-700 w-full">
               More info
             </Button>
           </div>
@@ -46,13 +52,13 @@ function Card({ card }) {
 }
 
 function Grid() {
-  const cards = cards_info;
+  const cards = Object.entries(parties_metadata);
 
   return (
     <div className="container mx-auto p-4 min-h-screen">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-        {cards.map((card) => (
-          <Card key={card.id} card={card} />
+        {cards.map(([partyKey, partyData]) => (
+          <Card key={partyKey} card={partyData} />
         ))}
       </div>
     </div>

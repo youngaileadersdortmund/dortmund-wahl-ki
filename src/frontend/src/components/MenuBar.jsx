@@ -120,11 +120,15 @@ export default function MenuBar() {
           />
         </div>
 
-        <h1 className="absolute left-1/2 -translate-x-1/2 text-5xl font-bold text-secondary">
-          {t("title")}
+        <h1 className="cursor-pointer absolute left-1/2 -translate-x-1/2 text-5xl font-bold text-secondary">
+          <a
+            href="/"
+            className="text-inherit no-underline hover:no-underline focus:outline-none hover:text-secondary"
+          >
+            {t("title")}
+          </a>
         </h1>
         <div className="flex mr-8 gap-2">
-
           <LanguageSelector
             languages={languages}
             selectedLanguage={i18n.language}
@@ -133,9 +137,9 @@ export default function MenuBar() {
         </div>
       </div>
       <nav className="flex gap-5 text-black justify-center w-full h-3">
-        <div className="cursor-pointer font-bold decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
+        {/* <div className="cursor-pointer font-bold decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
           {t("nav_bar.Whalprogramm")}
-        </div>
+        </div> */}
         <div className="cursor-pointer font-bold decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
           {t("nav_bar.about_project")}
         </div>
