@@ -18,7 +18,3 @@ If Adjustments are made:
 ```
 docker compose build react-app --no-cache
 ```
-
-## Mockup: 
-
-[Link](https://www.canva.com/design/DAGqaYVIYkE/Jr-5lV6KmygiYxxPJ0N1KA/edit?utm_content=DAGqaYVIYkE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
