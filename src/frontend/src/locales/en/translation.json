@@ -1,5 +1,5 @@
 {
-  "title": "Dortmund Local Election",
+  "title": "GenAI for Dortmund Politics",
   "description": {
     "title": "What is this about?",
     "intro": "We analyzed the visual impact of campaign posters and compared how they communicate ideas.",
@@ -9,7 +9,8 @@
   "nav_bar": {
     "Whalprogramm": "Election program",
     "about_project": "About the project",
-    "members": "Members"
+    "members": "Members",
+    "home": "Local Election"
   },
   "gen_ai_box": {
     "title": "What is GenAI",

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IoIosArrowDown } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const LanguageSelector = ({ languages, selectedLanguage, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -138,12 +139,21 @@ export default function MenuBar() {
       </div>
       <nav className="flex gap-5 text-black justify-center w-full h-3">
         <div className="cursor-pointer font-bold decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
-          <a
+          <Link
+            to="/"
             style={{ color: "inherit", textDecoration: "none" }}
-            href="/about-the-project"
           >
-            {t("nav_bar.about_project")}
-          </a>
+            {t("nav_bar.home")}
+          </Link>
+        </div>
+
+        <div className="cursor-pointer font-bold decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
+        <Link
+          to="/about-the-project"
+          style={{ color: "inherit", textDecoration: "none" }}
+        >
+          {t("nav_bar.about_project")}
+        </Link>
         </div>
       </nav>
     </div>
