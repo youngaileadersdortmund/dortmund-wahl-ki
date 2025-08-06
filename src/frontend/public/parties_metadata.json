@@ -1,0 +1,212 @@
+{
+  "bli": {
+    "name": "BLI",
+    "de": {
+      "visual_impact_points": [
+        "saubere Schulhöfe",
+        "Fahrradstellplätze",
+        "sicherere Radwege",
+        "Straßenbahninfrastruktur",
+        "baumgesäumte Straßen"
+      ]
+    },
+    "en": {
+      "visual_impact_points": [
+        "clean schoolyards",
+        "bike parking spaces",
+        "safer cycle paths",
+        "tram infrastructure",
+        "tree-lined streets"
+      ]
+    }
+  },
+  "bvt": {
+    "name": "BVT",
+    "de": {
+      "visual_impact_points": [
+        "Fahrradstellplätze",
+        "Sicherheit der Radwege",
+        "Solaranlagen",
+        "öffentliche Toiletten",
+        "Baumpflanzungen"
+      ]
+    },
+    "en": {
+      "visual_impact_points": [
+        "Bike Parking Spaces",
+        "Cycle Path Safety",
+        "Solar Panel Installations",
+        "Public Toilets",
+        "Tree Planting"
+      ]
+    }
+  },
+  "cdu": {
+    "name": "CDU",
+    "de": {
+      "visual_impact_points": [
+        "Smart City-Technologie (Sensoren, digitale Beschilderung)",
+        "Mischnutzung von Wohnkomplexen",
+        "Erweiterungen von Bildungseinrichtungen",
+        "Gesundheitsinfrastruktur",
+        "Revitalisierung von Kulturstätten"
+      ]
+    },
+    "en": {
+      "visual_impact_points": [
+        "Smart city tech (sensors, digital signage)",
+        "Mixed-use housing complexes",
+        "Educational facility expansions",
+        "Healthcare infrastructure",
+        "Cultural venue revitalization"
+      ]
+    }
+  },
+  "diepartei": {
+    "name": "DIEPARTEI",
+    "de": {
+      "visual_impact_points": [
+        "Schulbusse",
+        "Fahrradstellplätze",
+        "Radwege",
+        "Solaranlagen",
+        "baumbestandene Bereiche"
+      ]
+    },
+    "en": {
+      "visual_impact_points": [
+        "school buses",
+        "bike parking spaces",
+        "cycle paths",
+        "solar panels",
+        "tree-lined areas"
+      ]
+    }
+  },
+  "fdp": {
+    "name": "FDP",
+    "de": {
+      "visual_impact_points": [
+        "Mehr Fahrradstellplätze",
+        "Sichere Radinfrastruktur",
+        "Baumgesäumte öffentliche Bereiche",
+        "Solaranlagen",
+        "Mehr öffentliche Toiletten"
+      ]
+    },
+    "en": {
+      "visual_impact_points": [
+        "Increased bike parking infrastructure",
+        "Safer cycling infrastructure",
+        "Tree-lined public areas",
+        "Solar panel installations",
+        "More public restrooms"
+      ]
+    }
+  },
+  "gruene": {
+    "name": "GRUENE",
+    "de": {
+      "visual_impact_points": [
+        "Moderne Schulgebäude",
+        "erweiterte öffentliche Bibliotheken",
+        "saubere Schulumgebungen",
+        "eine infrastrukturfreundliche Radfahrerinfrastruktur",
+        "von Bäumen gesäumte öffentliche Plätze"
+      ]
+    },
+    "en": {
+      "visual_impact_points": [
+        "Modern school facilities",
+        "expanded public libraries",
+        "clean school environments",
+        "bike-friendly infrastructure",
+        "tree-lined public spaces"
+      ]
+    }
+  },
+  "linke": {
+    "name": "LINKE",
+    "de": {
+      "visual_impact_points": [
+        "geschützte Radwege",
+        "Solaranlagen",
+        "von Bäumen gesäumte öffentliche Plätze",
+        "sichtbare Fahrradstellplätze",
+        "öffentliche Toiletten"
+      ]
+    },
+    "en": {
+      "visual_impact_points": [
+        "protected bike lanes",
+        "solar panel installations",
+        "tree-lined public spaces",
+        "visible bike parking",
+        "public restroom availability"
+      ]
+    }
+  },
+  "spd": {
+    "name": "SPD",
+    "de": {
+      "visual_impact_points": [
+        "Saubere Schulhöfe",
+        "sicherere Radwege",
+        "mehr öffentliche Bibliotheken",
+        "baumgesäumte öffentliche Plätze",
+        "Solaranlagen"
+      ]
+    },
+    "en": {
+      "visual_impact_points": [
+        "Clean school grounds",
+        "Safer cycle paths",
+        "More public libraries",
+        "Tree-lined public spaces",
+        "Solar panel installations"
+      ]
+    }
+  },
+  "tierschutz": {
+    "name": "TIERSCHUTZ",
+    "de": {
+      "visual_impact_points": [
+        "Fahrradstellplätze",
+        "Sichere Radwege",
+        "Öffentliche Sportplätze",
+        "Baumgesäumte Bereiche",
+        "Solaranlagen"
+      ]
+    },
+    "en": {
+      "visual_impact_points": [
+        "Bike parking spaces",
+        "Safer cycle paths",
+        "Public sports fields",
+        "Tree-lined areas",
+        "Solar panel installations"
+      ]
+    }
+  },
+  "volt": {
+    "name": "VOLT",
+    "de": {
+      "visual_impact_points": [
+        "Fahrradstellplätze",
+        "öffentliche Sportanlagen",
+        "baumgesäumte Straßen",
+        "Solaranlagen",
+        "öffentliche Toiletten und Brunnen"
+      ]
+    },
+    "en": {
+      "visual_impact_points": [
+        "Bike Parking Spaces",
+        "Public Sports Facilities",
+        "Tree-lined Streets",
+        "Solar Panel Installations",
+        "Public Toilets and Fountains"
+      ]
+    }
+  }
+}
