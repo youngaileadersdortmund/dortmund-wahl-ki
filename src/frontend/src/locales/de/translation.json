@@ -1,5 +1,5 @@
 {
-  "title": "Dortmunder Kommunalwahl",
+  "title": "GenAI für Dortmunder Politik",
   "description": {
     "title": "Worum geht es hier?",
     "intro": "Wir haben aufgrund der Wahlprogramme der Parteien eine Anfrage an ein LLM gestellt und die Kernaussagen visuell dargestellt.",
@@ -8,8 +8,9 @@
   },
   "nav_bar": {
     "Whalprogramm": "Wahlprogramm",
-    "about_project": "Uber das Projekt",
-    "members": "Mitglieder"
+    "about_project": "Über das Projekt",
+    "members": "Mitglieder",
+    "home": "Kommunalwahl"
   },
   "gen_ai_box": {
     "title": "Was ist GenAI",
