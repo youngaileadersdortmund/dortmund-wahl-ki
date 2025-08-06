@@ -1,29 +1,25 @@
 import { Party } from '../type/party';
 
 export async function loadParties() {
-  const basePath = import.meta.env.VITE_ASSETS_BASE;
-  const assetYear = import.meta.env.VITE_ASSETS_YEAR;
-  const baseModel = import.meta.env.VITE_ASSETS_MODEL;
-  const baseImage = import.meta.env.VITE_ASSETS_IMAGE;
+    const basePath = '/images';
+    const folders = ['cdu', 'fdp', 'gruene', 'linke', 'spd'];
+    const parties = [];
 
-  if (!basePath) {
-    throw new Error('Missing ASSETS_BASE environment variable.');
-  }
+    for (const folder of folders) {
+        // Fetch JSON metadata
+        const metadata = await fetch(`${basePath}/${folder}/metafile.json`).then(res => res.json());
 
-  const folders = ['cdu', 'fdp', 'gruene', 'linke', 'spd'];
+        // Build image URLs manually
+        const images = [1, 2, 3].map(num => `${basePath}/${folder}/image/${num}.png`);
 
-  const parties = [];
+        // Fetch text file (visual_impact_points.txt)
+        const visualImpactText = await fetch(`${basePath}/${folder}/visual_impact_points.txt`).then(res => res.text());
 
-  for (const folder of folders) {
-    const visualImpactUrl = `${basePath}/${folder}/prompts/visual_impact_points.txt`;
-    const imageUrls = [1, 2, 3].map(num => `${basePath}/${assetYear}/${folder}/${baseImage}/${baseModel}/0_${num}.png`);
+        const party = new Party(metadata.name, metadata, images, visualImpactText);
+        parties.push(party);
+    }
 
-    const [metadata, visualImpactText] = await Promise.all([
-      fetch(visualImpactUrl).then(res => res.text()),
-    ]);
+    console.log(parties);
 
-    parties.push(new Party(folder, metadata, imageUrls, visualImpactText));
-  }
-
-  return parties;
+    return parties;
 }
