@@ -10,7 +10,7 @@ transformers.utils.logging.set_verbosity_error()
 
 
 def translate(input, sentence_batch_size=-1, source_lan='German', target_lan='English', model_name="Unbabel/TowerInstruct-13B-v0.1"):
-    pipe = transformers.pipeline("text-generation", model="Unbabel/TowerInstruct-13B-v0.1", torch_dtype=torch.bfloat16, device_map="auto")
+    pipe = transformers.pipeline("text-generation", model=model_name, torch_dtype=torch.bfloat16, device_map="auto")
 
     if isinstance(input, str):
         paragraphs = [input]
@@ -111,9 +111,16 @@ def reason(model, tokenizer, prompt, max_new_tokens=5000, end_of_reasoning_token
     return reasoning, answer
 
 
-def reason_about_visual_points(input, fname, model_name="Qwen/Qwen3-30B-A3B", out_fname='visual_points.txt', type_of_input='election program summary',
-                               prompt='Identify the five most important visual aspects that would be affected or impacted if this political program comes into effect. Describe each aspect in an informative and concise way, with a focus on the resulting visual appearance. Return these five visual descriptions as a comma-separated list, which in total should contain about 25 words.'):
-    point_fname, reasoning_fname = os.path.join(os.path.dirname(fname), 'prompts', out_fname), os.path.join(os.path.dirname(fname), 'prompts', out_fname.replace('.txt', '_reasoning.txt'))
+def load_llm(model_name):
+    tokenizer = transformers.AutoTokenizer.from_pretrained(model_name)
+    model = transformers.AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
+    return (model, tokenizer)
+
+
+def reason_about_visual_points(input, point_fname, llm, type_of_input='election program summary', n_points=5,
+                               prompt='Identify {p} important visual aspects of a city appearance that would be affected or impacted by this political program. Describe each aspect in an informative and concise way, with 3 to 6 words. Return these {p} visual descriptions as a comma-separated list.'):
+    reasoning_fname = point_fname.replace('.txt', '_reasoning.txt')
+    model, tokenizer = llm
     
     if os.path.isfile(point_fname):
         with open(point_fname, 'r') as f:
@@ -122,13 +129,9 @@ def reason_about_visual_points(input, fname, model_name="Qwen/Qwen3-30B-A3B", ou
             reasoning = f.read()
         print_str = f'Loading pre-compiled direct visual points from {point_fname}'
     else:
-        # init model
-        tokenizer = transformers.AutoTokenizer.from_pretrained(model_name)
-        model = transformers.AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
         # run model
-        full_prompt = f'Analyze the following {type_of_input}. {prompt}\n\n{input}'
+        full_prompt = f'Analyze the following {type_of_input}. {prompt.format(p=n_points)}\n\n{input}'
         reasoning, impact_points = reason(model, tokenizer, full_prompt)
-        # write results
         with open(point_fname, 'w') as f:
             f.write(impact_points)
         with open(reasoning_fname, 'w') as f:
