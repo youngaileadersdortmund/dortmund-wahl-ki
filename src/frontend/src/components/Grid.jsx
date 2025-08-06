@@ -1,7 +1,7 @@
 import { useState } from "react";
 import parties_metadata from "../../public/parties_metadata.json";
 import { FaCheckCircle } from "react-icons/fa";
-import { Button } from "./ui/button";
+import MoreInfoButton from "./MoreInfoButton";
 import { useTranslation } from "react-i18next";
 
 function Card({ card }) {
@@ -10,7 +10,8 @@ function Card({ card }) {
 
   const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
-  const visualImpactPoints = card[currentLanguage]?.visual_impact_points || card.de.visual_impact_points;
+  const visualImpactPoints =
+    card[currentLanguage]?.visual_impact_points || card.de.visual_impact_points;
 
   return (
     <div
@@ -38,9 +39,7 @@ function Card({ card }) {
                 </div>
               ))}
             </div>
-            <Button className="active:scale-95 transition-transform duration-150 bg-pink-600 hover:bg-pink-700 w-full">
-              More info
-            </Button>
+            <MoreInfoButton card={card} setIsHovered={setIsHovered} />
           </div>
         </div>
         <h3 className="text-lg font-semibold text-gray-800 mt-3 text-center">
@@ -55,7 +54,7 @@ function Grid() {
   const cards = Object.entries(parties_metadata);
 
   return (
-    <div className="container mx-auto p-4 min-h-screen">
+    <div className="container mx-auto px-12 min-h-screen ">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {cards.map(([partyKey, partyData]) => (
           <Card key={partyKey} card={partyData} />

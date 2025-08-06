@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@fontsource/montserrat": "^5.2.6",
+    "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-slot": "^1.2.3",
     "audit": "^0.0.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "fix": "^0.0.6",
     "i18next": "^25.2.1",

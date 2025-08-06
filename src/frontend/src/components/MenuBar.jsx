@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -137,11 +137,13 @@ export default function MenuBar() {
         </div>
       </div>
       <nav className="flex gap-5 text-black justify-center w-full h-3">
-        {/* <div className="cursor-pointer font-bold decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
-          {t("nav_bar.Whalprogramm")}
-        </div> */}
         <div className="cursor-pointer font-bold decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
-          {t("nav_bar.about_project")}
+          <a
+            style={{ color: "inherit", textDecoration: "none" }}
+            href="/about-the-project"
+          >
+            {t("nav_bar.about_project")}
+          </a>
         </div>
       </nav>
     </div>

@@ -4,7 +4,7 @@ import React from "react";
 const Footer = () => {
 
   return (
-    <footer class="bg-white rounded-lg shadow-sm m-4 w-2/3">
+    <footer class="bg-white rounded-lg shadow-sm m-4 w-2/3 ">
         <div class="w-full p-4 md:py-8">
             <div class="sm:flex sm:items-center sm:justify-between">
                 

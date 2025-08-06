@@ -1,14 +1,12 @@
-import React from "react";
 import CustomBox from "./CustomBox";
 import { useTranslation } from "react-i18next";
 
-const GenAIBox = ({ selectedImageIndex, setSelectedImageIndex }) => {
-  const images = ["/orig1.jpg", "/orig2.jpg", "/orig3.jpg"];
+const GenAIBox = () => {
   const { t } = useTranslation();
 
   return (
     <CustomBox title={t("gen_ai_box.title")} align="left">
-      <div className="text-center text-black space-y-3">
+      <div className="text-start text-black space-y-3">
         <p>
           {t("gen_ai_box.text_p1")}{" "}
           <span className="font-bold text-black">14.09.2025 </span>
@@ -39,9 +37,9 @@ const GenAIBox = ({ selectedImageIndex, setSelectedImageIndex }) => {
         </div>
       </div>
 
-      <div className="text-black text-xl">{t("gen_ai_box.image_select")}</div>
+      {/* <div className="text-black text-xl">{t("gen_ai_box.image_select")}</div> */}
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 w-full">
+      {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 w-full">
         {images.map((src, index) => (
           <div
             key={index}
@@ -59,7 +57,7 @@ const GenAIBox = ({ selectedImageIndex, setSelectedImageIndex }) => {
             />
           </div>
         ))}
-      </div>
+      </div> */}
     </CustomBox>
   );
 };

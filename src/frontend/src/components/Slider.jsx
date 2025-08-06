@@ -5,23 +5,48 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
-import FeaturedCard from "./FeaturedCard";
+import Autoplay from "embla-carousel-autoplay";
+import parties_metadata from "../../public/parties_metadata.json";
+import React from "react";
 
-export function Slider({ parties, selectedImageIndex }) {
+export function Slider() {
+  const allImages = React.useMemo(() => {
+    const images = [];
+    for (const partyKey in parties_metadata) {
+      const partyData = parties_metadata[partyKey];
+      for (let i = 0; i < 5; i++) {
+        images.push({
+          id: `${partyKey}-${i}`,
+          src: `./2025/${partyData.name.toLowerCase()}/0_${i}.png`,
+          alt: `${partyData.name} - ${
+            partyData.en.visual_impact_points[i] || "Image " + (i + 1)
+          }`,
+        });
+      }
+    }
+    return images;
+  }, []);
+
+  
   return (
-    <Carousel className="w-full">
+    <Carousel
+      className="w-full max-w-lg mx-auto"
+      opts={{
+        loop: true,
+      }}
+      plugins={[
+        Autoplay({
+          delay: 4000,
+        }),
+      ]}
+    >
       <CarouselContent>
-        {parties.map((party, index) => (
-          <CarouselItem
-            key={party.name || index}
-            className="pl-1 md:pl-2 lg:pl-4"
-          >
+        {allImages.map((image) => (
+          <CarouselItem key={image.id}>
             <div className="p-1">
-              <FeaturedCard
-                party={party}
-                align={index % 2 === 0 ? "left" : "right"}
-                selectedImageIndex={selectedImageIndex}
-              />
+              <div className="rounded-lg w-fit overflow-hidden shadow-lg">
+                <img src={image.src} alt={image.alt} />
+              </div>
             </div>
           </CarouselItem>
         ))}
