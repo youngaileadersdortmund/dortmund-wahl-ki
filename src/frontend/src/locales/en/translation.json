@@ -6,8 +6,11 @@
     "sampleTitle": "Example Prompt We Used",
     "sampleText": "Please describe how this poster visually communicates the party’s main messages and values."
   },
+  "home": {
+    "second_headline": "AI asked - How is Dortmund changing through politics...",
+    "programs": "Comparison of all parties"
+  },
   "nav_bar": {
-    "Whalprogramm": "Election program",
     "about_project": "About the project",
     "members": "Members",
     "home": "Local Election"
