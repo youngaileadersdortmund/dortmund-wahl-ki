@@ -36,28 +36,6 @@ const GenAIBox = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="text-black text-xl">{t("gen_ai_box.image_select")}</div> */}
-
-      {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 w-full">
-        {images.map((src, index) => (
-          <div
-            key={index}
-            className={`relative w-full pt-[75%] rounded overflow-hidden border-4 transition-all duration-300 cursor-pointer ${
-              selectedImageIndex === index
-                ? "border-primary scale-[1.03]"
-                : "border-transparent"
-            }`}
-            onClick={() => setSelectedImageIndex(index)}
-          >
-            <img
-              src={src}
-              alt={`Original ${index + 1}`}
-              className="absolute top-0 left-0 w-full h-full object-cover"
-            />
-          </div>
-        ))}
-      </div> */}
     </CustomBox>
   );
 };

@@ -1,10 +1,11 @@
-import React from 'react'
-import GenAIBox from '../components/GenAIBox'
+import GenAIBox from "../components/GenAIBox";
 
-function InfoPage() {
+export default function InfoPage() {
   return (
-    <GenAIBox></GenAIBox>
-  )
+    <div className="flex items-center justify-center">
+      <div className="max-w-[75%]">
+        <GenAIBox />
+      </div>
+    </div>
+  );
 }
-
-export default InfoPage

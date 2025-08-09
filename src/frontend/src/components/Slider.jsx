@@ -27,10 +27,9 @@ export function Slider() {
     return images;
   }, []);
 
-  
   return (
     <Carousel
-      className="w-full max-w-lg mx-auto"
+      className="w-full"
       opts={{
         loop: true,
       }}
@@ -43,8 +42,17 @@ export function Slider() {
       <CarouselContent>
         {allImages.map((image) => (
           <CarouselItem key={image.id}>
-            <div className="p-1">
-              <div className="rounded-lg w-fit overflow-hidden shadow-lg">
+            <div className="flex p-5 gap-24 items-center">
+              <div className="text-4xl text-red-800">
+                <span className="text-center py-6 px-4 md:px-8">
+                  <h1 className="text-2xl md:text-3xl font-bold">
+                    <p>... der Grünen?</p>
+                    <p>“mehr Grün in der Stadt, mehr bla, mehr blub”</p>
+                  </h1>
+                </span>
+              </div>
+
+              <div className="rounded-lg overflow-hidden shadow-lg">
                 <img src={image.src} alt={image.alt} />
               </div>
             </div>
