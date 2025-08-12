@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Checkout Frontend
-      - run: cd src/frontend
+        run: cd src/frontend
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
