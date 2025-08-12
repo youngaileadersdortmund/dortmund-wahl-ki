@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Change this to your default branch if different
+      - main  # Change if your default branch is different
 
 permissions:
   contents: read
@@ -22,25 +22,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Checkout Frontend
-        run: cd src/frontend
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # Adjust to your Node.js version
+          node-version: 20 # Adjust if needed
           cache: 'npm'
+          cache-dependency-path: src/frontend/package-lock.json
 
       - name: Install dependencies
+        working-directory: src/frontend
         run: npm ci
 
       - name: Build project
+        working-directory: src/frontend
         run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist  # Vite default output folder
+          path: src/frontend/dist  # Vite default output folder
 
   deploy:
     runs-on: ubuntu-latest
