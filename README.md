@@ -1,5 +1,7 @@
 # ai-for-political-education
 
+[![Deploy to GitHub Pages](https://github.com/youngaileadersdortmund/ai-for-political-education/actions/workflows/deploy.yml/badge.svg)](https://github.com/youngaileadersdortmund/ai-for-political-education/actions/workflows/deploy.yml)
+
 ## install
 clone https://github.com/bytedance/UNO locally
 
