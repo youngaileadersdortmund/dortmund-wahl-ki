@@ -12,8 +12,8 @@ import React from "react";
 export function Slider() {
   const allImages = React.useMemo(() => {
     const images = [];
-    for (const partyKey in parties_metadata) {
-      const partyData = parties_metadata[partyKey];
+    for (const partyKey in parties_metadata.kommu) {
+      const partyData = parties_metadata.kommu[partyKey];
       for (let i = 0; i < 5; i++) {
         images.push({
           id: `${partyKey}-${i}`,
