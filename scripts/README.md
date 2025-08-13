@@ -1,6 +1,6 @@
 ## Parties_metadata
 
-After updating any prompt.txt, and/or prompt_de.txt, you can run this command in the termindal to update the parties_metadata.json in the src/frontend/public folder.
+After updating any prompt.txt, and/or prompt_de.txt, you can run this command in the terminal to update the parties_metadata.json in the src/frontend/public folder.
 
 ```bash
 python parties_metadata.py
