@@ -42,6 +42,10 @@ jobs:
         with:
           path: src/frontend/dist  # Vite default output folder
 
+      - name: Copy index.html to 404.html
+        working-directory: src/frontend/dist
+        run: cp index.html 404.html
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
