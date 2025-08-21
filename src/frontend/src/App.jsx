@@ -7,12 +7,12 @@ import InfoPage from "./pages/InfoPage";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/ai-for-political-education/">
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/impressum" element={<ImpressumPage />} />
-          <Route path="/about-the-project" element={<InfoPage />} />
+          <Route path="impressum" element={<ImpressumPage />} />
+          <Route path="about-the-project" element={<InfoPage />} />
         </Route>
       </Routes>
     </Router>
