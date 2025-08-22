@@ -7,7 +7,7 @@
     "sampleText": "Please describe how this poster visually communicates the party’s main messages and values."
   },
   "home": {
-    "second_headline": "AI asked - How is Dortmund changing through politics...",
+    "second_headline": "AI asked - How is Dortmund 2025 changing through politics...",
     "programs": "Comparison of all parties"
   },
   "impr": {
@@ -23,22 +23,18 @@
     "members": "Members",
     "home": "Local Election"
   },
-  "gen_ai_box": {
-    "title": "What is GenAI",
-    "text_p1": "Our project is about preparing the election programs for the Dortmund local election on",
-    "text_p2": "using AI.",
-    "text_p3": "The election programs were provided to a generative language model (our AI), which was tasked with identifying similarities and differences between the programs. These findings were then passed on to an image-generating AI with the goal of illustrating the core points of the election programs using images from Dortmund.",
-    "pipeline": {
-      "1": "Election Programs",
-      "2": "AI for Text Analysis",
-      "3": "Summarized Election Programs",
-      "4": "AI for Image Generation",
-      "5": "Images of the Programs"
-    },
-    "image_select": "Select an image to see the results:"
+  "about": {
+    "text_top": "The local elections in North Rhine-Westphalia are coming up, and as a <a target=_blank href=https://youngaileadersdortmund.github.io>group of young AI enthusiasts</a>, we ask ourselves: can this innovative technology also be used to positively influence political education and local voter turnout? For example, by using AI to make party politics more understandable and accessible?<br><br>In Dortmund, we are therefore experimentally applying generative AI in the context of local elections to promote the <a target=_blank href=https://aiforgood.itu.int/young-ai-leaders-community/ >Young AI Leaders Community</a> to advance <a target=_blank href=https://www.un.org/sustainabledevelopment/education/>Sustainable Development Goal 4: Quality Education</a>. The promotion of local political education is to be achieved through local and transparent technical implementation. <br><br>Our project was shaped by intensive exchanges with the <a target=_blank href=https://lamarr-institute.org>Lamarr Institute</a> (an AI research center), the <a target=_blank href=https://www.jrdo.de>Jugendring Dortmund</a> (which collaborates on the <a target=_blank href=https://xn--whlt-loa.nrw/start/kommunalomat/>Kommunalomat</a>) and Max Mundhenke (developer of < href=https://bundestagswahl.ai/>https://bundestagswahl.ai/</a>) – thank you very much for your input!",
+    "text_tech1": "We use the election programs and responses to the Kommunalomat survey as our data source. This content was provided to us either directly by the parties or by the Dortmund Youth Council. The data was processed independently using a <a target=_blank href=https://youtu.be/LPZh9BOjkQs?si=c4_z9lyMp_4JTUE3>generative language model</a> (the AI) to determine how the municipality could be visually transformed by the program. This potential transformation is visualized in the final step using an image-generating AI model.",
+    "text_tech2": "Due to the considerable <a target=_blank href=https://www.gov.uk/government/publications/international-ai-safety-report-2025>risks associated with the use of generative AI</a>, it is our personal goal to implement this project as transparently as possible. We use the <a target=_blank href=https://huggingface.co/Qwen/Qwen3-30B-A3B>Qwen3-30B-A3B Reasoning Model</a> and <a target=_blank href=https://huggingface.co/black-forest-labs/FLUX.1-schnell>FLUX.1 [fast]</a> for image generation. Further technical details can be found in our <a target=_blank href=https://github.com/youngaileadersdortmund/ai-for-political-education>GitHub repository</a>.",
+    "text_team1": "As part of the <a target=_blank href=https://aiforgood.itu.int/young-ai-leaders-community/>global AI for Good Initiative</a>, the <a target=_blank href=https://youngaileadersdortmund.github.io>Young AI Leaders Dortmund</a> are investigating how young people can drive positive change with the help of AI. This hub project was realized by the following members of our hub (click for more information):",
+    "text_team2": "Would you like to learn more or exchange ideas with us? Then <a target=_blank href=https://www.linkedin.com/company/young-ai-leaders-dortmund/>feel free to connect with us</a> or contact us by email:<br><br><a href=mailto:dortmundhub.youngaileaders@gmail.com>dortmundhub.youngaileaders [at] gmail.com</a>",
+    "heading_tech": "Technical Realization",
+    "heading_team": "About the Team"
   },
   "disclaimer": {
-    "title": "Disclaimer"
+    "title": "Disclaimer",
+    "text": "The content presented is experimental and does not serve as a voting recommendation. It was created using generative AI and is intended solely to stimulate discourse and political education. Due to the processing with AI, the positions of the parties may be inaccurately or incorrectly represented. Please inform yourself thoroughly before the election. Further information can be found, for example, on the <a target=_blank href=https://www.dortmund.de/rathaus/lokalpolitik/wahlen/kommunalwahl/>website of the city of Dortmund</a>."
   },
   "scroll_to_top_button": "Scroll to top"
 }

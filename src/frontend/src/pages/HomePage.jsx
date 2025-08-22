@@ -14,7 +14,7 @@ function HomePage() {
   return (
     <div className="flex flex-col items-center justify-center px-4 md:px-0">
       <h1 className="text-primary py-8 md:p-6 text-2xl md:text-3xl font-bold text-center">
-        {t("home.second_headline")} 2025
+        {t("home.second_headline")}
       </h1>
 
       <div className="max-w-5xl w-full self-center px-2 md:px-0">
