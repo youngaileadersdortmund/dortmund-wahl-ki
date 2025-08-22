@@ -19,10 +19,9 @@
     "content": "Unsere Website wird über <a target=_blank href=https://pages.github.com>GitHub Pages</a> (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) gehostet.<br>Beim Aufruf unserer Seiten erhebt GitHub automatisch Log-Daten (z. B. IP-Adresse, Browsertyp, Zeitpunkt des Zugriffs), um die Sicherheit und Funktionsfähigkeit des Dienstes zu gewährleisten.<br>Wir selbst greifen auf keine diese Daten nicht zu und werten sie nicht aus.<br><br>Diese Seite enthält außerdem Links zu externen Websites Dritter (z. B. YouTube, LinkedIn). Beim Anklicken dieser Links verlassen Sie unsere Website. Für die Inhalte und die Verarbeitung personenbezogener Daten auf den verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.<br><br>Darüber hinaus verwenden wir keine Cookies, Tracking- oder Analysetools und verarbeiten keine weiteren personenbezogenen Daten."
   },
   "nav_bar": {
-    "Wahlprogramm": "Wahlprogramm",
     "about_project": "Über das Projekt",
-    "members": "Mitglieder",
-    "home": "Kommunalwahl"
+    "home": "Ergebnisse",
+    "discussion": "Diskurs"
   },
   "about": {
     "text_top": "Die Kommunalwahlen in NRW stehen bevor, und als <a target=_blank href=https://youngaileadersdortmund.github.io>Gruppe junger KI-Enthusiasten</a> fragen wir uns - kann diese neuartige Technologie auch genutzt werden, um die politische Bildung und lokale Wahlbeteiligung positiv zu beeinflussen? Zum Beispiel, indem man Parteipolitik durch KI verständlicher und zugänglicher aufbereitet?<br><br>In Dortmund wenden wir deshalb experimentell generative KI im Kontext der Kommunalwahl an, um im Rahmen der globalen <a target=_blank href=https://aiforgood.itu.int/young-ai-leaders-community/>Young AI Leaders Community</a> das <a target=_blank href=https://www.un.org/sustainabledevelopment/education/>Sustainable Development Goal 4: Quality Education</a> voranzutreiben. Die Förderung der kommunalpolitischen Bildung soll dabei mittels einer lokalen und transparenten technischen Realisierung erfolgen.<br><br>Unser Projekt wurde geprägt durch den intensiven Austausch mit dem <a target=_blank href=https://lamarr-institute.org>Lamarr Institut</a> (ein KI Forschungszentrum), dem <a target=_blank href=https://www.jrdo.de>Jugendring Dortmund</a> (welche am <a target=_blank href=https://xn--whlt-loa.nrw/start/kommunalomat/>Kommunalomat</a> mitarbeiten) und Max Mundhenke (Entwickler von < href=https://bundestagswahl.ai/>https://bundestagswahl.ai/</a>) - vielen Dank für euren Input!",

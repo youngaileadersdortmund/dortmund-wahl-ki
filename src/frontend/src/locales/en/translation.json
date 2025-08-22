@@ -20,8 +20,8 @@
   },
   "nav_bar": {
     "about_project": "About the project",
-    "members": "Members",
-    "home": "Local Election"
+    "home": "Results",
+    "discussion": "Diskurs"
   },
   "about": {
     "text_top": "The local elections in North Rhine-Westphalia are coming up, and as a <a target=_blank href=https://youngaileadersdortmund.github.io>group of young AI enthusiasts</a>, we ask ourselves: can this innovative technology also be used to positively influence political education and local voter turnout? For example, by using AI to make party politics more understandable and accessible?<br><br>In Dortmund, we are therefore experimentally applying generative AI in the context of local elections to promote the <a target=_blank href=https://aiforgood.itu.int/young-ai-leaders-community/ >Young AI Leaders Community</a> to advance <a target=_blank href=https://www.un.org/sustainabledevelopment/education/>Sustainable Development Goal 4: Quality Education</a>. The promotion of local political education is to be achieved through local and transparent technical implementation. <br><br>Our project was shaped by intensive exchanges with the <a target=_blank href=https://lamarr-institute.org>Lamarr Institute</a> (an AI research center), the <a target=_blank href=https://www.jrdo.de>Jugendring Dortmund</a> (which collaborates on the <a target=_blank href=https://xn--whlt-loa.nrw/start/kommunalomat/>Kommunalomat</a>) and Max Mundhenke (developer of < href=https://bundestagswahl.ai/>https://bundestagswahl.ai/</a>) – thank you very much for your input!",
