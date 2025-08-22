@@ -10,6 +10,10 @@
     "second_headline": "KI gefragt- Wie verändert sich Dortmund durch die Politik...",
     "programs": "Vergleich aller Parteien"
   },
+  "impr": {
+    "second_headline": "Impressum",
+    "content": "Angaben gemäß § 5 TMG:<br>Young AI Leaders - Dortmund Hub<br>Als Teil der globalen <a href=https://aiforgood.itu.int/young-ai-leaders-community/>Young AI Leaders</a> Community<br><br>Vertreten durch:<br>Raphael Fischer<br>Lamarr-Institut für Maschinelles Lernen und Künstliche Intelligenz<br>Joseph-von-Fraunhofer-Straße 25<br>44227 Dortmund<br><br>Kontakt:<br>E-Mail: dortmundhub.youngaileaders [at] gmail.com<br>Telefon: +49 231 755 5148<br><br>Redaktionell verantwortlich nach § 18 MStV:<br>Raphael Fischer"
+  },
   "nav_bar": {
     "Wahlprogramm": "Wahlprogramm",
     "about_project": "Über das Projekt",
