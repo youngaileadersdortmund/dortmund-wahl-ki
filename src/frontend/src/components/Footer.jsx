@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="w-full p-4 md:py-8" style={{ paddingLeft: "10%", paddingRight: "10%" }}>
         <div className="sm:flex sm:items-center sm:justify-between">
           <a href="https://youngaileadersdortmund.github.io/" className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-            <img src="/logo.png" className="h-8" alt="Flowbite Logo" />
+            <img src="public/logo.png" className="h-8" alt="Young AI Leaders Logo" />
             <span className="text-black self-center text-xl whitespace-nowrap dark:text-white">Young AI Leaders - Dortmund Hub</span>
           </a>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">

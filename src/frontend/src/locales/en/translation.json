@@ -16,7 +16,7 @@
   },
   "priv": {
     "name": "Privacy Policy",
-    "content": "Our website is hosted via <a href=https://pages.github.com>GitHub Pages</a> (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA).<br>When you visit our pages, GitHub automatically collects log data (e.g., IP address, browser type, time of access) to ensure the security and functionality of the service.<br>We do not have access to or process this data ourselves.<br>Beyond this, we do not use cookies, tracking, or analytics tools, and no further personal data is processed."
+    "content": "Our website is hosted via <a href=https://pages.github.com>GitHub Pages</a> (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA).<br>When you visit our pages, GitHub automatically collects log data (e.g., IP address, browser type, time of access) to ensure the security and functionality of the service.<br>We do not have access to or process this data ourselves.<br><br>Our website also contains links to external third-party websites (e.g., YouTube, LinkedIn). When you click on these links, you leave our website. The operators of those linked sites are solely responsible for their content and the processing of personal data.<br><br>Beyond this, we do not use cookies, tracking, or analytics tools, and no further personal data is processed."
   },
   "nav_bar": {
     "about_project": "About the project",

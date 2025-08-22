@@ -25,12 +25,12 @@ export default function MenuBar() {
         {/* Logos */}
         <div className="flex flex-row sm:flex-row items-center justify-center mb-2 sm:mb-0">
           <img
-            src="/logo.png"
+            src="public/logo.png"
             alt="Logo"
             className="h-20 w-20 sm:h-28 sm:w-28 mr-2 sm:mr-4 ml-2 sm:ml-8"
           />
           <img
-            src="/lamarr-logo-2023.svg"
+            src="public/lamarr-logo-2023.svg"
             alt="Logo"
             className="h-20 w-20 sm:h-28 sm:w-28 mr-2 sm:mr-4 ml-2 sm:ml-8"
           />

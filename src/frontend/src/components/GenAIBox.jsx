@@ -16,7 +16,7 @@ const GenAIBox = () => {
       </div>
 
       <div className="flex flex-wrap flex-col items-center justify-center gap-4 text-sm text-center">
-        <img src="/pipeline1.png" className="w-full rounded" />
+        <img src="public/pipeline1.png" className="w-full rounded" />
         <div className="flex gap-10 text-black font-bold content-center items-center align-middle">
           <div className="min-w-[100px] text-center">
             {t("gen_ai_box.pipeline.1")}
