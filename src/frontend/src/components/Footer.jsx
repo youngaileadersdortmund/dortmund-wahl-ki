@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="bg-white rounded-lg shadow-sm m-4 w-full">
       <div className="w-full p-4 md:py-8" style={{ paddingLeft: "10%", paddingRight: "10%" }}>
@@ -11,10 +14,10 @@ const Footer = () => {
           </a>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
             <li>
-              <a href="/impressum" className="text-primary hover:underline me-4 md:me-6">Impressum</a>
+              <Link to="/impressum" className="text-primary hover:underline me-4 md:me-6">{t("impr.name")}</Link>
             </li>
             <li>
-              <a href="#" className="text-primary hover:underline me-4 md:me-6">Datenschutz</a>
+              <Link to="/datenschutz" className="text-primary hover:underline me-4 md:me-6">{t("priv.name")}</Link>
             </li>
           </ul>
         </div>

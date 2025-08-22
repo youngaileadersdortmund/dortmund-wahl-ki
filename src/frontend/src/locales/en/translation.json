@@ -11,8 +11,12 @@
     "programs": "Comparison of all parties"
   },
   "impr": {
-    "second_headline": "Legal Notice (Impressum)",
+    "name": "Legal Notice",
     "content": "According to § 5 TMG (German Telemedia Act):<br>Young AI Leaders - Dortmund Hub<br>As part of the global <a href=https://aiforgood.itu.int/young-ai-leaders-community/>Young AI Leaders</a> community<br><br>Represented by:<br>Raphael Fischer<br>Lamarr Institute for Machine Learning and Artificial Intelligence<br>Joseph-von-Fraunhofer-Straße 25<br>44227 Dortmund, Germany<br><br>Kontakt:<br>E-Mail: dortmundhub.youngaileaders [at] gmail.com<br>Phone: +49 231 755 5148<br><br>Editorially responsible according to § 18 MStV (German Interstate Media Treaty):<br>Raphael Fischer"
+  },
+  "priv": {
+    "name": "Privacy Policy",
+    "content": "Our website is hosted via <a href=https://pages.github.com>GitHub Pages</a> (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA).<br>When you visit our pages, GitHub automatically collects log data (e.g., IP address, browser type, time of access) to ensure the security and functionality of the service.<br>We do not have access to or process this data ourselves.<br>Beyond this, we do not use cookies, tracking, or analytics tools, and no further personal data is processed."
   },
   "nav_bar": {
     "about_project": "About the project",

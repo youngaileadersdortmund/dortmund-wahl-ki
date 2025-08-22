@@ -11,8 +11,12 @@
     "programs": "Vergleich aller Parteien"
   },
   "impr": {
-    "second_headline": "Impressum",
+    "name": "Impressum",
     "content": "Angaben gemäß § 5 TMG:<br>Young AI Leaders - Dortmund Hub<br>Als Teil der globalen <a href=https://aiforgood.itu.int/young-ai-leaders-community/>Young AI Leaders</a> Community<br><br>Vertreten durch:<br>Raphael Fischer<br>Lamarr-Institut für Maschinelles Lernen und Künstliche Intelligenz<br>Joseph-von-Fraunhofer-Straße 25<br>44227 Dortmund<br><br>Kontakt:<br>E-Mail: dortmundhub.youngaileaders [at] gmail.com<br>Telefon: +49 231 755 5148<br><br>Redaktionell verantwortlich nach § 18 MStV:<br>Raphael Fischer"
+  },
+  "priv": {
+    "name": "Datenschutz",
+    "content": "Unsere Website wird über <a href=https://pages.github.com>GitHub Pages</a> (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) gehostet.<br>Beim Aufruf unserer Seiten erhebt GitHub automatisch Log-Daten (z. B. IP-Adresse, Browsertyp, Zeitpunkt des Zugriffs), um die Sicherheit und Funktionsfähigkeit des Dienstes zu gewährleisten.<br>Wir selbst greifen auf diese Daten nicht zu und werten sie nicht aus.<br>Darüber hinaus verwenden wir keine Cookies, Tracking- oder Analysetools und verarbeiten keine weiteren personenbezogenen Daten."
   },
   "nav_bar": {
     "Wahlprogramm": "Wahlprogramm",
