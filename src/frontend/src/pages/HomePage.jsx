@@ -31,7 +31,7 @@ function HomePage() {
         </div>
       </div>
 
-      <Grid parties_metadata={parties_metadata} sel_grid={grid} />
+      <Grid parties_metadata={parties_metadata} gridKey={grid} />
 
       <div className="max-w-3xl w-full self-center px-2 md:px-0">
         <Disclaimer />

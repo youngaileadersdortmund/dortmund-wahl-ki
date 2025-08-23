@@ -1,40 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import MoreInfoButton from "./MoreInfoButton";
 import { useTranslation } from "react-i18next";
 
-function Card({ card, paths, partyKey }) {
+function Card({ card, paths, partyKey, gridKey }) {
   const [isHovered, setIsHovered] = useState(false);
   const [randomIndex] = useState(() => Math.floor(Math.random() * 5));
+  const [visualImpactPoints, setVisualImpactPoints] = useState([]);
 
   const { i18n } = useTranslation();
-  const currentLanguage = i18n.language || "de";
+  const langKey = i18n.language || "de";
 
-  const getPointsForCard = (cardObj, lang) => {
-    if (!cardObj || typeof cardObj !== "object") return [];
-
-    const tryLang = (l) => {
-      const langObj = cardObj[l];
-      if (!langObj || typeof langObj !== "object") return null;
-      if (Array.isArray(langObj.visual_impact_points))
-        return langObj.visual_impact_points;
-      if (Array.isArray(langObj.visual_points)) return langObj.visual_points;
-      return null;
+  // Load points from .txt file asynchronously
+  useEffect(() => {
+    const fetchPoints = async () => {
+      if (!paths || !partyKey || !paths.base || !gridKey || !langKey) {
+        setVisualImpactPoints([]);
+        return;
+      }
+      // gridKey: 'kommunalomat' or 'program', langKey: 'de' or 'en'
+      if (!paths[gridKey] || !paths[langKey] || !paths[langKey].prompt) {
+        setVisualImpactPoints([]);
+        return;
+      }
+      const point_fname = `${paths.base}/${partyKey}/${paths[gridKey]}/${paths[langKey].prompt}`;
+      try {
+        const response = await fetch(point_fname);
+        if (!response.ok) throw new Error('File not found');
+        const text = await response.text();
+        // Split by comma, trim whitespace, filter out empty strings
+        const points = text.split(',').map(s => s.trim()).filter(Boolean);
+        setVisualImpactPoints(points);
+      } catch (e) {
+        setVisualImpactPoints([]);
+      }
     };
-
-    let pts = tryLang(lang);
-    if (!pts) pts = tryLang("de");
-    if (!pts) pts = tryLang("en");
-    if (!pts) {
-      if (Array.isArray(cardObj.visual_impact_points))
-        pts = cardObj.visual_impact_points;
-      else if (Array.isArray(cardObj.visual_points))
-        pts = cardObj.visual_points;
-    }
-    return Array.isArray(pts) ? pts : [];
-  };
-
-  const visualImpactPoints = getPointsForCard(card, currentLanguage);
+    fetchPoints();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paths, partyKey, gridKey, langKey]);
 
   const partyName = (card && card.name) || "Unknown";
 
@@ -47,7 +50,7 @@ function Card({ card, paths, partyKey }) {
       <div className="p-2">
         <div className="relative w-full h-72">
           <img
-            src={`${paths.base}/${partyKey}/${paths.kommunalomat}/${paths.images}/0_${randomIndex}.png`}
+            src={`${paths.base}/${partyKey}/${paths[gridKey]}/${paths.images}/0_${randomIndex}.png`}
             alt={partyName}
             className="w-full h-full object-cover rounded-md"
             onError={(e) => {
@@ -80,7 +83,7 @@ function Card({ card, paths, partyKey }) {
   );
 }
 
-function Grid({ parties_metadata, sel_grid }) {
+function Grid({ parties_metadata, gridKey }) {
   const paths = parties_metadata.paths
   const parties = parties_metadata.parties
   const cards = Object.entries(parties);
@@ -89,7 +92,7 @@ function Grid({ parties_metadata, sel_grid }) {
     <div className="container mx-auto px-12 min-h-screen ">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {cards.map(([partyKey, partyData]) => (
-          <Card key={partyKey} card={partyData} paths={paths} partyKey={partyKey} />
+          <Card key={partyKey} card={partyData} paths={paths} partyKey={partyKey} gridKey={gridKey} />
         ))}
       </div>
     </div>
