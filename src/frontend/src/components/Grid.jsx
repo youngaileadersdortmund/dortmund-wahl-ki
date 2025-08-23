@@ -28,11 +28,16 @@ function Card({ card, paths, partyKey, gridKey }) {
         const response = await fetch(point_fname);
         if (!response.ok) throw new Error('File not found');
         const text = await response.text();
-        // Split by comma, trim whitespace, filter out empty strings
-        const points = text.split(',').map(s => s.trim()).filter(Boolean);
-        setVisualImpactPoints(points);
+        // If the file is not a valid points file (e.g., HTML), show error text
+        if (text.trim().startsWith('<!doctype html>') || text.trim().startsWith('<html')) {
+          setVisualImpactPoints(['No data for selected party.']);
+        } else {
+          // Split by comma, trim whitespace, filter out empty strings
+          const points = text.split(',').map(s => s.trim()).filter(Boolean);
+          setVisualImpactPoints(points.length ? points : ['No data for selected party.']);
+        }
       } catch (e) {
-        setVisualImpactPoints([]);
+        setVisualImpactPoints(['No data for selected party.']);
       }
     };
     fetchPoints();
@@ -54,9 +59,8 @@ function Card({ card, paths, partyKey, gridKey }) {
             alt={partyName}
             className="w-full h-full object-cover rounded-md"
             onError={(e) => {
-              // graceful fallback if image missing
               e.currentTarget.onerror = null;
-              e.currentTarget.src = "/placeholder.png";
+              e.currentTarget.src = "public/placeholder.jpg";
             }}
           />
           <div
