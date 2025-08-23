@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import LanguageSelector from "./LanguageSelector";
 
-// TODO: Mobile Friendly
+const base = import.meta.env.BASE_URL || "/ai-for-political-education/";
 
 export default function MenuBar() {
   const { t, i18n } = useTranslation();
@@ -26,7 +26,7 @@ export default function MenuBar() {
         <div className="flex flex-row items-center justify-center mb-2 sm:mb-0">
           <a href="https://youngaileadersdortmund.github.io/" target="_blank">
             <img
-              src="public/logo.png"
+              src={`${base}logo.png`}
               alt="Logo"
               className="h-20 w-20 sm:h-28 sm:w-28 mr-2 sm:mr-4 ml-2 sm:ml-8"
             />
@@ -34,7 +34,7 @@ export default function MenuBar() {
 
           <a href="https://lamarr-institute.org/" target="_blank">
             <img
-              src="public/lamarr-logo-2023.svg"
+              src={`${base}lamarr-logo-2023.svg`}
               alt="Logo"
               className="h-20 w-20 sm:h-28 sm:w-28 mr-2 sm:mr-4 ml-2 sm:ml-8"
             />

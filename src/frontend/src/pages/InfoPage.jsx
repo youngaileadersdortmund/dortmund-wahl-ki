@@ -1,37 +1,39 @@
 import Disclaimer from "../components/Disclaimer";
 import { useTranslation } from "react-i18next";
 
+const base = import.meta.env.BASE_URL || "/ai-for-political-education/";
+
 export default function InfoPage() {
   const { t } = useTranslation();
   const members = [
     {
       name: "Raphael Fischer",
-      img: "public/members/raphael.jpg",
+      img: "members/raphael.jpg",
       link: "https://www.linkedin.com/in/raphael-fischer-3b1046208/",
     },
     {
       name: "Nico Koltermann",
-      img: "public/members/nico.jpg",
+      img: "members/nico.jpg",
       link: "https://www.linkedin.com/in/nico-koltermann/",
     },
     {
       name: "Jan Krawiec",
-      img: "public/members/jan.jpg",
+      img: "members/jan.jpg",
       link: "https://www.linkedin.com/in/jan-krawiec-707515296/",
     },
     {
       name: "Louisa von Essen",
-      img: "public/members/louisa.jpg",
+      img: "members/louisa.jpg",
       link: "https://www.linkedin.com/in/louisa-von-essen-a44b1a192/",
     },
     {
       name: "Youssef Abdelrahim",
-      img: "public/members/youssef.jpg",
+      img: "members/youssef.jpg",
       link: "https://www.linkedin.com/in/youssef-abdelrahim-de/",
     },
     {
       name: "Tareq Khouja",
-      img: "public/members/tareq.jpg",
+      img: "members/tareq.jpg",
       link: "https://www.linkedin.com/in/tareq-khouja/",
     },
   ];
@@ -43,14 +45,18 @@ export default function InfoPage() {
         dangerouslySetInnerHTML={{ __html: t("about.text_top") }}
       />
       <div className="w-full max-w-[40%] my-8 flex flex-row justify-between items-center gap-4 mx-auto">
-        <img src="public/logo.png" className="h-20 object-contain" alt="logo" />
         <img
-          src="public/E_SDG_logo_without_UN_emblem_horizontal_Transparent_WEB.png"
+          src={`${base}logo.png`}
+          className="h-20 object-contain"
+          alt="logo"
+        />
+        <img
+          src={`${base}E_SDG_logo_without_UN_emblem_horizontal_Transparent_WEB.png`}
           className="h-20 object-contain"
           alt="sdg"
         />
         <img
-          src="public/E-WEB-Goal-04.png"
+          src={`${base}E-WEB-Goal-04.png`}
           className="h-20 object-contain"
           alt="goal"
         />
@@ -64,7 +70,7 @@ export default function InfoPage() {
       />
       <div className="w-full max-w-[50%] my-8">
         <img
-          src="public/pipeline1.png"
+          src={`${base}pipeline.png`}
           className="w-full rounded"
           alt="pipeline"
         />
@@ -89,7 +95,8 @@ export default function InfoPage() {
                     my-6
                     grid grid-cols-2 gap-6 justify-items-center
                     sm:grid-cols-3
-                    md:flex md:flex-row md:justify-center md:items-center md:gap-6">
+                    md:flex md:flex-row md:justify-center md:items-center md:gap-6"
+      >
         {members.map((member) => (
           <a
             key={member.name}
@@ -100,7 +107,7 @@ export default function InfoPage() {
           >
             <div className="w-20 sm:w-24 md:w-28 lg:w-32 aspect-square rounded-full overflow-hidden border border-gray-300 flex-shrink-0">
               <img
-                src={member.img}
+                src={base + member.img}
                 alt={member.name}
                 className="w-full h-full object-cover block"
               />

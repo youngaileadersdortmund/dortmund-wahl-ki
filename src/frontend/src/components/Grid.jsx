@@ -3,8 +3,6 @@ import { FaCheckCircle } from "react-icons/fa";
 import MoreInfoButton from "./MoreInfoButton";
 import { useTranslation } from "react-i18next";
 
-const base = import.meta.env.BASE_URL || "/ai-for-political-education/";
-
 function Card({ card, paths, partyKey, gridKey }) {
   const [isHovered, setIsHovered] = useState(false);
   const [randomIndex] = useState(() => Math.floor(Math.random() * 5));
@@ -81,7 +79,7 @@ function Card({ card, paths, partyKey, gridKey }) {
             className="w-full h-full object-cover rounded-md"
             onError={(e) => {
               e.currentTarget.onerror = null;
-              e.currentTarget.src = `${base}placeholder.jpg`;
+              e.currentTarget.src = `${paths.base}placeholder.jpg`;
             }}
           />
           <div
