@@ -36,7 +36,7 @@ const GridSelector = ({
 
   return (
     <div
-      className="relative w-full max-w-xs mx-auto my-2 font-sans"
+      className="relative max-w-xs mx-auto my-2 font-sans"
       ref={dropdownRef}
     >
       <button
@@ -46,7 +46,7 @@ const GridSelector = ({
           rounded-full
           font-semibold
           text-md
-          flex items-center justify-center sm:justify-between
+          flex items-center justify-between sm:justify-between
           bg-secondary text-white
           px-4 py-2
           transition-all duration-300 ease-in-out
@@ -55,8 +55,7 @@ const GridSelector = ({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
-        <span className="hidden sm:inline">{current.name}</span>
-        <MdGridOn className="sm:hidden w-5 h-5" />
+        <span>{current.name}</span>
         <IoIosArrowDown
           className={`w-5 h-5 ml-2 transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""

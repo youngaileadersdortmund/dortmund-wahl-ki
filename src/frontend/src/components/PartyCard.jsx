@@ -1,4 +1,3 @@
-import React from 'react';
 import CustomBox from './CustomBox';
 
 export default function PartyCard({ party, align = 'left', selectedImageIndex = 0 }) {

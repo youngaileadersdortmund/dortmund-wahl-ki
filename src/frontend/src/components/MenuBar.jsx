@@ -21,23 +21,28 @@ export default function MenuBar() {
 
   return (
     <div className="w-full flex flex-col justify-between items-center mb-4 p-2 rounded">
-      <div className="flex w-full items-center justify-between flex-col sm:flex-row">
+      <div className="flex w-full items-center justify-between flex-col xl:flex-row">
         {/* Logos */}
-        <div className="flex flex-row sm:flex-row items-center justify-center mb-2 sm:mb-0">
-          <img
-            src="public/logo.png"
-            alt="Logo"
-            className="h-20 w-20 sm:h-28 sm:w-28 mr-2 sm:mr-4 ml-2 sm:ml-8"
-          />
-          <img
-            src="public/lamarr-logo-2023.svg"
-            alt="Logo"
-            className="h-20 w-20 sm:h-28 sm:w-28 mr-2 sm:mr-4 ml-2 sm:ml-8"
-          />
+        <div className="flex flex-row items-center justify-center mb-2 sm:mb-0">
+          <a href="https://youngaileadersdortmund.github.io/" target="_blank">
+            <img
+              src="public/logo.png"
+              alt="Logo"
+              className="h-20 w-20 sm:h-28 sm:w-28 mr-2 sm:mr-4 ml-2 sm:ml-8"
+            />
+          </a>
+
+          <a href="https://lamarr-institute.org/" target="_blank">
+            <img
+              src="public/lamarr-logo-2023.svg"
+              alt="Logo"
+              className="h-20 w-20 sm:h-28 sm:w-28 mr-2 sm:mr-4 ml-2 sm:ml-8"
+            />
+          </a>
         </div>
 
         {/* Headline */}
-        <h1 className="cursor-pointer text-3xl sm:text-5xl font-bold text-secondary text-center sm:absolute sm:left-1/2 sm:-translate-x-1/2 mb-2 sm:mb-0">
+        <h1 className="cursor-pointer text-3xl sm:text-5xl font-bold text-secondary text-center xl:absolute xl:left-1/2 xl:-translate-x-1/2 mb-2 sm:mb-0">
           <Link
             to="/"
             className="text-inherit no-underline hover:no-underline focus:outline-none hover:text-secondary"
@@ -47,14 +52,17 @@ export default function MenuBar() {
         </h1>
 
         {/* Language selector + hamburger */}
-        <div className="flex gap-2 mt-2 sm:mt-0 sm:mr-8">
+        <div className="flex gap-2 mt-2 sm:mr-8">
           <LanguageSelector
             languages={languages}
             selectedLanguage={i18n.language}
             onSelect={switchLanguage}
           />
           <div className="sm:hidden flex items-center text-white p-2">
-            <button onClick={() => setMenuOpen(!menuOpen)} className="bg-secondary rounded-full">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="bg-secondary rounded-full"
+            >
               {menuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
             </button>
           </div>

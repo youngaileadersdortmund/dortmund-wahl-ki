@@ -84,10 +84,19 @@ function Grid({ parties_metadata }) {
   const cards = Object.entries(parties_metadata);
 
   return (
-    <div className="container mx-auto px-12 min-h-screen ">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+    <div className="max-w-7xl mx-auto min-h-screen">
+      <div
+        className="grid
+                  grid-cols-1
+                  sm:grid-cols-2
+                  md:grid-cols-3
+                  lg:grid-cols-5
+                  gap-4 sm:gap-6 lg:gap-8"
+      >
         {cards.map(([partyKey, partyData]) => (
-          <Card key={partyKey} card={partyData} />
+          <div key={partyKey} className="w-full min-w-0">
+            <Card card={partyData} />
+          </div>
         ))}
       </div>
     </div>

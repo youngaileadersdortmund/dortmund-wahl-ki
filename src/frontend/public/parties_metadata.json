@@ -14,7 +14,7 @@
       "en": {
         "visual_points": [
           "Lively city center",
-          "attractive retail areas",
+          "Attractive retail areas",
           "renovated building facades",
           "green roofs",
           "expanded bike routes"
@@ -154,28 +154,18 @@
       "de": {
         "visual_impact_points": [
           "Smart City-Technologie (Sensoren, digitale Beschilderung)",
-          "Mischnutzung von Wohnkomplexen",
-          "Erweiterungen von Bildungseinrichtungen",
           "Gesundheitsinfrastruktur",
           "Revitalisierung von Kulturstätten",
           "saubere Schulhöfe",
-          "erweiterte Bibliotheken",
-          "mehr Fahrradstellplätze",
-          "sicherere Radwege",
           "mehr Stadtbäume"
         ]
       },
       "en": {
         "visual_impact_points": [
           "Smart city tech (sensors, digital signage)",
-          "Mixed-use housing complexes",
-          "Educational facility expansions",
           "Healthcare infrastructure",
           "Cultural venue revitalization",
           "clean school grounds",
-          "expanded libraries",
-          "increased bike parking",
-          "safer cycle paths",
           "more urban trees"
         ]
       }
@@ -229,7 +219,6 @@
           "Moderne Schulgebäude",
           "erweiterte öffentliche Bibliotheken",
           "saubere Schulumgebungen",
-          "eine infrastrukturfreundliche Radfahrerinfrastruktur",
           "von Bäumen gesäumte öffentliche Plätze",
           "von Bäumen gesäumte öffentliche Plätze."
         ]
@@ -239,7 +228,6 @@
           "Modern school facilities",
           "expanded public libraries",
           "clean school environments",
-          "bike-friendly infrastructure",
           "tree-lined public spaces",
           "tree-lined public spaces."
         ]
@@ -275,8 +263,7 @@
           "mehr öffentliche Bibliotheken",
           "baumgesäumte öffentliche Plätze",
           "Solaranlagen",
-          "baumbestandene öffentliche Plätze",
-          "Solaranlagen."
+          "baumbestandene öffentliche Plätze"
         ]
       },
       "en": {
@@ -285,8 +272,7 @@
           "Safer cycle paths",
           "More public libraries",
           "Tree-lined public spaces",
-          "Solar panel installations",
-          "Solar panel installations."
+          "Solar panel installations"
         ]
       }
     },

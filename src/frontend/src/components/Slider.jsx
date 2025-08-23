@@ -6,26 +6,11 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import parties_metadata from "../../public/parties_metadata.json";
-import React from "react";
+import { usePartyImages } from "../../hooks/usePartyImages";
+import { FaCheckCircle } from "react-icons/fa";
 
-export function Slider() {
-  const allImages = React.useMemo(() => {
-    const images = [];
-    for (const partyKey in parties_metadata.kommu) {
-      const partyData = parties_metadata.kommu[partyKey];
-      for (let i = 0; i < 5; i++) {
-        images.push({
-          id: `${partyKey}-${i}`,
-          src: `./2025/${partyData.name.toLowerCase()}/0_${i}.png`,
-          alt: `${partyData.name} - ${
-            partyData.en.visual_impact_points[i] || "Image " + (i + 1)
-          }`,
-        });
-      }
-    }
-    return images;
-  }, []);
+export function Slider({ lang = "de" }) {
+  const allImages = usePartyImages(lang, true);
 
   return (
     <Carousel
@@ -42,19 +27,25 @@ export function Slider() {
       <CarouselContent>
         {allImages.map((image) => (
           <CarouselItem key={image.id}>
-            <div className="flex p-5 gap-24 items-center">
-              <div className="text-4xl text-red-800">
-                <span className="text-center py-6 px-4 md:px-8">
-                  <h1 className="text-2xl md:text-3xl font-bold">
-                    <p>... der Grünen?</p>
-                    <p>“mehr Grün in der Stadt, mehr bla, mehr blub”</p>
-                  </h1>
-                </span>
+            <div className="flex xs:flex-col sm:flex-row p-5 gap-24 items-center justify-center">
+
+              <div className="max-w-[400px] text-left">
+                <h2 className="text-2xl font-bold mb-5">{image.partyName}</h2>
+                {image.visualImpactPoints.map((point, idx) => (
+                  <div key={idx} className="flex items-start content-center">
+                    <FaCheckCircle className="text-secondary text-lg self-center mr-2 my-4" />
+                    <span className="text-gray-700 text-xl self-center">{point}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-lg overflow-hidden shadow-lg max-w-[390px] aspect-square">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
-              <div className="rounded-lg overflow-hidden shadow-lg">
-                <img src={image.src} alt={image.alt} />
-              </div>
             </div>
           </CarouselItem>
         ))}
