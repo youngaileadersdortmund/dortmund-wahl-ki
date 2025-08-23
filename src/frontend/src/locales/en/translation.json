@@ -10,6 +10,11 @@
     "second_headline": "AI asked - How is Dortmund 2025 changing through politics...",
     "programs": "Comparison of all parties"
   },
+  "details": {
+    "title" : "More Information",
+    "text": "We analyzed the data about the party's program using AI to identify visual changes. This resulted in the following thought process (reasoning):",
+    "closing": "Further information on the technical implementation can be found on the ‘About the project’ page."
+  },
   "impr": {
     "name": "Legal Notice",
     "content": "According to § 5 TMG (German Telemedia Act):<br>Young AI Leaders - Dortmund Hub<br>As part of the global <a href=https://aiforgood.itu.int/young-ai-leaders-community/>Young AI Leaders</a> community<br><br>Represented by:<br>Raphael Fischer<br>Lamarr Institute for Machine Learning and Artificial Intelligence<br>Joseph-von-Fraunhofer-Straße 25<br>44227 Dortmund, Germany<br><br>Kontakt:<br>E-Mail: dortmundhub.youngaileaders [at] gmail.com<br>Phone: +49 231 755 5148<br><br>Editorially responsible according to § 18 MStV (German Interstate Media Treaty):<br>Raphael Fischer"

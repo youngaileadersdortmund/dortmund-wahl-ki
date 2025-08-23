@@ -6,45 +6,64 @@ import { useTranslation } from "react-i18next";
 function Card({ card, paths, partyKey, gridKey }) {
   const [isHovered, setIsHovered] = useState(false);
   const [randomIndex] = useState(() => Math.floor(Math.random() * 5));
-  const [visualImpactPoints, setVisualImpactPoints] = useState([]);
+  const [visualPoints, setVisualPoints] = useState([]);
+  const [reasoningData, setReasoningData] = useState([]);
 
   const { i18n } = useTranslation();
   const langKey = i18n.language || "de";
 
-  // Load points from .txt file asynchronously
+  // Load points and reasoning from .txt files asynchronously
   useEffect(() => {
-    const fetchPoints = async () => {
+    const fetchData = async () => {
       if (!paths || !partyKey || !paths.base || !gridKey || !langKey) {
-        setVisualImpactPoints([]);
+        setVisualPoints([]);
+        setReasoningData([]);
         return;
       }
       // gridKey: 'kommunalomat' or 'program', langKey: 'de' or 'en'
-      if (!paths[gridKey] || !paths[langKey] || !paths[langKey].prompt) {
-        setVisualImpactPoints([]);
+      if (!paths[gridKey] || !paths[langKey] || !paths[langKey].prompt || !paths[langKey].reasoning) {
+        setVisualPoints([]);
+        setReasoningData([]);
         return;
       }
       const point_fname = `${paths.base}/${partyKey}/${paths[gridKey]}/${paths[langKey].prompt}`;
+      const reasoning_fname = `${paths.base}/${partyKey}/${paths[gridKey]}/${paths[langKey].reasoning}`;
+      // Fetch points
       try {
         const response = await fetch(point_fname);
         if (!response.ok) throw new Error('File not found');
         const text = await response.text();
-        // If the file is not a valid points file (e.g., HTML), show error text
         if (text.trim().startsWith('<!doctype html>') || text.trim().startsWith('<html')) {
-          setVisualImpactPoints(['No data for selected party.']);
+          setVisualPoints(['No data for selected party.']);
         } else {
-          // Split by comma, trim whitespace, filter out empty strings
           const points = text.split(',').map(s => s.trim()).filter(Boolean);
-          setVisualImpactPoints(points.length ? points : ['No data for selected party.']);
+          setVisualPoints(points.length ? points : ['No data for selected party.']);
         }
       } catch (e) {
-        setVisualImpactPoints(['No data for selected party.']);
+        setVisualPoints(['No data for selected party.']);
+      }
+      // Fetch reasoning
+      try {
+        const response = await fetch(reasoning_fname);
+        if (!response.ok) throw new Error('File not found');
+        const text = await response.text();
+        if (text.trim().startsWith('<!doctype html>') || text.trim().startsWith('<html')) {
+          setReasoningData(['No reasoning data for selected party.']);
+        } else {
+          // Split by comma, trim whitespace, filter out empty strings
+          const reasonings = [text]; // text.split(',').map(s => s.trim()).filter(Boolean);
+          setReasoningData(reasonings.length ? reasonings : ['No reasoning data for selected party.']);
+        }
+      } catch (e) {
+        setReasoningData(['No reasoning data for selected party.']);
       }
     };
-    fetchPoints();
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paths, partyKey, gridKey, langKey]);
 
   const partyName = (card && card.name) || "Unknown";
+  const images_dir = `${paths.base}/${partyKey}/${paths[gridKey]}/${paths.images}`;
 
   return (
     <div
@@ -55,7 +74,7 @@ function Card({ card, paths, partyKey, gridKey }) {
       <div className="p-2">
         <div className="relative w-full h-72">
           <img
-            src={`${paths.base}/${partyKey}/${paths[gridKey]}/${paths.images}/0_${randomIndex}.png`}
+            src={`${images_dir}/0_${randomIndex}.png`}
             alt={partyName}
             className="w-full h-full object-cover rounded-md"
             onError={(e) => {
@@ -69,14 +88,14 @@ function Card({ card, paths, partyKey, gridKey }) {
             }`}
           >
             <div className="space-y-2">
-              {visualImpactPoints.map((bullet, index) => (
+              {visualPoints.map((bullet, index) => (
                 <div key={index} className="flex items-start">
                   <FaCheckCircle className=" text-secondary mr-2 flex-shrink-0 mt-0.5" />
                   <span className="text-gray-700 text-sm">{bullet}</span>
                 </div>
               ))}
             </div>
-            <MoreInfoButton card={card} setIsHovered={setIsHovered} />
+            <MoreInfoButton card={card} images_dir={images_dir} reasoningData={reasoningData} visualPoints={visualPoints} setIsHovered={setIsHovered} />
           </div>
         </div>
         <h3 className="text-lg font-semibold text-gray-800 mt-3 text-center">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { useTranslation } from "react-i18next";
 import {
   Dialog,
   DialogContent,
@@ -11,17 +12,18 @@ import {
   DialogClose,
 } from "./ui/dialog";
 
-export default function MoreInfoButton({ card, setIsHovered }) {
+export default function MoreInfoButton({ card, images_dir, reasoningData, visualPoints, setIsHovered }) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const imageIndexes = [0, 1, 2, 3, 4];
   const cardName = card.name.toLowerCase();
+  const { t } = useTranslation();
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button className="bg-primary text-white">
-          More info
+          Details
         </Button>
       </DialogTrigger>
 
@@ -32,10 +34,16 @@ export default function MoreInfoButton({ card, setIsHovered }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-4 items-start">
           {/* Left Column: Description */}
-          <div>
-            <h3 className="font-semibold mb-2 text-lg">Description</h3>
-            <DialogDescription className="text-gray-300">
-              This is a detailed description for {card.name}.
+          <div className="max-h-[32rem] overflow-y-auto pr-2">
+            <h3 className="font-semibold mb-2 text-lg">{t("details.title")}</h3>
+            <DialogDescription className="text-gray-300 mb-4">
+              {t("details.text")}
+            </DialogDescription>
+            <DialogDescription className="text-gray-300 mb-4">
+              {reasoningData}
+            </DialogDescription>
+            <DialogDescription className="text-gray-300 mb-4">
+              {t("details.closing")}
             </DialogDescription>
           </div>
 
@@ -44,7 +52,7 @@ export default function MoreInfoButton({ card, setIsHovered }) {
             <div className="relative aspect-video w-full">
               <img
                 className="h-full w-full object-contain rounded-lg shadow-lg"
-                src={`./2025/${cardName}/0_${selectedImageIndex}.png`}
+                src={`${images_dir}/0_${selectedImageIndex}.png`}
                 alt={`${card.name} - Image ${selectedImageIndex + 1}`}
                 key={selectedImageIndex}
               />
@@ -62,8 +70,8 @@ export default function MoreInfoButton({ card, setIsHovered }) {
                 >
                   <img
                     className="h-full w-full object-cover"
-                    src={`./2025/${cardName}/0_${index}.png`}
-                    alt={`${card.name} thumbnail ${index + 1}`}
+                    src={`${images_dir}/0_${index}.png`}
+                    alt={`${images_dir} thumbnail ${index + 1}`}
                   />
                 </div>
               ))}
