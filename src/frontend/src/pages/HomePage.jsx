@@ -9,7 +9,7 @@ import GridSelector from "../components/GridSelector";
 function HomePage() {
   const { t } = useTranslation();
   // default to "kommu" (kommunalomat view). Use "program" to show program view.
-  const [grid, setGrid] = useState("kommu");
+  const [grid, setGrid] = useState("kommunalomat");
 
   return (
     <div className="flex flex-col items-center justify-center px-4 md:px-0">
@@ -31,7 +31,7 @@ function HomePage() {
         </div>
       </div>
 
-      <Grid parties_metadata={parties_metadata[grid]} />
+      <Grid parties_metadata={parties_metadata} sel_grid={grid} />
 
       <div className="max-w-3xl w-full self-center px-2 md:px-0">
         <Disclaimer />

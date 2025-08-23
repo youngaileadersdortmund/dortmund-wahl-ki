@@ -3,7 +3,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import MoreInfoButton from "./MoreInfoButton";
 import { useTranslation } from "react-i18next";
 
-function Card({ card }) {
+function Card({ card, paths, partyKey }) {
   const [isHovered, setIsHovered] = useState(false);
   const [randomIndex] = useState(() => Math.floor(Math.random() * 5));
 
@@ -47,7 +47,7 @@ function Card({ card }) {
       <div className="p-2">
         <div className="relative w-full h-72">
           <img
-            src={`./2025/${partyName.toLowerCase()}/0_${randomIndex}.png`}
+            src={`${paths.base}/${partyKey}/${paths.kommunalomat}/${paths.images}/0_${randomIndex}.png`}
             alt={partyName}
             className="w-full h-full object-cover rounded-md"
             onError={(e) => {
@@ -80,14 +80,16 @@ function Card({ card }) {
   );
 }
 
-function Grid({ parties_metadata }) {
-  const cards = Object.entries(parties_metadata);
+function Grid({ parties_metadata, sel_grid }) {
+  const paths = parties_metadata.paths
+  const parties = parties_metadata.parties
+  const cards = Object.entries(parties);
 
   return (
     <div className="container mx-auto px-12 min-h-screen ">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {cards.map(([partyKey, partyData]) => (
-          <Card key={partyKey} card={partyData} />
+          <Card key={partyKey} card={partyData} paths={paths} partyKey={partyKey} />
         ))}
       </div>
     </div>

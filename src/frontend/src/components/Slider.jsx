@@ -10,19 +10,25 @@ import parties_metadata from "../../public/parties_metadata.json";
 import React from "react";
 
 export function Slider() {
+  const paths = parties_metadata.paths;
   const allImages = React.useMemo(() => {
     const images = [];
-    for (const partyKey in parties_metadata.kommu) {
-      const partyData = parties_metadata.kommu[partyKey];
-      for (let i = 0; i < 5; i++) {
-        images.push({
-          id: `${partyKey}-${i}`,
-          src: `./2025/${partyData.name.toLowerCase()}/0_${i}.png`,
-          alt: `${partyData.name} - ${
-            partyData.en.visual_impact_points[i] || "Image " + (i + 1)
-          }`,
-        });
-      }
+    for (const partyKey in parties_metadata.parties) {
+      const partyData = parties_metadata.parties[partyKey];
+      images.push({
+        id: `${partyKey}`,
+        src: `${paths.base}/${partyKey}/${paths.kommunalomat}/${paths.images}/0_0.png`,
+        alt: `${partyData.name}`
+      });
+      // for (let i = 0; i < 5; i++) {
+      //   images.push({
+      //     id: `${partyKey}-${i}`,
+      //     src: `./2025/${partyData.name.toLowerCase()}/0_${i}.png`,
+      //     alt: `${partyData.name} - ${
+      //       partyData.en.visual_impact_points[i] || "Image " + (i + 1)
+      //     }`,
+      //   });
+      // }
     }
     return images;
   }, []);

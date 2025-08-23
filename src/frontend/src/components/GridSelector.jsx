@@ -4,12 +4,12 @@ import { MdGridOn } from "react-icons/md";
 
 const DEFAULT_OPTIONS = [
   { code: "program", name: "Program" },
-  { code: "kommu", name: "Kommunalomat" },
+  { code: "kommunalomat", name: "Kommunalomat" },
 ];
 
 const GridSelector = ({
   options = DEFAULT_OPTIONS,
-  selected = "kommu",
+  selected = "kommunalomat",
   onSelect,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
