@@ -23,7 +23,7 @@ function HomePage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 items-center border-t-2 px-4 border-secondary mt-8 md:mt-10 w-full">
         <div className="hidden md:block" /> {/* left spacer only on md+ */}
-        <h1 className="justify-self-center text-wrap text-secondary py-6 md:py-8 text-center whitespace-nowrap">
+        <h1 className="justify-self-center xs:text-wrap lg:text-nowrap text-secondary py-6 md:py-8 text-center whitespace-nowrap">
           {t("home.programs")}
         </h1>
         <div className="justify-self-center md:justify-self-end mt-4 md:mt-0">

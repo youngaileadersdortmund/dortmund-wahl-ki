@@ -21,7 +21,9 @@ export const usePartyImages = (lang = "de", shuffle = true) => {
           partyKey,
           partyName: partyData.name,
           index: i,
-          src: `public/2025/${String(partyData.name).toLowerCase()}/0_${i}.png`,
+          src: `public/political_content_dortmund_2025/${String(
+            partyData.name
+          ).toLowerCase()}/results_p5_Qwen3-30B-A3B_kommunalomat/img_FLUX.1-schnell_guid0.0_nsteps5/0_${i}.png`,
           alt: `${partyData.name} - ${points[i] || "Image " + (i + 1)}`,
           visualImpactPoints: points,
           pointForImage: points[i] || null,
@@ -35,6 +37,8 @@ export const usePartyImages = (lang = "de", shuffle = true) => {
         [images[i], images[j]] = [images[j], images[i]];
       }
     }
+
+    console.log(images)
 
     return images;
   }, [lang, shuffle]);
