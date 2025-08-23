@@ -1,12 +1,12 @@
 import { useMemo } from "react";
-import parties_metadata from "../public/parties_metadata.json";
+import slider_info from "../public/slider_info.json";
 
 export const usePartyImages = (lang = "de", shuffle = true) => {
   const allImages = useMemo(() => {
     const images = [];
 
-    for (const partyKey in parties_metadata.kommu) {
-      const partyData = parties_metadata.kommu[partyKey];
+    for (const partyKey in slider_info.kommu) {
+      const partyData = slider_info.kommu[partyKey];
 
       const points =
         (lang === "de" && partyData.de && partyData.de.visual_impact_points) ||

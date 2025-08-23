@@ -1,42 +1,69 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import MoreInfoButton from "./MoreInfoButton";
 import { useTranslation } from "react-i18next";
 
-function Card({ card }) {
+function Card({ card, paths, partyKey, gridKey }) {
   const [isHovered, setIsHovered] = useState(false);
   const [randomIndex] = useState(() => Math.floor(Math.random() * 5));
+  const [visualPoints, setVisualPoints] = useState([]);
+  const [reasoningData, setReasoningData] = useState([]);
 
   const { i18n } = useTranslation();
-  const currentLanguage = i18n.language || "de";
+  const langKey = i18n.language || "de";
 
-  const getPointsForCard = (cardObj, lang) => {
-    if (!cardObj || typeof cardObj !== "object") return [];
-
-    const tryLang = (l) => {
-      const langObj = cardObj[l];
-      if (!langObj || typeof langObj !== "object") return null;
-      if (Array.isArray(langObj.visual_impact_points))
-        return langObj.visual_impact_points;
-      if (Array.isArray(langObj.visual_points)) return langObj.visual_points;
-      return null;
+  // Load points and reasoning from .txt files asynchronously
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!paths || !partyKey || !paths.base || !gridKey || !langKey) {
+        setVisualPoints([]);
+        setReasoningData([]);
+        return;
+      }
+      // gridKey: 'kommunalomat' or 'program', langKey: 'de' or 'en'
+      if (!paths[gridKey] || !paths[langKey] || !paths[langKey].prompt || !paths[langKey].reasoning) {
+        setVisualPoints([]);
+        setReasoningData([]);
+        return;
+      }
+      const point_fname = `${paths.base}/${partyKey}/${paths[gridKey]}/${paths[langKey].prompt}`;
+      const reasoning_fname = `${paths.base}/${partyKey}/${paths[gridKey]}/${paths[langKey].reasoning}`;
+      // Fetch points
+      try {
+        const response = await fetch(point_fname);
+        if (!response.ok) throw new Error('File not found');
+        const text = await response.text();
+        if (text.trim().startsWith('<!doctype html>') || text.trim().startsWith('<html')) {
+          setVisualPoints(['No data for selected party.']);
+        } else {
+          const points = text.split(',').map(s => s.trim()).filter(Boolean);
+          setVisualPoints(points.length ? points : ['No data for selected party.']);
+        }
+      } catch {
+        setVisualPoints(['No data for selected party.']);
+      }
+      // Fetch reasoning
+      try {
+        const response = await fetch(reasoning_fname);
+        if (!response.ok) throw new Error('File not found');
+        const text = await response.text();
+        if (text.trim().startsWith('<!doctype html>') || text.trim().startsWith('<html')) {
+          setReasoningData(['No reasoning data for selected party.']);
+        } else {
+          // Split by comma, trim whitespace, filter out empty strings
+          const reasonings = [text]; // text.split(',').map(s => s.trim()).filter(Boolean);
+          setReasoningData(reasonings.length ? reasonings : ['No reasoning data for selected party.']);
+        }
+      } catch {
+        setReasoningData(['No reasoning data for selected party.']);
+      }
     };
-
-    let pts = tryLang(lang);
-    if (!pts) pts = tryLang("de");
-    if (!pts) pts = tryLang("en");
-    if (!pts) {
-      if (Array.isArray(cardObj.visual_impact_points))
-        pts = cardObj.visual_impact_points;
-      else if (Array.isArray(cardObj.visual_points))
-        pts = cardObj.visual_points;
-    }
-    return Array.isArray(pts) ? pts : [];
-  };
-
-  const visualImpactPoints = getPointsForCard(card, currentLanguage);
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paths, partyKey, gridKey, langKey]);
 
   const partyName = (card && card.name) || "Unknown";
+  const images_dir = `${paths.base}/${partyKey}/${paths[gridKey]}/${paths.images}`;
 
   return (
     <div
@@ -47,13 +74,12 @@ function Card({ card }) {
       <div className="p-2">
         <div className="relative w-full h-72">
           <img
-            src={`./2025/${partyName.toLowerCase()}/0_${randomIndex}.png`}
+            src={`${images_dir}/0_${randomIndex}.png`}
             alt={partyName}
             className="w-full h-full object-cover rounded-md"
             onError={(e) => {
-              // graceful fallback if image missing
               e.currentTarget.onerror = null;
-              e.currentTarget.src = "/placeholder.png";
+              e.currentTarget.src = "public/placeholder.jpg";
             }}
           />
           <div
@@ -62,14 +88,14 @@ function Card({ card }) {
             }`}
           >
             <div className="space-y-2">
-              {visualImpactPoints.map((bullet, index) => (
+              {visualPoints.map((bullet, index) => (
                 <div key={index} className="flex items-start">
                   <FaCheckCircle className=" text-secondary mr-2 flex-shrink-0 mt-0.5" />
                   <span className="text-gray-700 text-sm">{bullet}</span>
                 </div>
               ))}
             </div>
-            <MoreInfoButton card={card} setIsHovered={setIsHovered} />
+            <MoreInfoButton card={card} images_dir={images_dir} reasoningData={reasoningData} visualPoints={visualPoints} setIsHovered={setIsHovered} />
           </div>
         </div>
         <h3 className="text-lg font-semibold text-gray-800 mt-3 text-center">
@@ -80,8 +106,10 @@ function Card({ card }) {
   );
 }
 
-function Grid({ parties_metadata }) {
-  const cards = Object.entries(parties_metadata);
+function Grid({ parties_metadata, gridKey }) {
+  const paths = parties_metadata.paths
+  const parties = parties_metadata.parties
+  const cards = Object.entries(parties);
 
   return (
     <div className="max-w-7xl mx-auto min-h-screen">
@@ -94,9 +122,7 @@ function Grid({ parties_metadata }) {
                   gap-4 sm:gap-6 lg:gap-8"
       >
         {cards.map(([partyKey, partyData]) => (
-          <div key={partyKey} className="w-full min-w-0">
-            <Card card={partyData} />
-          </div>
+          <Card key={partyKey} card={partyData} paths={paths} partyKey={partyKey} gridKey={gridKey} />
         ))}
       </div>
     </div>
