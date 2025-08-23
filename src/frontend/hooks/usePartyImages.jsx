@@ -2,6 +2,8 @@ import { useMemo } from "react";
 import slider_info from "../public/slider_info.json";
 
 export const usePartyImages = (lang = "de", shuffle = true) => {
+  const base = import.meta.env.BASE_URL || "/ai-for-political-education/";
+
   const allImages = useMemo(() => {
     const images = [];
 
@@ -21,7 +23,7 @@ export const usePartyImages = (lang = "de", shuffle = true) => {
           partyKey,
           partyName: partyData.name,
           index: i,
-          src: `public/political_content_dortmund_2025/${String(
+          src: `${base}political_content_dortmund_2025/${String(
             partyData.name
           ).toLowerCase()}/results_p5_Qwen3-30B-A3B_kommunalomat/img_FLUX.1-schnell_guid0.0_nsteps5/0_${i}.png`,
           alt: `${partyData.name} - ${points[i] || "Image " + (i + 1)}`,

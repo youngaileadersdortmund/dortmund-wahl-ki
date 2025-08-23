@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-import { MdGridOn } from "react-icons/md";
 
 const DEFAULT_OPTIONS = [
   { code: "program", name: "Program" },
