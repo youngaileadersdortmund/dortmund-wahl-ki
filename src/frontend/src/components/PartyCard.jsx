@@ -23,7 +23,7 @@ export default function PartyCard({ party, align = 'left', selectedImageIndex = 
       </div>
 
         {selectedImage ? (
-          <div className="overflow-hidden rounded-md w-full sm:w-1/2 transition-all duration-500">
+          <div className="rounded-md w-full sm:w-1/2 transition-all duration-500">
             <img
               src={selectedImage}
               alt={`${party.name} Bild ${selectedImageIndex + 1}`}

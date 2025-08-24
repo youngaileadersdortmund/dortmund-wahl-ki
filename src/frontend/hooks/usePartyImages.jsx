@@ -40,8 +40,6 @@ export const usePartyImages = (lang = "de", shuffle = true) => {
       }
     }
 
-    console.log(images)
-
     return images;
   }, [lang, shuffle]);
 

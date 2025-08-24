@@ -70,7 +70,7 @@ function Card({ card, paths, partyKey, gridKey }) {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col relative"
+      className="bg-white rounded-lg shadow-md flex flex-col relative"
     >
       <div className="p-2">
         <div className="relative w-full h-72">

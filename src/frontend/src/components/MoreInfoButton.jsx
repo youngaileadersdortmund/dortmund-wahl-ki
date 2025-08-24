@@ -21,9 +21,9 @@ export default function MoreInfoButton({ card, images_dir, reasoningData, visual
   const { t } = useTranslation();
 
   return (
-    <Dialog>
+    <Dialog className="overflow-y-auto">
       <DialogTrigger asChild>
-        <Button className="bg-primary text-white" disabled={turnOff}>
+        <Button onClick={() => setIsHovered(false)} className="bg-primary text-white" disabled={turnOff}>
           Details
         </Button>
       </DialogTrigger>

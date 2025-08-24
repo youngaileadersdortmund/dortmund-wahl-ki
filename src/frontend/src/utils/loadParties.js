@@ -19,7 +19,5 @@ export async function loadParties() {
         parties.push(party);
     }
 
-    console.log(parties);
-
     return parties;
 }

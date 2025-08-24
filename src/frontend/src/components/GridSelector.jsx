@@ -35,7 +35,7 @@ const GridSelector = ({
 
   return (
     <div
-      className="relative max-w-xs mx-auto my-2 font-sans"
+      className="relative max-w-xs mx-auto mr-8 font-sans"
       ref={dropdownRef}
     >
       <button

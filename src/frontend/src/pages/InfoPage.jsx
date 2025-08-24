@@ -41,7 +41,7 @@ export default function InfoPage() {
   return (
     <div className="flex flex-col items-center justify-center px-4 md:px-0">
       <div
-        className="w-full max-w-[50%]"
+        className="w-full lg:max-w-[50%]"
         dangerouslySetInnerHTML={{ __html: t("about.text_top") }}
       />
       <div className="w-full max-w-[40%] my-8 flex flex-row justify-between items-center gap-4 mx-auto">
@@ -65,10 +65,10 @@ export default function InfoPage() {
         {t("about.heading_tech")}
       </h1>
       <div
-        className="w-full max-w-[50%]"
+        className="w-full lg:max-w-[50%]"
         dangerouslySetInnerHTML={{ __html: t("about.text_tech1") }}
       />
-      <div className="w-full max-w-[50%] my-8">
+      <div className="w-full lg:max-w-[50%] my-8">
         <img
           src={`${base}pipeline.png`}
           className="w-full rounded"
@@ -76,7 +76,7 @@ export default function InfoPage() {
         />
       </div>
       <div
-        className="w-full max-w-[50%]"
+        className="w-full lg:max-w-[50%]"
         dangerouslySetInnerHTML={{ __html: t("about.text_tech2") }}
       />
       <div className="max-w-3xl w-full self-center px-2 md:px-0">
@@ -86,12 +86,12 @@ export default function InfoPage() {
         {t("about.heading_team")}
       </h1>
       <div
-        className="w-full max-w-[50%]"
+        className="w-full lg:max-w-[50%]"
         dangerouslySetInnerHTML={{ __html: t("about.text_team1") }}
       />
       <div
         className="w-full
-                    max-w-[50%]
+                    lg:max-w-[50%]
                     my-6
                     grid grid-cols-2 gap-6 justify-items-center
                     sm:grid-cols-3
@@ -103,7 +103,7 @@ export default function InfoPage() {
             href={member.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center mx-2 md:mx-3"
+            className="flex flex-col items-center mx-1"
           >
             <div className="w-20 sm:w-24 md:w-28 lg:w-32 aspect-square rounded-full overflow-hidden border border-gray-300 flex-shrink-0">
               <img
@@ -119,7 +119,7 @@ export default function InfoPage() {
       </div>
 
       <div
-        className="w-full max-w-[50%]"
+        className="w-full lg:max-w-[50%]"
         dangerouslySetInnerHTML={{ __html: t("about.text_team2") }}
       />
     </div>
