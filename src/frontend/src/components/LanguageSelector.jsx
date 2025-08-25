@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-import { MdLanguage } from "react-icons/md"; // icon for mobile
 
 const LanguageSelector = ({ languages, selectedLanguage, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,20 +38,23 @@ const LanguageSelector = ({ languages, selectedLanguage, onSelect }) => {
       <button
         onClick={toggleDropdown}
         className={`
-          w-full sm:w-36
+          w-24 sm:w-36
           rounded-full
           font-semibold
           text-md
-          flex items-center justify-center sm:justify-between
+          flex items-center justify-between
           bg-secondary text-white
           px-4 py-2
           transition-all duration-300 ease-in-out
           focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50
         `}
       >
-        {/* Show text on desktop, icon on mobile */}
-        <span className="hidden sm:inline">{currentLangObj.name}</span>
-        <MdLanguage className="sm:hidden w-5 h-5" />
+        {/* Show code on mobile, full name on desktop */}
+        <span>
+          <span className="sm:hidden">{currentLangObj.code.toUpperCase()}</span>
+          <span className="hidden sm:inline">{currentLangObj.name}</span>
+        </span>
+
         <IoIosArrowDown
           className={`w-5 h-5 ml-2 transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
@@ -91,7 +93,9 @@ const LanguageSelector = ({ languages, selectedLanguage, onSelect }) => {
                 }
               `}
             >
-              {lang.name}
+              {/* Show code on mobile, full name on desktop */}
+              <span className="sm:hidden">{lang.code.toUpperCase()}</span>
+              <span className="hidden sm:inline">{lang.name}</span>
             </button>
           ))}
         </div>

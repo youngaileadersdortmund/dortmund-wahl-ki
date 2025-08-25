@@ -15,14 +15,15 @@ import {
 export default function MoreInfoButton({ card, images_dir, reasoningData, visualPoints, setIsHovered }) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
+  const turnOff = visualPoints == "No data for selected party." ? true : false;
+
   const imageIndexes = [0, 1, 2, 3, 4];
-  const cardName = card.name.toLowerCase();
   const { t } = useTranslation();
 
   return (
-    <Dialog>
+    <Dialog className="overflow-y-auto">
       <DialogTrigger asChild>
-        <Button className="bg-primary text-white">
+        <Button onClick={() => setIsHovered(false)} className="bg-primary text-white" disabled={turnOff}>
           Details
         </Button>
       </DialogTrigger>

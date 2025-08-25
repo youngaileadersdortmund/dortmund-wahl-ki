@@ -3,6 +3,8 @@ import { FaCheckCircle } from "react-icons/fa";
 import MoreInfoButton from "./MoreInfoButton";
 import { useTranslation } from "react-i18next";
 
+const base = import.meta.env.BASE_URL || "/ai-for-political-education/";
+
 function Card({ card, paths, partyKey, gridKey }) {
   const [isHovered, setIsHovered] = useState(false);
   const [randomIndex] = useState(() => Math.floor(Math.random() * 5));
@@ -39,7 +41,7 @@ function Card({ card, paths, partyKey, gridKey }) {
           const points = text.split(',').map(s => s.trim()).filter(Boolean);
           setVisualPoints(points.length ? points : ['No data for selected party.']);
         }
-      } catch (e) {
+      } catch {
         setVisualPoints(['No data for selected party.']);
       }
       // Fetch reasoning
@@ -54,12 +56,11 @@ function Card({ card, paths, partyKey, gridKey }) {
           const reasonings = [text]; // text.split(',').map(s => s.trim()).filter(Boolean);
           setReasoningData(reasonings.length ? reasonings : ['No reasoning data for selected party.']);
         }
-      } catch (e) {
+      } catch {
         setReasoningData(['No reasoning data for selected party.']);
       }
     };
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paths, partyKey, gridKey, langKey]);
 
   const partyName = (card && card.name) || "Unknown";
@@ -69,7 +70,7 @@ function Card({ card, paths, partyKey, gridKey }) {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col relative"
+      className="bg-white rounded-lg shadow-md flex flex-col relative"
     >
       <div className="p-2">
         <div className="relative w-full h-72">
@@ -79,7 +80,7 @@ function Card({ card, paths, partyKey, gridKey }) {
             className="w-full h-full object-cover rounded-md"
             onError={(e) => {
               e.currentTarget.onerror = null;
-              e.currentTarget.src = "public/placeholder.jpg";
+            e.currentTarget.src = `${base}placeholder.jpg`;
             }}
           />
           <div
@@ -112,8 +113,15 @@ function Grid({ parties_metadata, gridKey }) {
   const cards = Object.entries(parties);
 
   return (
-    <div className="container mx-auto px-12 min-h-screen ">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+    <div className="max-w-7xl mx-auto min-h-screen">
+      <div
+        className="grid
+                  grid-cols-1
+                  sm:grid-cols-2
+                  md:grid-cols-3
+                  lg:grid-cols-5
+                  gap-4 sm:gap-6 lg:gap-8"
+      >
         {cards.map(([partyKey, partyData]) => (
           <Card key={partyKey} card={partyData} paths={paths} partyKey={partyKey} gridKey={gridKey} />
         ))}

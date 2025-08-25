@@ -7,26 +7,26 @@ import Grid from "../components/Grid";
 import GridSelector from "../components/GridSelector";
 
 function HomePage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   // default to "kommu" (kommunalomat view). Use "program" to show program view.
   const [grid, setGrid] = useState("kommunalomat");
 
   return (
-    <div className="flex flex-col items-center justify-center px-4 md:px-0">
+    <div className="flex flex-col xs:gap-3 items-center justify-center">
       <h1 className="text-primary py-8 md:p-6 text-2xl md:text-3xl font-bold text-center">
         {t("home.second_headline")}
       </h1>
 
-      <div className="max-w-5xl w-full self-center px-2 md:px-0">
-        <Slider />
+      <div className="max-w-5xl w-full self-center sm:px-2 xs:px-8">
+        <Slider lang={i18n.language} />
       </div>
 
-      <div className="grid grid-cols-3 items-center border-t-2 border-secondary mt-8 md:mt-10 w-full">
-        <div /> {/* left spacer */}
-        <h1 className="justify-self-center text-secondary py-6 md:py-8 text-center whitespace-nowrap">
+      <div className="grid grid-cols-1 md:grid-cols-3 items-center border-t-2 px-4 border-secondary mt-8 md:mt-10 w-full">
+        <div className="hidden md:block" /> {/* left spacer only on md+ */}
+        <h1 className="justify-self-center xs:text-wrap lg:text-nowrap text-secondary py-6 md:py-8 text-center whitespace-nowrap">
           {t("home.programs")}
         </h1>
-        <div className="justify-self-end">
+        <div className="justify-self-center md:justify-self-end mt-4 md:mt-0">
           <GridSelector selected={grid} onSelect={setGrid} />
         </div>
       </div>

@@ -10,7 +10,7 @@ function Layout() {
       <MenuBar />
       <ScrollToTopButton />
       <main className="flex-grow w-full flex justify-center items-center">
-        <div className="md:w-[75%] lg:w-full">
+        <div className="xs:w-[90%] md:w-[75%] lg:w-full">
           <Outlet /> {/* This is where pages will render */}
         </div>
       </main>

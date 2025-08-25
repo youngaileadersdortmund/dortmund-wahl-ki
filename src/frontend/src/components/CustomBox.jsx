@@ -1,5 +1,3 @@
-import React from "react";
-
 const CustomBox = ({ title, align = "left", children }) => {
   const justify = align === "left" ? "justify-start" : "justify-end";
   const textAlign = align === "left" ? "text-left" : "text-right";
