@@ -1,8 +1,0 @@
-<denken>
-Okay, wir gehen diese Abfrage an. Der Benutzer möchte, dass ich das Wahlprogramm der CDU analysiere und fünf wichtige visuelle Aspekte der Stadtgestaltung identifiziere, die durch ihre Politik beeinflusst werden. Jeder Aspekt muss in 3-6 Wörtern, prägnant und informativ, beschrieben werden. Dann als durch Kommas getrennte Liste zurückgeben.
-
-Zuerst muss ich durch den Text gehen und die wichtigsten Punkte in Bezug auf die visuellen Aspekte der Stadtgestaltung herausfiltern. Lassen Sie uns durch den Text blättern.
-
-Sie erwähnen "einen wieder einladenden Stadtkern mit lebhaften Plätzen, attraktiven Geschäften und sicheren Straßen". Das bezieht sich also auf das Stadtzentrums Erscheinungsbild. Vielleicht "Lebhaftes Stadtzentrum" oder "Attraktive Einkaufsbereiche".
-
-Dann geht es um "energieeffiziente Sanierung von Häusern und die Sanierung von

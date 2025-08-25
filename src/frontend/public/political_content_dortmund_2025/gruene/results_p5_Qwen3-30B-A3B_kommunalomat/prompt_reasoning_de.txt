@@ -1,6 +1,0 @@
-<denken>
-Okay, wir gehen diese Abfrage an. Der Benutzer möchte, dass ich die geöffneten Wahlkompass-Antworten analysiere und 5 wichtige visuelle Aspekte der Stadtgestaltung identifiziere, die vom politischen Programm betroffen sind. Jede Beschreibung muss prägnant sein, 3-6 Wörter lang und als durch Kommas getrennte Liste zurückgegeben werden.
-
-Zuerst muss ich durch die Antworten gehen und die wichtigsten Punkte in Bezug auf die visuellen Aspekte der Stadt herausfiltern. Die Antworten umfassen viele Bereiche: Schulen, Verkehr, öffentliche Räume, Infrastruktur usw. Aber der Fokus liegt auf visuellen Aspekten. Also muss ich über Elemente nachdenken, die Sie in einer Stadtumgebung sehen können.
-
-Wenn ich mir die erste Antwort über die gleichen Schulmöbel und digitale Ausstattung ansehe. Das betrifft die Innenausstattung der Schulen, aber vielleicht ist der

@@ -9,8 +9,8 @@ import Autoplay from "embla-carousel-autoplay";
 import { usePartyImages } from "../../hooks/usePartyImages";
 import { FaCheckCircle } from "react-icons/fa";
 
-export function Slider({ lang = "de" }) {
-  const allImages = usePartyImages(lang, true);
+export function Slider({ lang = "de", metadata = {} }) {
+  const allImages = usePartyImages(lang, true, metadata);
 
   return (
     <Carousel

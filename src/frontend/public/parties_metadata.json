@@ -43,8 +43,8 @@
   },
   "paths": {
     "base": "/ai-for-political-education/political_content_dortmund_2025",
-    "program": "results_p5_Qwen3-30B-A3B_program",
-    "kommunalomat": "results_p5_Qwen3-30B-A3B_kommunalomat",
+    "program": "results_p5_Qwen_Qwen3-30B-A3B_program",
+    "kommunalomat": "results_p5_Qwen_Qwen3-30B-A3B_kommunalomat",
     "images": "img_FLUX.1-schnell_guid0.0_nsteps5",
     "de": {
       "prompt": "prompt_de.txt",

@@ -18,7 +18,7 @@ function HomePage() {
       </h1>
 
       <div className="max-w-5xl w-full self-center sm:px-2 xs:px-8">
-        <Slider lang={i18n.language} />
+        <Slider lang={i18n.language} metaData={parties_metadata} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 items-center border-t-2 px-4 border-secondary mt-8 md:mt-10 w-full">
