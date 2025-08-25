@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 from llm import load_llm, load_translation_model, translate, translate_pdf, reason_about_visual_points, summarize_content
 from images import load_model_diffusers, generate_images_diffusers
+import shutil
 import glob
 
 
@@ -81,6 +82,7 @@ if __name__ == '__main__':
     parser.add_argument("--mode", type=str, default='translate', choices=["translate", "summarize", "reason", "translate_results", "generate_images"], help="Processing mode")
     parser.add_argument("--input_dir", type=str, default="programs", help="Directory containing party program pdfs")
     parser.add_argument("--output_dir", type=str, default="src/frontend/public/political_content_dortmund_2025_all", help="Output directory for results")
+    parser.add_argument("--override", action='store_true', help="Override existing files")
     # reasoning
     parser.add_argument("--llm", type=str, default="Qwen/Qwen3-30B-A3B", help="Name of the LLM to use for reasoning")
     parser.add_argument("--n_points", type=int, default=5, help="Number of visual points to generate")
@@ -111,8 +113,11 @@ if __name__ == '__main__':
             os.makedirs(out_dir, exist_ok=True)
             out_file = os.path.join(out_dir, "program_en.txt")
             if os.path.isfile(out_file):
-                print(f"{out_file} already exists, skipping.")
-                continue
+                if args.override:
+                    os.remove(out_file)
+                else:
+                    print(f"{out_file} already exists, skipping.")
+                    continue
             print(f"Translating {pdf_path} -> {out_file}")
             translated = translate_pdf(model, pdf_path)
             with open(out_file, "w") as f:
@@ -127,8 +132,11 @@ if __name__ == '__main__':
                 print(f"{in_file} not found, skipping.")
                 continue
             if os.path.isfile(out_file):
-                print(f"{out_file} already exists, skipping.")
-                continue
+                if args.override:
+                    os.remove(out_file)
+                else:
+                    print(f"{out_file} already exists, skipping.")
+                    continue
             print(f"Summarizing {in_file} -> {out_file}")
             with open(in_file, "r") as f:
                 content = f.read()
@@ -148,9 +156,12 @@ if __name__ == '__main__':
                 if not os.path.isfile(in_file_full):
                     print(f"{in_file_full} not found, skipping.")
                     continue
-                if os.path.isfile(out_points) and os.path.isfile(out_reasoning):
-                    print(f"{out_points} and {out_reasoning} already exist, skipping.")
-                    continue
+                if os.path.isfile(out_points_full) and os.path.isfile(out_reasoning):
+                    if args.override:
+                        os.remove(out_points_full)
+                        os.remove(out_reasoning)
+                    else:
+                        print(f"{out_points_full} and {out_reasoning} already exist, skipping.")
                 print(f"Reasoning for {party} {input_type}")
                 with open(in_file_full, "r") as f:
                     input = f.read()
@@ -170,12 +181,15 @@ if __name__ == '__main__':
                 if os.path.basename(input_fname) in ["prompt.txt", "prompt_reasoning.txt"]:
                     out_name = os.path.join(root, input_fname.replace('.txt', '_de.txt'))
                     if os.path.isfile(out_name):
-                        print(f"{out_name} already exists, skipping.")
-                        continue        
+                        if args.override:
+                            os.remove(out_name)
+                        else:
+                            print(f"{out_name} already exists, skipping.")
+                            continue        
                     print(f"Translating results for {os.path.join(root, input_fname)}")
                     with open(os.path.join(root, input_fname), "r") as f:
                         input = f.read().split('\n')
-                    translated = translate(model, input)
+                    translated = translate(model, input, source_lan='English', target_lan='German')
                     if isinstance(translated, list):
                         translated = '\n'.join(translated)
                     with open(out_name, "w") as f:
@@ -192,7 +206,10 @@ if __name__ == '__main__':
                         input = f.read()
                     save_path = os.path.join(root, f'img_{args.image_generator.split("/")[-1]}_guid{args.guidance}_nsteps{args.num_steps}')
                     if os.path.exists(save_path):
-                        print(f"{save_path} already exists, skipping.")
-                        continue
+                        if args.override:
+                            shutil.rmtree(save_path)
+                        else:
+                            print(f"{save_path} already exists, skipping.")
+                            continue
                     print(f"Generating images for {save_path}")
                     generate_images_diffusers(model, input, save_path, args.guidance, args.num_steps, args.n_images)
