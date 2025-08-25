@@ -21,7 +21,12 @@ function Card({ card, paths, partyKey, gridKey }) {
         return;
       }
       // gridKey: 'kommunalomat' or 'program', langKey: 'de' or 'en'
-      if (!paths[gridKey] || !paths[langKey] || !paths[langKey].prompt || !paths[langKey].reasoning) {
+      if (
+        !paths[gridKey] ||
+        !paths[langKey] ||
+        !paths[langKey].prompt ||
+        !paths[langKey].reasoning
+      ) {
         setVisualPoints([]);
         setReasoningData([]);
         return;
@@ -31,31 +36,46 @@ function Card({ card, paths, partyKey, gridKey }) {
       // Fetch points
       try {
         const response = await fetch(point_fname);
-        if (!response.ok) throw new Error('File not found');
+        if (!response.ok) throw new Error("File not found");
         const text = await response.text();
-        if (text.trim().startsWith('<!doctype html>') || text.trim().startsWith('<html')) {
-          setVisualPoints(['No data for selected party.']);
+        if (
+          text.trim().startsWith("<!doctype html>") ||
+          text.trim().startsWith("<html")
+        ) {
+          setVisualPoints(["No data for selected party."]);
         } else {
-          const points = text.split(',').map(s => s.trim()).filter(Boolean);
-          setVisualPoints(points.length ? points : ['No data for selected party.']);
+          const points = text
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+          setVisualPoints(
+            points.length ? points : ["No data for selected party."]
+          );
         }
       } catch {
-        setVisualPoints(['No data for selected party.']);
+        setVisualPoints(["No data for selected party."]);
       }
       // Fetch reasoning
       try {
         const response = await fetch(reasoning_fname);
-        if (!response.ok) throw new Error('File not found');
+        if (!response.ok) throw new Error("File not found");
         const text = await response.text();
-        if (text.trim().startsWith('<!doctype html>') || text.trim().startsWith('<html')) {
-          setReasoningData(['No reasoning data for selected party.']);
+        if (
+          text.trim().startsWith("<!doctype html>") ||
+          text.trim().startsWith("<html")
+        ) {
+          setReasoningData(["No reasoning data for selected party."]);
         } else {
           // Split by comma, trim whitespace, filter out empty strings
           const reasonings = [text]; // text.split(',').map(s => s.trim()).filter(Boolean);
-          setReasoningData(reasonings.length ? reasonings : ['No reasoning data for selected party.']);
+          setReasoningData(
+            reasonings.length
+              ? reasonings
+              : ["No reasoning data for selected party."]
+          );
         }
       } catch {
-        setReasoningData(['No reasoning data for selected party.']);
+        setReasoningData(["No reasoning data for selected party."]);
       }
     };
     fetchData();
@@ -63,6 +83,10 @@ function Card({ card, paths, partyKey, gridKey }) {
 
   const partyName = (card && card.name) || "Unknown";
   const images_dir = `${paths.base}/${partyKey}/${paths[gridKey]}/${paths.images}`;
+
+  if (visualPoints == "No data for selected party.") {
+    return null;
+  }
 
   return (
     <div
@@ -78,7 +102,7 @@ function Card({ card, paths, partyKey, gridKey }) {
             className="w-full h-full object-cover rounded-md"
             onError={(e) => {
               e.currentTarget.onerror = null;
-            e.currentTarget.src = `${paths.base}placeholder.jpg`;
+              e.currentTarget.src = `${paths.base}placeholder.jpg`;
             }}
           />
           <div
@@ -86,7 +110,7 @@ function Card({ card, paths, partyKey, gridKey }) {
               isHovered ? "opacity-100" : "opacity-0"
             }`}
           >
-            <div className="space-y-2">
+            <div>
               {visualPoints.map((bullet, index) => (
                 <div key={index} className="flex items-start">
                   <FaCheckCircle className=" text-secondary mr-2 flex-shrink-0 mt-0.5" />
@@ -94,7 +118,13 @@ function Card({ card, paths, partyKey, gridKey }) {
                 </div>
               ))}
             </div>
-            <MoreInfoButton card={card} images_dir={images_dir} reasoningData={reasoningData} visualPoints={visualPoints} setIsHovered={setIsHovered} />
+            <MoreInfoButton
+              card={card}
+              images_dir={images_dir}
+              reasoningData={reasoningData}
+              visualPoints={visualPoints}
+              setIsHovered={setIsHovered}
+            />
           </div>
         </div>
         <h3 className="text-lg font-semibold text-gray-800 mt-3 text-center">
@@ -106,8 +136,8 @@ function Card({ card, paths, partyKey, gridKey }) {
 }
 
 function Grid({ parties_metadata, gridKey }) {
-  const paths = parties_metadata.paths
-  const parties = parties_metadata.parties
+  const paths = parties_metadata.paths;
+  const parties = parties_metadata.parties;
   const cards = Object.entries(parties);
 
   return (
@@ -121,7 +151,13 @@ function Grid({ parties_metadata, gridKey }) {
                   gap-4 sm:gap-6 lg:gap-8"
       >
         {cards.map(([partyKey, partyData]) => (
-          <Card key={partyKey} card={partyData} paths={paths} partyKey={partyKey} gridKey={gridKey} />
+          <Card
+            key={partyKey}
+            card={partyData}
+            paths={paths}
+            partyKey={partyKey}
+            gridKey={gridKey}
+          />
         ))}
       </div>
     </div>

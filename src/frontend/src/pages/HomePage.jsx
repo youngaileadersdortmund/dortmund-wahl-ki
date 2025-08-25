@@ -26,9 +26,11 @@ function HomePage() {
         <h1 className="justify-self-center xs:text-wrap lg:text-nowrap text-secondary py-6 md:py-8 text-center whitespace-nowrap">
           {t("home.programs")}
         </h1>
+
         <div className="justify-self-center md:justify-self-end mt-4 md:mt-0">
           <GridSelector selected={grid} onSelect={setGrid} />
         </div>
+
       </div>
 
       <Grid parties_metadata={parties_metadata} gridKey={grid} />
