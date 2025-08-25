@@ -21,12 +21,12 @@ def load_model_diffusers(model_name):
     return pipe
 
 
-def generate_images_diffusers(visual_details, diffuser_pipe, save_path, guidance=0., num_steps=4, n_images=4):
+def generate_images_diffusers(model, visual_details, save_path, guidance=0., num_steps=4, n_images=4):
     import torch
     if not os.path.isdir(save_path):
         os.makedirs(save_path)
     prompt = "Dortmund city, with additional " + visual_details
-    images = diffuser_pipe(
+    images = model(
         prompt,
         height=512,
         width=512,

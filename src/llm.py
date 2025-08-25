@@ -9,8 +9,12 @@ import torch
 transformers.utils.logging.set_verbosity_error()
 
 
-def translate(input, sentence_batch_size=-1, source_lan='German', target_lan='English', model_name="Unbabel/TowerInstruct-13B-v0.1"):
+def load_translation_model(model_name="Unbabel/TowerInstruct-13B-v0.1"):
     pipe = transformers.pipeline("text-generation", model=model_name, torch_dtype=torch.bfloat16, device_map="auto")
+    return pipe
+
+
+def translate(model, input, sentence_batch_size=-1, source_lan='German', target_lan='English'):
 
     if isinstance(input, str):
         paragraphs = [input]
@@ -26,72 +30,52 @@ def translate(input, sentence_batch_size=-1, source_lan='German', target_lan='En
     
     translated = []
     for paragraph in tqdm.tqdm(paragraphs, desc=f'Translating {len(paragraphs)} paragraphs from {source_lan} to {target_lan}'):
-        messages = [{"role": "user", "content": f"Translate the following sentences from {source_lan} into {target_lan}.\n{source_lan}: {paragraph}\n{target_lan}:"},]
-        prompt = pipe.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-        outputs = pipe(prompt, max_new_tokens=256, do_sample=False)
-        translated.append(outputs[0]["generated_text"].split('<|im_start|>assistant')[1].strip())
+        if len(paragraph.strip()) > 0:
+            messages = [{"role": "user", "content": f"Translate the following sentences from {source_lan} into {target_lan}.\n{source_lan}: {paragraph}\n{target_lan}:"},]
+            prompt = model.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+            outputs = model(prompt, max_new_tokens=256, do_sample=False)
+            translated.append(outputs[0]["generated_text"].split('<|im_start|>assistant')[1].strip())
     return translated if len(translated) > 1 else translated[0]
 
 
-def translate_pdf(fname, sentence_batch_size=10, break_after=None):
-    tr_fname = fname.replace('.pdf', '_en.txt')
-    if os.path.isfile(tr_fname):
-        with open(tr_fname, 'r') as f:
-            content = f.read()
-        print(f'Loading pre-compiled translation of {len(content.split("\n"))} sentences from {tr_fname}')
-    else:
-        reader = PdfReader(fname)
-        full_text = []
-        for p_idx, page in enumerate(reader.pages):
-            text = page.extract_text()
-            lines = text.split('\n')
-            for line in lines:
-                if len(line) > 10 and not line.upper() == line:
-                    full_text.append(line.strip())
-            if break_after and len(full_text) > break_after:
-                break
-        full_text = ' '.join(full_text)
-        # Split the text into sentences using ., ?, or ! as delimiters
-        sentences = re.split(r'(?<=[.!?])\s+', full_text)
-        print(f'Number of sentences in {fname}: {len(sentences)}, to be processed in {len(sentences) // sentence_batch_size} batches')
-        # translate single paragraphs
-        translated = translate(sentences, sentence_batch_size=sentence_batch_size)
+def translate_pdf(model, fname, sentence_batch_size=10, break_after=None):
+    reader = PdfReader(fname)
+    full_text = []
+    for p_idx, page in enumerate(reader.pages):
+        text = page.extract_text()
+        lines = text.split('\n')
+        for line in lines:
+            if len(line) > 10 and not line.upper() == line:
+                full_text.append(line.strip())
+        if break_after and len(full_text) > break_after:
+            break
+    full_text = ' '.join(full_text)
+    # Split the text into sentences using ., ?, or ! as delimiters
+    sentences = re.split(r'(?<=[.!?])\s+', full_text)
+    print(f'Number of sentences in {fname}: {len(sentences)}, to be processed in {len(sentences) // sentence_batch_size} batches')
+    # translate single paragraphs
+    translated = translate(model, sentences, sentence_batch_size=sentence_batch_size)
 
-        # concat paragraphs, split sentences across lines, write into file
-        translated = ' '.join(translated).replace('e.g.', 'for example')
-        sentences = re.split(r'(?<=[.!?])\s+', translated)
-        content = '\n'.join(sentences)
-        with open(tr_fname, 'w') as f:
-            f.write(content)
-        print(f'Compiled translation of {len(sentences)} sentences into {tr_fname}')
-    return content
+    # concat paragraphs, split sentences across lines, write into file
+    translated = ' '.join(translated).replace('e.g.', 'for example')
+    sentences = re.split(r'(?<=[.!?])\s+', translated)
+    return '\n'.join(sentences)
 
 
 def summarize_content(content, fname, sentence_batch_size=20, summarization_rate=0.25, model_id="facebook/bart-large-cnn"):
-    sum_fname = fname.replace('.pdf', '_sum.txt')
-    if os.path.isfile(sum_fname):
-        with open(sum_fname, 'r') as f:
-            summary = f.read()
-        print_str = f'Loading pre-compiled summary from {sum_fname}'
-    else:
-        sentences = content.split('\n')
-        summarizer = transformers.pipeline("summarization", model=model_id)
-        summary_sentences = []
-        for i, s in enumerate(range(0, len(sentences), sentence_batch_size)):
-            paragraph = ' '.join(sentences[s:(s+sentence_batch_size)])
-            maxl, minl = int(len(paragraph) * summarization_rate / 4), int(len(paragraph) * summarization_rate / 8)
-            summary = summarizer(paragraph, max_length=maxl, min_length=minl, do_sample=False)
-            summary = summary[0]['summary_text']
-            summary_splitted = re.split(r'(?<=[.!?])\s+', summary)
-            for sentence in summary_splitted:
-                summary_sentences.append(sentence.strip())
-            print(f'Summarized sentence batch {i+1} / {len(sentences)//sentence_batch_size+1}, summary has {len(summary)} characters instead of {len(paragraph)} ({len(summary)/len(paragraph)*100:4.2f}% of original size)')
-        summary = '\n'.join(summary_sentences)
-        with open(sum_fname, 'w') as f:
-            f.write(summary)
-        print_str = f'Compiled summary into {sum_fname}'
-    print(f'{print_str} - {len(summary)} characters, {len(summary)/len(content)*100:4.2f}% of the original translation ({len(content)} characters)')
-    return summary
+    sentences = content.split('\n')
+    summarizer = transformers.pipeline("summarization", model=model_id)
+    summary_sentences = []
+    for i, s in enumerate(range(0, len(sentences), sentence_batch_size)):
+        paragraph = ' '.join(sentences[s:(s+sentence_batch_size)])
+        maxl, minl = int(len(paragraph) * summarization_rate / 4), int(len(paragraph) * summarization_rate / 8)
+        summary = summarizer(paragraph, max_length=maxl, min_length=minl, do_sample=False)
+        summary = summary[0]['summary_text']
+        summary_splitted = re.split(r'(?<=[.!?])\s+', summary)
+        for sentence in summary_splitted:
+            summary_sentences.append(sentence.strip())
+        print(f'Summarized sentence batch {i+1} / {len(sentences)//sentence_batch_size+1}, summary has {len(summary)} characters instead of {len(paragraph)} ({len(summary)/len(paragraph)*100:4.2f}% of original size)')
+    return '\n'.join(summary_sentences)
 
 
 def reason(model, tokenizer, prompt, max_new_tokens=5000, end_of_reasoning_token=151668):
@@ -117,30 +101,11 @@ def load_llm(model_name):
     return (model, tokenizer)
 
 
-def reason_about_visual_points(input, point_fname, llm, type_of_input='election program summary', n_points=5,
+def reason_about_visual_points(llm, input, type_of_input='election program summary', n_points=5,
                                prompt='Identify {p} important visual aspects of a city appearance that would be affected or impacted by this political program. Describe each aspect in an informative and concise way, with 3 to 6 words. Return these {p} visual descriptions as a comma-separated list.'):
-    reasoning_fname = point_fname.replace('.txt', '_reasoning.txt')
     model, tokenizer = llm
-    
-    if os.path.isfile(point_fname):
-        with open(point_fname, 'r') as f:
-            impact_points = f.read()
-        with open(reasoning_fname, 'r') as f:
-            reasoning = f.read()
-        print_str = f'Loading pre-compiled direct visual points from {point_fname}'
-    else:
-        # run model
-        full_prompt = f'Analyze the following {type_of_input}. {prompt.format(p=n_points)}\n\n{input}'
-        reasoning, impact_points = reason(model, tokenizer, full_prompt)
-        with open(point_fname, 'w') as f:
-            f.write(impact_points)
-        with open(reasoning_fname, 'w') as f:
-            f.write(reasoning)
-                
-        # finalize
-        print_str = f'Compiled direct visual points into {point_fname}'
-
-    print('\n', print_str, '\n', "reasoning content:", reasoning, '\n', str(impact_points))
+    full_prompt = f'Analyze the following {type_of_input}. {prompt.format(p=n_points)}\n\n{input}'
+    reasoning, impact_points = reason(model, tokenizer, full_prompt)
     return impact_points, reasoning
 
 

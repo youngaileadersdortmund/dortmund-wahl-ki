@@ -1,0 +1,20 @@
+<think>
+Okay, let's tackle this query. The user wants me to analyze the election program summary for Dortmund and identify five important visual aspects of a city's appearance that would be affected by this political program. Each aspect needs to be described in 3-6 words.
+First, I need to go through the program summary thoroughly. The program covers a lot of areas: climate neutrality, sustainable building, renewable energy, green spaces, public transport, cycling infrastructure, pedestrian areas, and more. The key is to find the visual elements that would change due to these policies.
+Let me start by highlighting the main points. The program mentions "de-paving, greening, and sponge city concepts" which relate to more green spaces and water management. That could translate to more parks, green roofs, and water features. Then there's a focus on expanding renewable energy, which might involve solar panels on buildings, but that's more infrastructural. However, the visual aspect here would be solar installations on rooftops.
+Another part talks about "cycle paths that connect" and "safe cycling," which would mean more visible bike lanes, possibly separated from car traffic. Also, "barrier-free" and "pedestrian traffic" suggest more walkable areas with wider sidewalks and fewer obstacles.
+The program also mentions "removal of barriers" and "30 km/h speed limits," which could lead to more pedestrian zones and traffic-calmed areas. Additionally, "greening" and "trees and forests" are emphasized, so more trees and urban forests would be a visual aspect.
+I need to ensure that each of the five aspects is a visual element directly impacted by the program. Let me list possible ones:
+1. Green spaces and parks (due to de-paving, greening, sponge city)
+2. Solar installations on buildings (expansion of renewable energy)
+3. Bike lanes and cycling infrastructure (cycle paths, safe cycling)
+4. Pedestrian zones and walkable areas (barrier-free, 30 km/h zones)
+5. Tree-lined streets and urban forests (trees, forests, greenery)
+Now, check if these are all covered in the program. Yes, the program mentions de-paving, green roofs, solar installations, bike paths, pedestrian areas, and trees. Each of these would be visual changes. Now, condense each into 3-6 words.
+1. Increased green spaces and parks
+2. Solar panel installations on rooftops
+3. Expanded bike lane networks
+4. Pedestrian-friendly street designs
+5. Tree-lined urban forests
+That should cover the key visual aspects. Let me verify each against the program to ensure accuracy. The answer should be a comma-separated list of these five.
+</think>

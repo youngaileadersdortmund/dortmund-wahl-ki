@@ -179,3 +179,4 @@ cython_debug/
 node_modules/
 
 src/frontend/.vite
+programs/*
