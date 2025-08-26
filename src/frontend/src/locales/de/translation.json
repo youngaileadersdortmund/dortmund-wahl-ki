@@ -8,7 +8,8 @@
   "details": {
     "title": "Weitere Informationen",
     "text": "Wir haben die Daten über das Programm der Partei mithilfe einer KI analysiert, um potentielle visuelle Veränderungen zu ermitteln. Dabei entstand der folgende Gedankenprozess (Reasoning):",
-    "closing": "Weitere Informationen zur technischen Umsetzung findet man auf der 'Über das Projekt' Seite."
+    "closing1": "Die Ergebnisse dieser Analyse wurden im Anschluss mit einem bildgenerativen Modell visualisiert. Weitere Details zu den politischen Inhalten der Partei sind der entsprechenden",
+    "closing2": "zu entnehmen. Weitere Informationen zur technischen Umsetzung findet man auf der 'Über das Projekt' Seite."
   },
   "impr": {
     "name": "Impressum",

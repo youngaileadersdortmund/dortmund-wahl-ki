@@ -44,7 +44,7 @@ export default function MoreInfoButton({ card, images_dir, reasoningData, visual
               {reasoningData}
             </DialogDescription>
             <DialogDescription className="text-gray-300 mb-4">
-              {t("details.closing")}
+              {t("details.closing1")} <a href={card.url} target="_blank">Website</a> {t("details.closing2")}
             </DialogDescription>
           </div>
 

@@ -8,7 +8,8 @@
   "details": {
     "title" : "More Information",
     "text": "We analyzed the data about the party's program using AI to identify visual changes. This resulted in the following thought process (reasoning):",
-    "closing": "Further information on the technical implementation can be found on the ‘About the project’ page."
+    "closing1": "The results of this analysis were then visualized using an image-generating model. Further details on the party's political content can be found in the corresponding",
+    "closing2": ". Further information on the technical implementation can be found on the ‘About the project’ page."
   },
   "impr": {
     "name": "Legal Notice",
