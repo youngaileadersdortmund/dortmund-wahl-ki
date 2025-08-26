@@ -9,9 +9,13 @@ import Autoplay from "embla-carousel-autoplay";
 import { usePartyImages } from "../../hooks/usePartyImages";
 import { FaCheckCircle } from "react-icons/fa";
 import FadeLoader from "react-spinners/FadeLoader";
+import { useTranslation } from "react-i18next";
 
-export function Slider({ lang = "de", metadata = {} }) {
-  const { images, isLoading } = usePartyImages(lang, true, metadata);
+export function Slider({ metadata, lang = "de" }) {
+
+  const { t } = useTranslation();
+  
+  const { images, isLoading } = usePartyImages(metadata, lang, true);
 
   if (isLoading)
     return (
@@ -37,7 +41,7 @@ export function Slider({ lang = "de", metadata = {} }) {
           <CarouselItem key={image.id}>
             <div className="flex xs:flex-col sm:flex-row p-5 gap-24 items-center justify-center">
               <div className="max-w-[400px] text-left">
-                <h2 className="text-2xl font-bold mb-5">{image.partyName}</h2>
+                <h2 className="text-2xl mb-5">{t("home.slider_headline")} <a target="_blank" href={image.partyURL}>{image.partyName}</a>?</h2>
                 {image.visualImpactPoints.map((point, idx) => (
                   <div key={idx} className="flex items-start content-center">
                     <FaCheckCircle className="text-secondary text-lg self-center mr-2 my-4" />

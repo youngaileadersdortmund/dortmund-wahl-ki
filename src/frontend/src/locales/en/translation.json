@@ -1,13 +1,8 @@
 {
   "title": "GenAI for Dortmund Politics",
-  "description": {
-    "title": "What is this about?",
-    "intro": "We analyzed the visual impact of campaign posters and compared how they communicate ideas.",
-    "sampleTitle": "Example Prompt We Used",
-    "sampleText": "Please describe how this poster visually communicates the party’s main messages and values."
-  },
   "home": {
-    "second_headline": "AI asked - How is Dortmund 2025 changing through politics...",
+    "second_headline": "We asked AI - How is Dortmund 2025 changing through politics...",
+    "slider_headline": "...of the party",
     "programs": "Comparison of all parties"
   },
   "details": {

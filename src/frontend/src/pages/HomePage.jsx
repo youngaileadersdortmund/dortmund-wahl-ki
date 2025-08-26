@@ -9,7 +9,7 @@ import GridSelector from "../components/GridSelector";
 function HomePage() {
   const { t, i18n } = useTranslation();
   // default to "kommu" (kommunalomat view). Use "program" to show program view.
-  const [grid, setGrid] = useState("kommunalomat");
+  const [grid, setGrid] = useState("program");
 
   return (
     <div className="flex flex-col xs:gap-3 items-center justify-center">
@@ -18,7 +18,7 @@ function HomePage() {
       </h1>
 
       <div className="max-w-5xl w-full self-center sm:px-2 xs:px-8">
-        <Slider lang={i18n.language} metaData={parties_metadata} />
+        <Slider metadata={parties_metadata} lang={i18n.language} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 items-center border-t-2 px-4 border-secondary mt-8 md:mt-10 w-full">
