@@ -81,7 +81,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Iterative processing of party programs.")
     parser.add_argument("--mode", type=str, default='translate', choices=["translate", "summarize", "reason", "translate_results", "generate_images"], help="Processing mode")
     parser.add_argument("--input_dir", type=str, default="programs", help="Directory containing party program pdfs")
-    parser.add_argument("--output_dir", type=str, default="src/frontend/public/political_content_dortmund_2025_all", help="Output directory for results")
+    parser.add_argument("--output_dir", type=str, default="src/frontend/public/political_content_dortmund_2025", help="Output directory for results")
     parser.add_argument("--override", action='store_true', help="Override existing files")
     # reasoning
     parser.add_argument("--llm", type=str, default="Qwen/Qwen3-30B-A3B", help="Name of the LLM to use for reasoning")
