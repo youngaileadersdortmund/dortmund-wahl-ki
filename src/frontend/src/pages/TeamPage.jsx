@@ -41,8 +41,16 @@ export default function TeamPage() {
   return (
     <div className="flex flex-col items-center justify-center px-4 md:px-0">
       <div
-        className="w-full lg:max-w-[50%]"
-        dangerouslySetInnerHTML={{ __html: t("about.text_top") }}
+        className="w-full lg:max-w-[50%] my-2"
+        dangerouslySetInnerHTML={{ __html: t("about.text_top1") }}
+      />
+      <div
+        className="w-full lg:max-w-[50%] my-2"
+        dangerouslySetInnerHTML={{ __html: t("about.text_top2") }}
+      />
+      <div
+        className="w-full lg:max-w-[50%] my-2"
+        dangerouslySetInnerHTML={{ __html: t("about.text_top3") }}
       />
       <div className="w-full max-w-[40%] my-8 flex flex-row justify-between items-center gap-4 mx-auto">
         <img

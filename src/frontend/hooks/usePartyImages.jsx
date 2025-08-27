@@ -31,19 +31,17 @@ export const usePartyImages = (metadata, lang = "de", shuffle = true) => {
             }
           } catch {}
           if (pointsFileExists) {
-            for (let i = 0; i < 5; i++) {
-              imagesArr.push({
-                id: `${partyKey}-${i}`,
-                partyKey,
-                partyName: name,
-                partyURL: url,
-                index: i,
-                src: `${paths.base}/${partyKey}/${paths.program}/${paths.images}/0_${i}.png`,
-                alt: `${name} - Image ${i + 1}`,
-                visualImpactPoints: points,
-                pointForImage: points[i] ?? null,
-              });
-            }
+            imagesArr.push({
+              id: `${partyKey}-${i}`,
+              partyKey,
+              partyName: name,
+              partyURL: url,
+              index: i,
+              src: `${paths.base}/${partyKey}/${paths.program}/${paths.images}/0_0.png`,
+              alt: `${name} - Image ${i + 1}`,
+              visualImpactPoints: points,
+              pointForImage: points[i] ?? null,
+            });
           }
         }
         if (shuffle) {
