@@ -4,7 +4,8 @@ import Layout from "./pages/Layout";
 import HomePage from "./pages/HomePage";
 import ImpressumPage from "./pages/ImpressumPage";
 import PrivacyPage from "./pages/PrivacyPage";
-import InfoPage from "./pages/InfoPage";
+import TeamPage from "./pages/TeamPage";
+import TechPage from "./pages/TechPage";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="impressum" element={<ImpressumPage />} />
           <Route path="datenschutz" element={<PrivacyPage />} />
-          <Route path="about-the-project" element={<InfoPage />} />
+          <Route path="team" element={<TeamPage />} />
+          <Route path="tech" element={<TechPage />} />
         </Route>
       </Routes>
     </Router>

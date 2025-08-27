@@ -78,10 +78,18 @@ export default function MenuBar() {
         </div>
         <div className="cursor-pointer font-bold decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
           <Link
-            to="/about-the-project"
+            to="/team"
             style={{ color: "inherit", textDecoration: "none" }}
           >
-            {t("nav_bar.about_project")}
+            {t("nav_bar.about_team")}
+          </Link>
+        </div>
+        <div className="cursor-pointer font-bold decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
+          <Link
+            to="/tech"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            {t("nav_bar.about_tech")}
           </Link>
         </div>
       </nav>

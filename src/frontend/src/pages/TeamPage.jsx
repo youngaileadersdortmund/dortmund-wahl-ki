@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 const base = import.meta.env.BASE_URL || "/ai-for-political-education/";
 
-export default function InfoPage() {
+export default function TeamPage() {
   const { t } = useTranslation();
   const members = [
     {
@@ -62,27 +62,6 @@ export default function InfoPage() {
         />
       </div>
       <h1 className="justify-self-center text-secondary py-6 md:py-8 text-center whitespace-nowrap">
-        {t("about.heading_tech")}
-      </h1>
-      <div
-        className="w-full lg:max-w-[50%]"
-        dangerouslySetInnerHTML={{ __html: t("about.text_tech1") }}
-      />
-      <div className="w-full lg:max-w-[50%] my-8">
-        <img
-          src={`${base}pipeline.png`}
-          className="w-full rounded"
-          alt="pipeline"
-        />
-      </div>
-      <div
-        className="w-full lg:max-w-[50%]"
-        dangerouslySetInnerHTML={{ __html: t("about.text_tech2") }}
-      />
-      <div className="max-w-3xl w-full self-center px-2 md:px-0">
-        <Disclaimer />
-      </div>
-      <h1 className="justify-self-center text-secondary py-6 md:py-8 text-center whitespace-nowrap">
         {t("about.heading_team")}
       </h1>
       <div
@@ -112,7 +91,6 @@ export default function InfoPage() {
                 className="w-full h-full object-cover block"
               />
             </div>
-
             <span className="mt-2 text-sm text-center">{member.name}</span>
           </a>
         ))}
@@ -122,6 +100,10 @@ export default function InfoPage() {
         className="w-full lg:max-w-[50%]"
         dangerouslySetInnerHTML={{ __html: t("about.text_team2") }}
       />
+
+      <div className="max-w-3xl w-full self-center px-2 md:px-0">
+        <Disclaimer />
+      </div>
     </div>
   );
 }
