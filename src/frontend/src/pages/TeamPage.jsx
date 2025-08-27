@@ -39,6 +39,7 @@ export default function TeamPage() {
   ];
 
   return (
+    // general project goal and yail info
     <div className="flex flex-col items-center justify-center px-4 md:px-0">
       <div
         className="w-full lg:max-w-[50%] my-2"
@@ -48,27 +49,60 @@ export default function TeamPage() {
         className="w-full lg:max-w-[50%] my-2"
         dangerouslySetInnerHTML={{ __html: t("about.text_top2") }}
       />
+      <div className="w-full max-w-[40%] my-8 flex flex-row justify-between items-center gap-4 mx-auto">
+        <a href="https://youngaileadersdortmund.github.io/" target="_blank">
+          <img
+            src={`${base}logo.png`}
+            className="h-24 object-contain"
+            alt="logo"
+          />
+        </a>
+        <a href="https://www.un.org/sustainabledevelopment/" target="_blank">
+          <img
+            src={`${base}E_SDG_logo_without_UN_emblem_horizontal_Transparent_WEB.png`}
+            className="h-20 object-contain"
+            alt="sdg"
+          />
+        </a>
+        <a href="https://www.un.org/sustainabledevelopment/education/" target="_blank">
+          <img
+            src={`${base}E-WEB-Goal-04.png`}
+            className="h-20 object-contain"
+            alt="goal"
+          />
+        </a>
+      </div>
+
+      {/* partner info */}
       <div
         className="w-full lg:max-w-[50%] my-2"
         dangerouslySetInnerHTML={{ __html: t("about.text_top3") }}
       />
-      <div className="w-full max-w-[40%] my-8 flex flex-row justify-between items-center gap-4 mx-auto">
-        <img
-          src={`${base}logo.png`}
-          className="h-20 object-contain"
-          alt="logo"
-        />
-        <img
-          src={`${base}E_SDG_logo_without_UN_emblem_horizontal_Transparent_WEB.png`}
-          className="h-20 object-contain"
-          alt="sdg"
-        />
-        <img
-          src={`${base}E-WEB-Goal-04.png`}
-          className="h-20 object-contain"
-          alt="goal"
-        />
+      <div className="w-full max-w-[45%] my-8 flex flex-row justify-between items-center gap-4 mx-auto">
+        <a href="https://lamarr-institute.org/" target="_blank">
+          <img
+            src={`${base}lamarr_logo.png`}
+            alt="Lamarr Logo"
+            className="h-16 object-contain"
+          />
+        </a>
+        <a href="https://www.jrdo.de/" target="_blank">
+          <img
+            src={`${base}logo-jugendring-do.svg`}
+            alt="Jugendring Logo"
+            className="h-20 object-contain"
+          />
+        </a>
+        <a href="https://bundestagswahl.ai/" target="_blank">
+          <img
+            src={`${base}btwai.png`}
+            alt="bundestagswahl.ai Logo"
+            className="h-10 object-contain"
+          />
+        </a>
       </div>
+
+      {/* team info */}
       <h1 className="justify-self-center text-secondary py-6 md:py-8 text-center whitespace-nowrap">
         {t("about.heading_team")}
       </h1>

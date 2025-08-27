@@ -31,14 +31,6 @@ export default function MenuBar() {
               className="h-20 w-20 sm:h-28 sm:w-28 mr-2 sm:mr-4 ml-2 sm:ml-8"
             />
           </a>
-
-          <a href="https://lamarr-institute.org/" target="_blank">
-            <img
-              src={`${base}lamarr-logo-2023.svg`}
-              alt="Logo"
-              className="h-20 w-20 sm:h-28 sm:w-28 mr-2 sm:mr-4 ml-2 sm:ml-8"
-            />
-          </a>
         </div>
 
         {/* Headline */}

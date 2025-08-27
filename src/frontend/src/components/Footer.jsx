@@ -18,7 +18,7 @@ const Footer = () => {
           >
             <img
               src={`${base}logo.png`}
-              className="h-8"
+              className="h-12"
               alt="Young AI Leaders Logo"
             />
             <span className="text-black self-center text-xl whitespace-nowrap dark:text-white">
