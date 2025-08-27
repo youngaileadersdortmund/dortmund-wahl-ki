@@ -1,13 +1,14 @@
 {
   "title": "GenAI für Dortmunder Politik",
   "home": {
-    "second_headline": "Wir haben KI gefragt - Wie verändert sich Dortmund 2025 durch die Politik...",
-    "slider_headline": "...der Partei",
-    "programs": "Vergleich der Parteien"
+    "second_title": "Wir haben KI gefragt - Wie verändert sich Dortmund 2025 durch die Politik...",
+    "slider_title": "...der Partei",
+    "programs_title": "Vergleich der Parteien",
+    "programs_text": "Wir haben das Programm der Partei mithilfe von KI analysiert, um potentielle visuelle Veränderungen zu ermitteln. Als Datenquelle dient entweder das Parteiprogramm, oder die Antworten zum Kommunalomat - diese Auswahl lässt sich rechts ändern."
   },
   "details": {
     "title": "Weitere Informationen",
-    "text": "Wir haben die Daten über das Programm der Partei mithilfe einer KI analysiert, um potentielle visuelle Veränderungen zu ermitteln. Dabei entstand der folgende Gedankenprozess (Reasoning):",
+    "text": "Wir haben die Daten über das Programm der Partei mithilfe von KI analysiert, um potentielle visuelle Veränderungen zu ermitteln. Dabei entstand der folgende Gedankenprozess (Reasoning):",
     "closing1": "Die Ergebnisse dieser Analyse wurden im Anschluss mit einem bildgenerativen Modell visualisiert. Weitere Details zu den politischen Inhalten der Partei sind der entsprechenden",
     "closing2": "zu entnehmen. Weitere Informationen zur technischen Umsetzung findet man auf der 'Über das Projekt' Seite."
   },

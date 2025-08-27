@@ -14,7 +14,7 @@ function HomePage() {
   return (
     <div className="flex flex-col xs:gap-3 items-center justify-center">
       <h1 className="text-primary py-8 md:p-6 text-2xl md:text-3xl font-bold text-center">
-        {t("home.second_headline")}
+        {t("home.second_title")}
       </h1>
 
       <div className="max-w-5xl w-full self-center sm:px-2 xs:px-8">
@@ -24,7 +24,7 @@ function HomePage() {
       <div className="grid grid-cols-1 md:grid-cols-3 items-center border-t-2 px-4 border-secondary mt-8 md:mt-10 w-full">
         <div className="hidden md:block" /> {/* left spacer only on md+ */}
         <h1 className="justify-self-center xs:text-wrap lg:text-nowrap text-secondary py-6 md:py-8 text-center whitespace-nowrap">
-          {t("home.programs")}
+          {t("home.programs_title")}
         </h1>
 
         <div className="justify-self-center md:justify-self-end mt-4 md:mt-0">
@@ -32,6 +32,11 @@ function HomePage() {
         </div>
 
       </div>
+
+      <div
+        className="w-full lg:max-w-[50%] my-2"
+        dangerouslySetInnerHTML={{ __html: t("home.programs_text") }}
+      />
 
       <Grid parties_metadata={parties_metadata} gridKey={grid} />
 

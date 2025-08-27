@@ -41,7 +41,7 @@ export function Slider({ metadata, lang = "de" }) {
           <CarouselItem key={image.id}>
             <div className="flex xs:flex-col sm:flex-row p-5 gap-24 items-center justify-center">
               <div className="max-w-[400px] text-left">
-                <h2 className="text-2xl mb-5">{t("home.slider_headline")} <a target="_blank" href={image.partyURL}>{image.partyName}</a>?</h2>
+                <h2 className="text-2xl mb-5">{t("home.slider_title")} <a target="_blank" href={image.partyURL}>{image.partyName}</a>?</h2>
                 {image.visualImpactPoints.map((point, idx) => (
                   <div key={idx} className="flex items-start content-center">
                     <FaCheckCircle className="text-secondary text-lg self-center mr-2 my-4" />

@@ -1,9 +1,10 @@
 {
   "title": "GenAI for Dortmund Politics",
   "home": {
-    "second_headline": "We asked AI - How is Dortmund 2025 changing through politics...",
-    "slider_headline": "...of the party",
-    "programs": "Comparison of all parties"
+    "second_title": "We asked AI - How is Dortmund 2025 changing through politics...",
+    "slider_title": "...of the party",
+    "programs_title": "Comparison of all parties",
+    "programs_text": "We analyzed the party's program using AI to identify potential visual changes. Either the party program or the answers to the Kommunalomat serve as the data source—this selection can be changed on the right."
   },
   "details": {
     "title" : "More Information",
