@@ -109,6 +109,26 @@ export default function TeamPage() {
         dangerouslySetInnerHTML={{ __html: t("about.text_team2") }}
       />
 
+      <h1 className="justify-self-center text-secondary py-6 md:py-8 text-center whitespace-nowrap">
+        {t("about.heading_next")}
+      </h1>
+      <div
+        className="w-full lg:max-w-[50%] my-2"
+        dangerouslySetInnerHTML={{ __html: t("about.text_next1") }}
+      />
+      <div
+        className="w-full lg:max-w-[50%] my-2"
+        dangerouslySetInnerHTML={{ __html: t("about.text_next2") }}
+      />
+      <div
+        className="w-full lg:max-w-[50%] my-2"
+        dangerouslySetInnerHTML={{ __html: t("about.text_next3") }}
+      />
+      <div
+        className="w-full lg:max-w-[50%] my-2"
+        dangerouslySetInnerHTML={{ __html: t("about.text_next4") }}
+      />
+
       <div className="max-w-3xl w-full self-center px-2 md:px-0">
         <Disclaimer />
       </div>
