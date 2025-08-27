@@ -32,15 +32,15 @@ export const usePartyImages = (metadata, lang = "de", shuffle = true) => {
           } catch {}
           if (pointsFileExists) {
             imagesArr.push({
-              id: `${partyKey}-${i}`,
+              id: `${partyKey}`,
               partyKey,
               partyName: name,
               partyURL: url,
-              index: i,
+              index: 0,
               src: `${paths.base}/${partyKey}/${paths.program}/${paths.images}/0_0.png`,
-              alt: `${name} - Image ${i + 1}`,
+              alt: `${name} - Image`,
               visualImpactPoints: points,
-              pointForImage: points[i] ?? null,
+              pointForImage: points[0] ?? null,
             });
           }
         }
