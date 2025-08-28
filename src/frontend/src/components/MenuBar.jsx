@@ -90,21 +90,18 @@ export default function MenuBar() {
       {menuOpen && (
         <nav className="flex sm:hidden flex-col gap-3 text-black justify-center w-full mt-2 font-bold">
           <div className="cursor-pointer decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
-            <Link
-              to="/"
-              style={{ color: "inherit", textDecoration: "none" }}
-              onClick={() => setMenuOpen(false)}
-            >
+            <Link to="/" style={{ color: "inherit", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>
               {t("nav_bar.home")}
             </Link>
           </div>
           <div className="cursor-pointer decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
-            <Link
-              to="/about-the-project"
-              style={{ color: "inherit", textDecoration: "none" }}
-              onClick={() => setMenuOpen(false)}
-            >
-              {t("nav_bar.about_project")}
+            <Link to="/team" style={{ color: "inherit", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>
+              {t("nav_bar.about_team")}
+            </Link>
+          </div>
+          <div className="cursor-pointer decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
+            <Link to="/tech" style={{ color: "inherit", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>
+              {t("nav_bar.about_tech")}
             </Link>
           </div>
         </nav>
