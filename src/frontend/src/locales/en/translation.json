@@ -1,5 +1,5 @@
 {
-  "title": "GenAI for Dortmund Politics",
+  "title": "GenAI for Dortmund Elections",
   "home": {
     "second_title": "We asked AI - How is Dortmund 2025 changing through politics...",
     "slider_title": "...of the party",
@@ -30,17 +30,32 @@
     "text_top1": "Local elections are coming up in North Rhine-Westphalia, and as a <a target=_blank href=https://youngaileadersdortmund.github.io>group of young AI enthusiasts</a>, we're wondering—can this new technology also be used to promote political education and local voter turnout? For example, by using AI to make party politics more understandable and accessible?",
     "text_top2": "In the context of the local elections in Dortmund, we are therefore experimenting with generative AI to visualize the political programs of the parties. As part of the global <a target=_blank href=https://aiforgood.itu.int/young-ai-leaders-community/>Young AI Leaders Community</a>, we are promoting the UN's Sustainable Development Goal <a target=_blank href=https://www.un.org/sustainabledevelopment/education/>Quality Education</a> (SDG 4). Our aim is to implement the technology locally and make the development process transparent.",
     "text_top3": "Our project was shaped by intensive exchanges with the <a target=_blank href=https://lamarr-institute.org>Lamarr Institute</a> (an AI research center), the <a target=_blank href=https://www.jrdo.de>Jugendring Dortmund</a> (which collaborates on the <a target=_blank href=https://xn--whlt-loa.nrw/start/kommunalomat/>Kommunalomat</a>) and Max Mundhenke (developer of <a href=https://bundestagswahl.ai/>bundestagswahl.ai</a>) - thank you very much for your input!",
-    "text_tech1": "We use the election programs and responses to the Kommunalomat survey as our data source. This content was provided to us either directly by the parties or by the Dortmund Youth Council. The data was processed independently using a <a target=_blank href=https://youtu.be/LPZh9BOjkQs?si=c4_z9lyMp_4JTUE3>generative language model</a> (the AI) to determine how the municipality could be visually transformed by the program. This potential transformation is visualized in the final step using an image-generating AI model.",
-    "text_tech2": "Due to the considerable <a target=_blank href=https://www.gov.uk/government/publications/international-ai-safety-report-2025>risks associated with the use of generative AI</a>, it is our personal goal to implement this project as transparently as possible. We use the <a target=_blank href=https://huggingface.co/Qwen/Qwen3-30B-A3B>Qwen3-30B-A3B</a> for analysis (including reasoning) and <a target=_blank href=https://huggingface.co/black-forest-labs/FLUX.1-schnell>FLUX.1 [schnell]</a> for image generation. In addition, <a target=_blank href=https://huggingface.co/facebook/bart-large-cnn>BART</a> was used for summarizing and <a target=_blank href=https://huggingface.co/Unbabel/TowerInstruct-13B-v0.1>TowerInstruct-13B-v0.1</a> for translating the content. Further technical details can be found in our <a target=_blank href=https://github.com/youngaileadersdortmund/ai-for-political-education>GitHub repository</a>.",
     "text_team1": "As part of the <a target=_blank href=https://aiforgood.itu.int/young-ai-leaders-community/>global AI for Good Initiative</a>, the <a target=_blank href=https://youngaileadersdortmund.github.io>Young AI Leaders Dortmund</a> are investigating how young people can drive positive change with the help of AI. This hub project was realized by the following members of our hub (click for more information):",
     "text_team2": "Would you like to learn more or exchange ideas with us? Then <a target=_blank href=https://www.linkedin.com/company/young-ai-leaders-dortmund/>feel free to connect with us</a> or contact us by email:<br><br><a href=mailto:dortmundhub.youngaileaders@gmail.com>dortmundhub.youngaileaders [at] gmail.com</a>",
     "text_next1": "While working on this project, we identified a lot of potential for future work that we would like to address briefly.",
     "text_next2": "Firstly, we noticed that the political agendas of local election campaigns are very similar. Our methodology could therefore be improved by analysing and visualising the differences between the programmes to facilitate comparison. Furthermore, selecting AI models could be improved by investigating potential biases and risks more closely.",
     "text_next3": "Secondly, we believe that our methodology could easily be transferred to other domains and elections. We welcome any feedback and would especially love to see other Young AI Leaders join us in our efforts to advance political education with the help of AI.",
     "text_next4": "Finally, we plan to explore the potential and challenges of using AI to visualise political party programmes scientifically. To this end, we intend to organise an interdisciplinary roundtable discussion to bring together experts in AI ethics, media studies, psychology and related fields. The insights gathered will be analysed and published as a research manuscript to identify future research directions and foster collaborations at the intersection of technology, politics and society.",
-    "heading_tech": "Technical Realization",
     "heading_team": "About the Team",
     "heading_next": "Next Steps"
+  },
+  "tech": {
+    "heading_tech": "Technical Realization",
+    "text_tech1": "We use the election programs and responses to the Kommunalomat survey as our data source. This content was provided to us either directly by the parties or by the Dortmund Youth Council. The data was processed independently using a <a target=_blank href=https://youtu.be/LPZh9BOjkQs?si=c4_z9lyMp_4JTUE3>generative language model</a> (the AI) to determine how the municipality could be visually transformed by the program. This potential transformation is visualized in the final step using an image-generating AI model.",
+    "text_tech2": "Due to the considerable <a target=_blank href=https://www.gov.uk/government/publications/international-ai-safety-report-2025>risks associated with the use of generative AI</a>, it is our personal goal to implement this project as transparently as possible. We use the <a target=_blank href=https://huggingface.co/Qwen/Qwen3-30B-A3B>Qwen3-30B-A3B</a> for analysis (including reasoning) and <a target=_blank href=https://huggingface.co/black-forest-labs/FLUX.1-schnell>FLUX.1 [schnell]</a> for image generation. In addition, <a target=_blank href=https://huggingface.co/facebook/bart-large-cnn>BART</a> was used for summarizing and <a target=_blank href=https://huggingface.co/Unbabel/TowerInstruct-13B-v0.1>TowerInstruct-13B-v0.1</a> for translating the content. Further technical details can be found in our <a target=_blank href=https://github.com/youngaileadersdortmund/dortmund-wahl-ki>GitHub repository</a>.",
+    "heading_deploy": "Deployment and Resources",
+    "text_deploy1": "Our calculations were performed on the <a target=_blank href=https://gitlab.tu-dortmund.de/lamarr/lamarr-public/cluster>Lamarr Institute's computing cluster</a>, and we are very grateful for this opportunity. In the spirit of <a target=_blank href=https://link.springer.com/article/10.1007/s10618-024-01020-3/>sustainable reporting on AI</a>, we also examined energy consumption and CO₂ emissions. According to <a target=_blank href=https://github.com/mlco2>CodeCarbon</a>, our deployment on two NVIDIA A100 GPUs results in the following consumption values:",
+    "text_deploy2": "These consumption values only describe the last run, in which 8 party programs (PDFs) and the Kommunalomat responses were analyzed. The previous development consumed approximately five times the amount of resources.",
+    "tab_heading1": "Processing Step",
+    "tab_heading2": "Duration",
+    "tab_heading3": "Energy Use",
+    "tab_heading4": "Emissions",
+    "tab_translate": "Translate",
+    "tab_summarize": "Summarize",
+    "tab_reason": "Reason",
+    "tab_translate_results": "Translate",
+    "tab_generate_images": "Generate Images",
+    "tab_total": "Total"
   },
   "disclaimer": {
     "title": "Disclaimer",

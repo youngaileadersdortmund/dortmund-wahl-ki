@@ -1,4 +1,4 @@
-# GenAI for Dortmund Politics
+# dortmund-wahl-ki - GenAI for Dortmund Elections
 
 #### We asked AI – How is Dortmund 2025 changing through politics?
 This project explores how generative AI can support **political education** and **local voter engagement** in Dortmund. Using party programs and survey responses, we analyze content with large language models, generate visualizations of political visions, and make the results accessible to the public. Check out our [public webpage](https://dortmund-wahl-ki.de)!
@@ -13,8 +13,8 @@ If you want to run our solution locally, you can follow the steps below. Note we
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/youngaileadersdortmund/ai-for-political-education.git
-    cd ai-for-political-education
+    git clone https://github.com/youngaileadersdortmund/dortmund-wahl-ki.git
+    cd dortmund-wahl-ki
     ```
 
 2. Install dependencies:
@@ -72,9 +72,9 @@ If you use or refer to our work, please link back to this README, for example vi
 ```bibtex
 @misc{yail_dortmund_politics_2025,
   author       = {Raphael Fischer and Nico Koltermann and Jan Krawiec and Louisa von Essen and Youssef Abdelrahim and Tareq Khouja},
-  title        = {{Young} {AI} {Leaders} - {GenAI} for {Dortmund} {Politics}},
+  title        = {{Young} {AI} {Leaders} - {GenAI} for {Dortmund} {Elections}},
   year         = {2025},
-  howpublished = {https://dortmund-wahl-ki.de },
+  howpublished = {https://dortmund-wahl-ki.de},
   note         = {Experimental project applying generative AI for political education and local elections in Dortmund}
 }
 ```

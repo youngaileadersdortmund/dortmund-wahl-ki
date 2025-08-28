@@ -5,6 +5,7 @@ WORKDIR /app
 
 COPY src/frontend/package.json ./
 RUN npm install
-RUN npm install react-spinners 
+RUN npm install react-spinners
+RUN npm install papaparse
 
 CMD ["npm", "run", "dev"]
