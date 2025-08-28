@@ -1,12 +1,14 @@
 import os
-
 import argparse
-import pandas as pd
-import numpy as np
-from llm import load_llm, load_translation_model, translate, translate_pdf, reason_about_visual_points, summarize_content
-from images import load_model_diffusers, generate_images_diffusers
 import shutil
 import glob
+
+import pandas as pd
+import numpy as np
+from codecarbon import OfflineEmissionsTracker
+
+from llm import load_llm, load_translation_model, translate, translate_pdf, reason_about_visual_points, summarize_content
+from images import load_model_diffusers, generate_images_diffusers
 
 
 def translate_kommunalomat(model, fname, output_dir, only_approved=True):
@@ -95,6 +97,9 @@ if __name__ == '__main__':
 
     os.makedirs(args.output_dir, exist_ok=True)
     party_dirs = [d for d in os.listdir(args.output_dir) if os.path.isdir(os.path.join(args.output_dir, d))]
+
+    tracker = OfflineEmissionsTracker(log_level='error', country_iso_code="DEU", output_dir=args.output_dir, experiment_id=args.mode)
+    tracker.start()
 
     if args.mode == "translate":
         print('TRANSLATING KOMMUNALOMAT')
@@ -213,3 +218,5 @@ if __name__ == '__main__':
                             continue
                     print(f"Generating images for {save_path}")
                     generate_images_diffusers(model, input, save_path, args.guidance, args.num_steps, args.n_images)
+
+    tracker.stop()
