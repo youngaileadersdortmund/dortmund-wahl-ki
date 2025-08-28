@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const base = import.meta.env.BASE_URL || "/ai-for-political-education/";
+const base = import.meta.env.BASE_URL || "dortmund-wahl-ki.de";
 
 const Footer = () => {
   const { t } = useTranslation();

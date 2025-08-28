@@ -9,7 +9,7 @@ import TechPage from "./pages/TechPage";
 
 function App() {
   return (
-    <Router basename="/ai-for-political-education/">
+    <Router basename="dortmund-wahl-ki.de/">
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />

@@ -1,7 +1,7 @@
 import Disclaimer from "../components/Disclaimer";
 import { useTranslation } from "react-i18next";
 
-const base = import.meta.env.BASE_URL || "/ai-for-political-education/";
+const base = import.meta.env.BASE_URL || "dortmund-wahl-ki.de/";
 
 export default function TeamPage() {
   const { t } = useTranslation();
