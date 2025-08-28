@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import LanguageSelector from "./LanguageSelector";
 
-const base = import.meta.env.BASE_URL || "dortmund-wahl-ki.de/";
+const base = import.meta.env.BASE_URL;
 
 export default function MenuBar() {
   const { t, i18n } = useTranslation();
