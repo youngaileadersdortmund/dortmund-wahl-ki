@@ -9,7 +9,7 @@ import TechPage from "./pages/TechPage";
 
 function App() {
   return (
-    <Router basename="/">
+    <Router basename="dortmund-wahl-ki">
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
