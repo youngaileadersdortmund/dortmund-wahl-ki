@@ -53,7 +53,7 @@ export default function MenuBar() {
           <div className="sm:hidden flex items-center text-white p-2">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="bg-secondary rounded-full"
+              className="bg-secondary w-24 h-10 rounded-full flex items-center justify-center"
             >
               {menuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
             </button>
