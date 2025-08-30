@@ -95,7 +95,7 @@ function Card({ card, paths, partyKey, gridKey }) {
       className="bg-white rounded-lg shadow-md flex flex-col relative"
     >
       <div className="p-2">
-        <div className="relative w-full h-72">
+        <div className="relative w-full h-96">
           <img
             src={`${images_dir}/0_${randomIndex}.png`}
             alt={partyName}
@@ -110,10 +110,10 @@ function Card({ card, paths, partyKey, gridKey }) {
               isHovered ? "opacity-100" : "opacity-0"
             }`}
           >
-            <div>
+            <div className="flex flex-col items-start gap-1">
               {visualPoints.map((bullet, index) => (
-                <div key={index} className="flex items-start">
-                  <FaCheckCircle className=" text-secondary mr-2 flex-shrink-0 mt-0.5" />
+                <div key={index} className="flex text-left">
+                  <FaCheckCircle className="mr-2 flex-shrink-0 text-secondary" />
                   <span className="text-gray-700 text-sm">{bullet}</span>
                 </div>
               ))}
@@ -147,7 +147,7 @@ function Grid({ parties_metadata, gridKey }) {
                   grid-cols-1
                   sm:grid-cols-2
                   md:grid-cols-3
-                  lg:grid-cols-5
+                  lg:grid-cols-4
                   gap-4 sm:gap-6 lg:gap-8"
       >
         {cards.map(([partyKey, partyData]) => (

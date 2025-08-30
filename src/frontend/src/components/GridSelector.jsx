@@ -41,7 +41,7 @@ const GridSelector = ({
       <button
         onClick={toggleDropdown}
         className={`
-          w-full sm:w-44
+          w-full xs:w-44
           rounded-full
           font-semibold
           text-md
