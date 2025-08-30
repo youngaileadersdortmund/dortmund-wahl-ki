@@ -28,8 +28,8 @@ export default function MoreInfoButton({ card, images_dir, reasoningData, visual
         </Button>
       </DialogTrigger>
 
-      <DialogContent showCloseButton={false} className="sm:max-w-4xl md:max-w-[63rem] text-white border-none">
-        <DialogHeader>
+      <DialogContent showCloseButton={true} className="xs:pt-12 sm:max-w-4xl md:max-w-[63rem] text-white border-none">
+        <DialogHeader className="xs:fixed xs:pt-6">
           <DialogTitle className="text-2xl">{card.name}</DialogTitle>
         </DialogHeader>
 
@@ -52,7 +52,7 @@ export default function MoreInfoButton({ card, images_dir, reasoningData, visual
           <div className="flex flex-col gap-4">
             <div className="relative aspect-video w-full">
               <img
-                className="h-full w-full object-contain rounded-lg shadow-lg"
+                className="h-full w-full object-contain rounded-lg"
                 src={`${images_dir}/0_${selectedImageIndex}.png`}
                 alt={`${card.name} - Image ${selectedImageIndex + 1}`}
                 key={selectedImageIndex}
