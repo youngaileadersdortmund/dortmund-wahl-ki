@@ -21,13 +21,13 @@ function HomePage() {
         <Slider metadata={parties_metadata} lang={i18n.language} />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 items-center border-t-2 px-4 border-secondary mt-8 md:mt-10 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-3 items-center border-t-2 px-4 border-secondary mt-8 md:mt-10 w-full">
         <div className="hidden md:block" /> {/* left spacer only on md+ */}
-        <h1 className="justify-self-center xs:text-wrap lg:text-nowrap text-secondary py-6 md:py-8 text-center whitespace-nowrap">
+        <h1 className="justify-self-center xs:text-wrap md:text-nowrap text-secondary py-6 md:py-8 text-center whitespace-nowrap">
           {t("home.programs_title")}
         </h1>
 
-        <div className="justify-self-center md:justify-self-end mt-4 md:mt-0">
+        <div className="justify-self-center lg:justify-self-end mt-4 md:mt-0">
           <GridSelector selected={grid} onSelect={setGrid} />
         </div>
 

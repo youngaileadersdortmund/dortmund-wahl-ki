@@ -12,9 +12,8 @@ import FadeLoader from "react-spinners/FadeLoader";
 import { useTranslation } from "react-i18next";
 
 export function Slider({ metadata, lang = "de" }) {
-
   const { t } = useTranslation();
-  
+
   const { images, isLoading } = usePartyImages(metadata, lang, true);
 
   if (isLoading)
@@ -41,15 +40,21 @@ export function Slider({ metadata, lang = "de" }) {
           <CarouselItem key={image.id}>
             <div className="flex xs:flex-col sm:flex-row p-5 gap-24 items-center justify-center">
               <div className="max-w-[400px] text-left">
-                <h2 className="text-2xl mb-5">{t("home.slider_title")} <a target="_blank" href={image.partyURL}>{image.partyName}</a>?</h2>
-                {image.visualImpactPoints.map((point, idx) => (
-                  <div key={idx} className="flex items-start content-center">
-                    <FaCheckCircle className="text-secondary text-lg self-center mr-2 my-4" />
-                    <span className="text-gray-700 text-xl self-center">
-                      {point}
-                    </span>
-                  </div>
-                ))}
+                <h2 className="text-2xl mb-5">
+                  {t("home.slider_title")}{" "}
+                  <a target="_blank" href={image.partyURL}>
+                    {image.partyName}
+                  </a>
+                  ?
+                </h2>
+                <div className="flex flex-col gap-5">
+                  {image.visualImpactPoints.map((point, idx) => (
+                    <div key={idx} className="flex items-start">
+                      <FaCheckCircle className="mr-2 mt-2 h-5 w-5 flex-shrink-0 self-start text-secondary" />
+                      <span className="text-xl text-gray-700">{point}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className="rounded-lg overflow-hidden shadow-lg max-w-[390px] aspect-square">
                 <img

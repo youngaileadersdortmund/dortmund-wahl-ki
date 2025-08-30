@@ -115,8 +115,9 @@ export default function TeamPage() {
                     lg:max-w-[50%]
                     my-6
                     grid grid-cols-2 gap-6 justify-items-center
+                    items-start
                     sm:grid-cols-3
-                    md:flex md:flex-row md:justify-center md:items-center md:gap-6"
+                    md:flex md:flex-row md:justify-center md:gap-6"
       >
         {members.map((member) => (
           <a
@@ -126,7 +127,7 @@ export default function TeamPage() {
             rel="noopener noreferrer"
             className="flex flex-col items-center mx-1"
           >
-            <div className="w-20 sm:w-24 md:w-28 lg:w-32 aspect-square rounded-full overflow-hidden border border-gray-300 flex-shrink-0">
+            <div className="w-20 sm:w-24 md:w-26 lg:w-32 aspect-square rounded-full overflow-hidden border border-gray-300 flex-shrink-0">
               <img
                 src={base + member.img}
                 alt={member.name}
