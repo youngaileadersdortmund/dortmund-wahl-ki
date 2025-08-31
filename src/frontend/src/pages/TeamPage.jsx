@@ -101,6 +101,10 @@ export default function TeamPage() {
           />
         </a>
       </div>
+      <div
+        className="w-full lg:max-w-[50%] my-2"
+        dangerouslySetInnerHTML={{ __html: t("projekt.text_top4") }}
+      />
 
       {/* team info */}
       <h1 className="justify-self-center text-secondary py-6 md:py-8 text-center whitespace-nowrap">
