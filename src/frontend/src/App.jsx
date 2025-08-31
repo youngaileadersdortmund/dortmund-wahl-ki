@@ -4,7 +4,7 @@ import Layout from "./pages/Layout";
 import HomePage from "./pages/HomePage";
 import ImpressumPage from "./pages/ImpressumPage";
 import PrivacyPage from "./pages/PrivacyPage";
-import TeamPage from "./pages/TeamPage";
+import ProjectPage from "./pages/ProjectPage";
 import TechPage from "./pages/TechPage";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="impressum" element={<ImpressumPage />} />
           <Route path="datenschutz" element={<PrivacyPage />} />
-          <Route path="projekt" element={<TeamPage />} />
+          <Route path="projekt" element={<ProjectPage />} />
           <Route path="technik" element={<TechPage />} />
         </Route>
       </Routes>

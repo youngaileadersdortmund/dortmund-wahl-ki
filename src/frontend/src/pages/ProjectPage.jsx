@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 const base = import.meta.env.BASE_URL;
 
-export default function TeamPage() {
+export default function ProjectPage() {
   const { t } = useTranslation();
   const members = [
     {
