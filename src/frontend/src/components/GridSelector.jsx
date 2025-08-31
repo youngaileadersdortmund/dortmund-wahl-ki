@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 
 const DEFAULT_OPTIONS = [
-  { code: "program", name: "Program" },
+  { code: "program", name: "Programm" },
   { code: "kommunalomat", name: "Kommunalomat" },
 ];
 

@@ -35,23 +35,23 @@ export default function EmissionsTable() {
       <table>
         <thead>
           <tr>
-            <th>{t("tech.tab_heading1")}</th>
-            <th>{t("tech.tab_heading2")}</th>
-            <th>{t("tech.tab_heading3")}</th>
-            <th>{t("tech.tab_heading4")}</th>
+            <th>{t("technik.tab_heading1")}</th>
+            <th>{t("technik.tab_heading2")}</th>
+            <th>{t("technik.tab_heading3")}</th>
+            <th>{t("technik.tab_heading4")}</th>
           </tr>
         </thead>
         <tbody>
           {rows.map((row, i) => (
             <tr key={i}>
-              <td>{t(`tech.tab_${row.experiment_id}`)}</td>
+              <td>{t(`technik.tab_${row.experiment_id}`)}</td>
               <td>{(Number(row.duration) / 60).toFixed(2)} min</td>
               <td>{Number(row.energy_consumed).toFixed(2)} kWh</td>
               <td>{Number(row.emissions).toFixed(2)} CO2eq</td>
             </tr>
           ))}
           <tr style={{ fontWeight: 'bold' }}>
-            <td>{t('tech.tab_total')}</td>
+            <td>{t('technik.tab_total')}</td>
             <td>{(totalDuration / 60).toFixed(2)} min</td>
             <td>{totalEnergy.toFixed(2)} kWh</td>
             <td>{totalEmissions.toFixed(2)} CO2eq</td>

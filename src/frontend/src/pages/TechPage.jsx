@@ -10,11 +10,11 @@ export default function TechPage() {
   return (
     <div className="flex flex-col items-center justify-center px-4 md:px-0">
       <h1 className="justify-self-center text-secondary py-6 md:py-8 text-center whitespace-nowrap">
-        {t("tech.heading_tech")}
+        {t("technik.heading_tech")}
       </h1>
       <div
         className="w-full lg:max-w-[50%]"
-        dangerouslySetInnerHTML={{ __html: t("tech.text_tech1") }}
+        dangerouslySetInnerHTML={{ __html: t("technik.text_tech1") }}
       />
       <div className="w-full lg:max-w-[50%] my-8">
         <img
@@ -25,20 +25,20 @@ export default function TechPage() {
       </div>
       <div
         className="w-full lg:max-w-[50%]"
-        dangerouslySetInnerHTML={{ __html: t("tech.text_tech2") }}
+        dangerouslySetInnerHTML={{ __html: t("technik.text_tech2") }}
       />
       { /* Deployment and Emissions */ }
       <h1 className="justify-self-center text-secondary py-6 md:py-8 text-center whitespace-nowrap">
-        {t("tech.heading_deploy")}
+        {t("technik.heading_deploy")}
       </h1>
       <div
         className="w-full lg:max-w-[50%]"
-        dangerouslySetInnerHTML={{ __html: t("tech.text_deploy1") }}
+        dangerouslySetInnerHTML={{ __html: t("technik.text_deploy1") }}
       />
       <EmissionsTable />
       <div
         className="w-full lg:max-w-[50%]"
-        dangerouslySetInnerHTML={{ __html: t("tech.text_deploy2") }}
+        dangerouslySetInnerHTML={{ __html: t("technik.text_deploy2") }}
       />
       <div className="max-w-3xl w-full self-center px-2 md:px-0">
         <Disclaimer />

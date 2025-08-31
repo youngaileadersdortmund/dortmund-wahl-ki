@@ -1,5 +1,10 @@
 {
   "title": "GenAI for Dortmund Elections",
+  "nav_bar": {
+    "projekt": "Project and Team",
+    "technik": "Technical Details",
+    "home": "Results"
+  },
   "home": {
     "second_title": "We asked AI - How is Dortmund 2025 changing through politics...",
     "slider_title": "...of the party",
@@ -12,21 +17,7 @@
     "closing1": "The results of this analysis were then visualized using an image-generating model. Further details on the party's political content can be found in the corresponding",
     "closing2": ". Further information on the technical implementation can be found on the ‘About the project’ page."
   },
-  "impr": {
-    "name": "Legal Notice",
-    "content": "According to § 5 TMG (German Telemedia Act):<br>Young AI Leaders - Dortmund Hub<br>As part of the global <a href=https://aiforgood.itu.int/young-ai-leaders-community/>Young AI Leaders</a> community<br><br>Represented by:<br>Raphael Fischer<br>Lamarr Institute for Machine Learning and Artificial Intelligence<br>Joseph-von-Fraunhofer-Straße 25<br>44227 Dortmund, Germany<br><br>Kontakt:<br>E-Mail: dortmundhub.youngaileaders [at] gmail.com<br>Phone: +49 231 755 5148<br><br>Editorially responsible according to § 18 MStV (German Interstate Media Treaty):<br>Raphael Fischer"
-  },
-  "priv": {
-    "name": "Privacy Policy",
-    "content": "Our website is hosted via <a href=https://pages.github.com>GitHub Pages</a> (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA).<br>When you visit our pages, GitHub automatically collects log data (e.g., IP address, browser type, time of access) to ensure the security and functionality of the service.<br>We do not have access to or process this data ourselves.<br><br>Our website also contains links to external third-party websites (e.g., YouTube, LinkedIn). When you click on these links, you leave our website. The operators of those linked sites are solely responsible for their content and the processing of personal data.<br><br>Beyond this, we do not use cookies, tracking, or analytics tools, and no further personal data is processed."
-  },
-  "nav_bar": {
-    "about_team": "Project and Team",
-    "about_tech": "Technical Details",
-    "home": "Results",
-    "discussion": "Diskurs"
-  },
-  "about": {
+  "projekt": {
     "text_top1": "Local elections are coming up in North Rhine-Westphalia, and as a <a target=_blank href=https://youngaileadersdortmund.github.io>group of young AI enthusiasts</a>, we're wondering—can this new technology also be used to promote political education and local voter turnout? For example, by using AI to make party politics more understandable and accessible?",
     "text_top2": "In the context of the local elections in Dortmund, we are therefore experimenting with generative AI to visualize the political programs of the parties. As part of the global <a target=_blank href=https://aiforgood.itu.int/young-ai-leaders-community/>Young AI Leaders Community</a>, we are promoting the UN's Sustainable Development Goal <a target=_blank href=https://www.un.org/sustainabledevelopment/education/>Quality Education</a> (SDG 4). Our aim is to implement the technology locally and make the development process transparent.",
     "text_top3": "Our project was shaped by intensive exchanges with the <a target=_blank href=https://lamarr-institute.org>Lamarr Institute</a> (an AI research center), the <a target=_blank href=https://www.jrdo.de>Jugendring Dortmund</a> (which collaborates on the <a target=_blank href=https://xn--whlt-loa.nrw/start/kommunalomat/>Kommunalomat</a>) and Max Mundhenke (developer of <a href=https://bundestagswahl.ai/>bundestagswahl.ai</a>) - thank you very much for your input!",
@@ -39,13 +30,13 @@
     "heading_team": "About the Team",
     "heading_next": "Next Steps"
   },
-  "tech": {
+  "technik": {
     "heading_tech": "Technical Realization",
     "text_tech1": "We use the election programs and responses to the Kommunalomat survey as our data source. This content was provided to us either directly by the parties or by the Dortmund Youth Council. The data was processed independently using a <a target=_blank href=https://youtu.be/LPZh9BOjkQs?si=c4_z9lyMp_4JTUE3>generative language model</a> (the AI) to determine how the municipality could be visually transformed by the program. This potential transformation is visualized in the final step using an image-generating AI model.",
     "text_tech2": "Due to the considerable <a target=_blank href=https://www.gov.uk/government/publications/international-ai-safety-report-2025>risks associated with the use of generative AI</a>, it is our personal goal to implement this project as transparently as possible. We use the <a target=_blank href=https://huggingface.co/Qwen/Qwen3-30B-A3B>Qwen3-30B-A3B</a> for analysis (including reasoning) and <a target=_blank href=https://huggingface.co/black-forest-labs/FLUX.1-schnell>FLUX.1 [schnell]</a> for image generation. In addition, <a target=_blank href=https://huggingface.co/facebook/bart-large-cnn>BART</a> was used for summarizing and <a target=_blank href=https://huggingface.co/Unbabel/TowerInstruct-13B-v0.1>TowerInstruct-13B-v0.1</a> for translating the content. Further technical details can be found in our <a target=_blank href=https://github.com/youngaileadersdortmund/dortmund-wahl-ki>GitHub repository</a>.",
     "heading_deploy": "Deployment and Resources",
     "text_deploy1": "Our calculations were performed on the <a target=_blank href=https://gitlab.tu-dortmund.de/lamarr/lamarr-public/cluster>Lamarr Institute's computing cluster</a>, and we are very grateful for this opportunity. In the spirit of <a target=_blank href=https://link.springer.com/article/10.1007/s10618-024-01020-3/>sustainable reporting on AI</a>, we also examined energy consumption and CO₂ emissions. According to <a target=_blank href=https://github.com/mlco2>CodeCarbon</a>, our deployment on two NVIDIA A100 GPUs results in the following consumption values:",
-    "text_deploy2": "These consumption values only describe the last run, in which 8 party programs (PDFs) and the Kommunalomat responses were analyzed. The previous development consumed approximately five times the amount of resources.",
+    "text_deploy2": "These consumption values only describe the last run, in which 8 party programs (PDFs) and the Kommunalomat responses were analyzed. We estimate that the previous development consumed approximately five times the amount of resources.",
     "tab_heading1": "Processing Step",
     "tab_heading2": "Duration",
     "tab_heading3": "Energy Use",
@@ -56,6 +47,14 @@
     "tab_translate_results": "Translate",
     "tab_generate_images": "Generate Images",
     "tab_total": "Total"
+  },
+  "impr": {
+    "name": "Legal Notice",
+    "content": "According to § 5 TMG (German Telemedia Act):<br>Young AI Leaders - Dortmund Hub<br>As part of the global <a href=https://aiforgood.itu.int/young-ai-leaders-community/>Young AI Leaders</a> community<br><br>Represented by:<br>Raphael Fischer<br>Lamarr Institute for Machine Learning and Artificial Intelligence<br>Joseph-von-Fraunhofer-Straße 25<br>44227 Dortmund, Germany<br><br>Kontakt:<br>E-Mail: dortmundhub.youngaileaders [at] gmail.com<br>Phone: +49 231 755 5148<br><br>Editorially responsible according to § 18 MStV (German Interstate Media Treaty):<br>Raphael Fischer"
+  },
+  "priv": {
+    "name": "Privacy Policy",
+    "content": "Our website is hosted via <a href=https://pages.github.com>GitHub Pages</a> (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA).<br>When you visit our pages, GitHub automatically collects log data (e.g., IP address, browser type, time of access) to ensure the security and functionality of the service.<br>We do not have access to or process this data ourselves.<br><br>Our website also contains links to external third-party websites (e.g., YouTube, LinkedIn). When you click on these links, you leave our website. The operators of those linked sites are solely responsible for their content and the processing of personal data.<br><br>Beyond this, we do not use cookies, tracking, or analytics tools, and no further personal data is processed."
   },
   "disclaimer": {
     "title": "Disclaimer",

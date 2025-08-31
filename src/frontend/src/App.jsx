@@ -15,8 +15,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="impressum" element={<ImpressumPage />} />
           <Route path="datenschutz" element={<PrivacyPage />} />
-          <Route path="team" element={<TeamPage />} />
-          <Route path="tech" element={<TechPage />} />
+          <Route path="projekt" element={<TeamPage />} />
+          <Route path="technik" element={<TechPage />} />
         </Route>
       </Routes>
     </Router>

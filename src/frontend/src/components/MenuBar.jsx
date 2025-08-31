@@ -70,18 +70,18 @@ export default function MenuBar() {
         </div>
         <div className="cursor-pointer font-bold decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
           <Link
-            to="/team"
+            to="/projekt"
             style={{ color: "inherit", textDecoration: "none" }}
           >
-            {t("nav_bar.about_team")}
+            {t("nav_bar.projekt")}
           </Link>
         </div>
         <div className="cursor-pointer font-bold decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
           <Link
-            to="/tech"
+            to="/technik"
             style={{ color: "inherit", textDecoration: "none" }}
           >
-            {t("nav_bar.about_tech")}
+            {t("nav_bar.technik")}
           </Link>
         </div>
       </nav>
@@ -95,13 +95,13 @@ export default function MenuBar() {
             </Link>
           </div>
           <div className="cursor-pointer decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
-            <Link to="/team" style={{ color: "inherit", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>
-              {t("nav_bar.about_team")}
+            <Link to="/projekt" style={{ color: "inherit", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>
+              {t("nav_bar.projekt")}
             </Link>
           </div>
           <div className="cursor-pointer decoration-primary underline decoration-2 decoration-offset-2 hover:text-secondary">
-            <Link to="/tech" style={{ color: "inherit", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>
-              {t("nav_bar.about_tech")}
+            <Link to="/technik" style={{ color: "inherit", textDecoration: "none" }} onClick={() => setMenuOpen(false)}>
+              {t("nav_bar.technik")}
             </Link>
           </div>
         </nav>

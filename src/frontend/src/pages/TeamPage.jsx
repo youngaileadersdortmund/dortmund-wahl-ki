@@ -43,11 +43,11 @@ export default function TeamPage() {
     <div className="flex flex-col items-center justify-center px-4 md:px-0">
       <div
         className="w-full lg:max-w-[50%] my-2"
-        dangerouslySetInnerHTML={{ __html: t("about.text_top1") }}
+        dangerouslySetInnerHTML={{ __html: t("projekt.text_top1") }}
       />
       <div
         className="w-full lg:max-w-[50%] my-2"
-        dangerouslySetInnerHTML={{ __html: t("about.text_top2") }}
+        dangerouslySetInnerHTML={{ __html: t("projekt.text_top2") }}
       />
       <div className="w-full max-w-[40%] my-8 flex flex-row justify-between items-center gap-4 mx-auto">
         <a href="https://youngaileadersdortmund.github.io/" target="_blank">
@@ -76,7 +76,7 @@ export default function TeamPage() {
       {/* partner info */}
       <div
         className="w-full lg:max-w-[50%] my-2"
-        dangerouslySetInnerHTML={{ __html: t("about.text_top3") }}
+        dangerouslySetInnerHTML={{ __html: t("projekt.text_top3") }}
       />
       <div className="w-full max-w-[45%] my-8 flex flex-row justify-between items-center gap-4 mx-auto">
         <a href="https://lamarr-institute.org/" target="_blank">
@@ -104,11 +104,11 @@ export default function TeamPage() {
 
       {/* team info */}
       <h1 className="justify-self-center text-secondary py-6 md:py-8 text-center whitespace-nowrap">
-        {t("about.heading_team")}
+        {t("projekt.heading_team")}
       </h1>
       <div
         className="w-full lg:max-w-[50%]"
-        dangerouslySetInnerHTML={{ __html: t("about.text_team1") }}
+        dangerouslySetInnerHTML={{ __html: t("projekt.text_team1") }}
       />
       <div
         className="w-full
@@ -141,27 +141,27 @@ export default function TeamPage() {
 
       <div
         className="w-full lg:max-w-[50%]"
-        dangerouslySetInnerHTML={{ __html: t("about.text_team2") }}
+        dangerouslySetInnerHTML={{ __html: t("projekt.text_team2") }}
       />
 
       <h1 className="justify-self-center text-secondary py-6 md:py-8 text-center whitespace-nowrap">
-        {t("about.heading_next")}
+        {t("projekt.heading_next")}
       </h1>
       <div
         className="w-full lg:max-w-[50%] my-2"
-        dangerouslySetInnerHTML={{ __html: t("about.text_next1") }}
+        dangerouslySetInnerHTML={{ __html: t("projekt.text_next1") }}
       />
       <div
         className="w-full lg:max-w-[50%] my-2"
-        dangerouslySetInnerHTML={{ __html: t("about.text_next2") }}
+        dangerouslySetInnerHTML={{ __html: t("projekt.text_next2") }}
       />
       <div
         className="w-full lg:max-w-[50%] my-2"
-        dangerouslySetInnerHTML={{ __html: t("about.text_next3") }}
+        dangerouslySetInnerHTML={{ __html: t("projekt.text_next3") }}
       />
       <div
         className="w-full lg:max-w-[50%] my-2"
-        dangerouslySetInnerHTML={{ __html: t("about.text_next4") }}
+        dangerouslySetInnerHTML={{ __html: t("projekt.text_next4") }}
       />
 
       <div className="max-w-3xl w-full self-center px-2 md:px-0">
