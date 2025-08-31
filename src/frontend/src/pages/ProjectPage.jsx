@@ -50,7 +50,7 @@ export default function ProjectPage() {
         dangerouslySetInnerHTML={{ __html: t("projekt.text_top2") }}
       />
       <div className="w-full max-w-[40%] my-8 flex flex-row justify-between items-center gap-4 mx-auto">
-        <a href="https://youngaileadersdortmund.github.io/" target="_blank">
+        <a href="https://youngaileaders-dortmund.de/" target="_blank">
           <img
             src={`${base}logo.png`}
             className="h-24 object-contain"

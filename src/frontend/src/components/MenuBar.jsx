@@ -24,7 +24,7 @@ export default function MenuBar() {
       <div className="flex w-full items-center justify-between flex-col xl:flex-row">
         {/* Logos */}
         <div className="flex flex-row items-center justify-center mb-2 sm:mb-0">
-          <a href="https://youngaileadersdortmund.github.io/" target="_blank">
+          <a href="https://youngaileaders-dortmund.de/" target="_blank">
             <img
               src={`${base}logo.png`}
               alt="Logo"
