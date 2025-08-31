@@ -1,6 +1,6 @@
 // config.js
 window.klaroConfig = {
-  version: 2, // bump version to force re-show
+  version: 1, // bump version to force re-show
   acceptAll: true,
   services: [
     {
