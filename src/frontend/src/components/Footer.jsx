@@ -26,24 +26,24 @@ const Footer = () => {
               <p>Dortmund Hub</p>
             </span>
           </a>
-          <ul className="flex flex-col md:flex-row items-center mb-6 text-sm font-medium text-gray-500 md:mb-0 dark:text-gray-400">
-            <li>
-              <Link
-                to="/impressum"
-                className="text-primary hover:underline me-0 md:me-6 mb-2 md:mb-0"
-              >
-                {t("impr.name")}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/datenschutz"
-                className="text-primary hover:underline me-0 md:me-6"
-              >
-                {t("priv.name")}
-              </Link>
-            </li>
-          </ul>
+            <ul className="flex flex-row items-center mb-6 text-sm font-medium text-gray-500 dark:text-gray-400 p-4">
+              <li>
+                <Link
+                  to="/impressum"
+                  className="text-primary hover:underline p-4"
+                >
+                  {t("impr.name")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/datenschutz"
+                  className="text-primary hover:underline p-4"
+                >
+                  {t("priv.name")}
+                </Link>
+              </li>
+            </ul>
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400 text-center">
