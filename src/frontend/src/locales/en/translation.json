@@ -25,11 +25,11 @@
     "text_team1": "As part of the <a target=_blank href=https://aiforgood.itu.int/young-ai-leaders-community/>global AI for Good Initiative</a>, the <a target=_blank href=https://youngaileadersdortmund.github.io>Young AI Leaders Dortmund</a> are investigating how young people can drive positive change with the help of AI. This hub project was realized by the following members of our hub (click for more information):",
     "text_team2": "Would you like to learn more or exchange ideas with us? Then <a target=_blank href=https://www.linkedin.com/company/young-ai-leaders-dortmund/>feel free to connect with us</a> or contact us by email:<br><br><a href=mailto:dortmundhub.youngaileaders@gmail.com>dortmundhub.youngaileaders [at] gmail.com</a>",
     "text_next1": "While working on this project, we identified a lot of potential for future work that we would like to address briefly.",
-    "text_next2": "Firstly, we noticed that the political agendas of local election campaigns are very similar. Our methodology could therefore be improved by analysing and visualising the differences between the programmes to facilitate comparison. Furthermore, selecting AI models could be improved by investigating potential biases and risks more closely.",
-    "text_next3": "Secondly, we believe that our methodology could easily be transferred to other domains and elections. We welcome any feedback and would especially love to see other Young AI Leaders join us in our efforts to advance political education with the help of AI.",
-    "text_next4": "Finally, we plan to explore the potential and challenges of using AI to visualise political party programmes scientifically. To this end, we intend to organise an interdisciplinary roundtable discussion to bring together experts in AI ethics, media studies, psychology and related fields. The insights gathered will be analysed and published as a research manuscript to identify future research directions and foster collaborations at the intersection of technology, politics and society.",
+    "text_next2": "We believe that future projects should focus more on visualizing the differences between the programs in order to facilitate comparison. To be honest, the AI analysis of the election programs hardly differs at all; one could also summarize it as follows: everything is somehow a little greener. Our results thus also reveal the limitations of AI: depicting nuances and understanding individual priorities.",
+    "text_next3": "Our methodology can easily be transferred to other areas and elections. We welcome feedback and initiatives that aim to further develop and improve the project with us.",
+    "text_next4": "We also want to scientifically investigate the potential and challenges of using AI to promote political education. To this end, we are planning an interdisciplinary discussion panel that will bring together experts from the fields of AI ethics, media studies, psychology, and related areas.",
     "heading_team": "About the Team",
-    "heading_next": "Next Steps"
+    "heading_next": "Results and Next Steps"
   },
   "technik": {
     "heading_tech": "Technical Realization",
