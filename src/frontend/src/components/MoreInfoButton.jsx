@@ -28,14 +28,39 @@ export default function MoreInfoButton({ card, images_dir, reasoningData, visual
         </Button>
       </DialogTrigger>
 
-      <DialogContent showCloseButton={true} className="xs:pt-12 sm:max-w-4xl md:max-w-[63rem] text-white border-none">
+      <DialogContent 
+        showCloseButton={false} 
+        className="xs:pt-12 sm:max-w-4xl md:max-w-[63rem] text-white border-none"
+        closeClassName="bg-secondary text-white hover:bg-secondary/90 rounded-full"
+      >
+
+        <DialogClose asChild>
+          <button className="absolute right-4 top-4 bg-secondary text-white rounded-full p-2 hover:bg-secondary/90">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+            <span className="sr-only">Close</span>
+          </button>
+        </DialogClose>
+
         <DialogHeader className="xs:fixed xs:pt-6">
           <DialogTitle className="text-2xl">{card.name}</DialogTitle>
         </DialogHeader>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-4 items-start">
           {/* Left Column: Description */}
-          <div className="max-h-[32rem] overflow-y-auto pr-2">
+          <div className="max-h-[32rem] overflow-y-auto pr-2 border border-secondary pb-4 rounded-lg p-3">
             <h3 className="font-semibold mb-2 text-lg">{t("details.title")}</h3>
             <DialogDescription className="text-gray-300 mb-4">
               {t("details.text")}

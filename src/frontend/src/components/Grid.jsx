@@ -114,10 +114,13 @@ function Card({ card, paths, partyKey, gridKey }) {
               {visualPoints.map((bullet, index) => (
                 <div key={index} className="flex text-left">
                   <FaCheckCircle className="mr-2 flex-shrink-0 text-secondary" />
-                  <span className="text-gray-700 text-sm">{bullet}</span>
+                  <span className="text-gray-700 text-sm">
+                    {bullet.charAt(0).toUpperCase() + bullet.slice(1)}
+                  </span>
                 </div>
               ))}
             </div>
+
             <MoreInfoButton
               card={card}
               images_dir={images_dir}
@@ -141,12 +144,13 @@ function Grid({ parties_metadata, gridKey }) {
   const cards = Object.entries(parties);
 
   return (
-    <div className="max-w-7xl mx-auto min-h-screen">
+    <div className="max-w-screen-2xl mx-auto min-h-screen">
       <div
         className="grid
                   grid-cols-1
                   sm:grid-cols-2
-                  lg:grid-cols-4
+                  lg:grid-cols-3
+                  xl:grid-cols-4
                   gap-4 sm:gap-6 md:gap-4 lg:gap-8"
       >
         {cards.map(([partyKey, partyData]) => (

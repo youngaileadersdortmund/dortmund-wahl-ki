@@ -16,12 +16,12 @@ export function Slider({ metadata, lang = "de" }) {
 
   const { images, isLoading } = usePartyImages(metadata, lang, true);
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-full">
-        <FadeLoader color="#52B49B" />
-      </div>
-    );
+    if (isLoading)
+      return (
+        <div className="flex justify-center items-center h-full min-h-[400px]">
+          <FadeLoader color="#52B49B" />
+        </div>
+      );
 
   return (
     <Carousel
@@ -51,7 +51,9 @@ export function Slider({ metadata, lang = "de" }) {
                   {image.visualImpactPoints.map((point, idx) => (
                     <div key={idx} className="flex items-start">
                       <FaCheckCircle className="mr-2 mt-2 h-5 w-5 flex-shrink-0 self-start text-secondary" />
-                      <span className="text-xl text-gray-700">{point}</span>
+                      <span className="text-xl text-gray-700">
+                        {point.charAt(0).toUpperCase() + point.slice(1)}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -67,8 +69,8 @@ export function Slider({ metadata, lang = "de" }) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="bg-secondary" />
-      <CarouselNext className="bg-secondary" />
+      <CarouselPrevious className="bg-transparent text-green-600 md:bg-secondary md:text-white" />
+      <CarouselNext className="bg-transparent text-green-600 md:bg-secondary md:text-white" />
     </Carousel>
   );
 }

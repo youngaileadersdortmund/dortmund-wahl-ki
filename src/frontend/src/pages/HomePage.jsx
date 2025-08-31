@@ -36,7 +36,7 @@ function HomePage() {
       <div
         className="w-full lg:max-w-[50%] my-2"
         dangerouslySetInnerHTML={{ __html: t("home.programs_text") }}
-      />
+        />
 
       <Grid parties_metadata={parties_metadata} gridKey={grid} />
 
