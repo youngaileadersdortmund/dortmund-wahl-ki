@@ -19,7 +19,7 @@ window.klaroConfig = {
         if (!window.gtagScriptLoaded) {
           var s = document.createElement('script');
           s.async = true;
-          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-1G346W5BET';
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-VMQPZS6TNY';
           document.head.appendChild(s);
           window.gtagScriptLoaded = true;
         }
@@ -27,7 +27,7 @@ window.klaroConfig = {
         function gtag(){dataLayer.push(arguments);}
         window.gtag = gtag;
         gtag('js', new Date());
-        gtag('config', 'G-1G346W5BET');
+        gtag('config', 'G-VMQPZS6TNY');
       },
       onDecline: function() {
         // Optionally, remove GA cookies here if needed
