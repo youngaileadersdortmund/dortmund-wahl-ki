@@ -13,8 +13,8 @@ const Footer = () => {
       >
         <div className="flex flex-col md:flex-row md:items-center md:justify-between items-center text-center">
           <a
-            href="https://youngaileadersdortmund.github.io/"
-            className="flex flex-col md:flex-row items-center mb-4 md:mb-0 space-y-2 md:space-y-0 md:space-x-3 rtl:space-x-reverse"
+            href="https://youngaileaders-dortmund.de/"
+            className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
           >
             <img
               src={`${base}logo.png`}
@@ -49,7 +49,7 @@ const Footer = () => {
         <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400 text-center">
           © 2025{" "}
           <a
-            href="https://youngaileadersdortmund.github.io/"
+            href="https://youngaileaders-dortmund.de/"
             className="text-primary hover:underline hover:text-black"
           >
             Young AI Leaders - Dortmund Hub

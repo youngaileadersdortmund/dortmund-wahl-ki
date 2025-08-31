@@ -49,30 +49,29 @@ export default function ProjectPage() {
         className="w-full lg:max-w-[50%] my-2"
         dangerouslySetInnerHTML={{ __html: t("projekt.text_top2") }}
       />
-
-    <div className="w-full max-w-[90%] md:max-w-[40%] my-8 flex flex-col md:flex-row justify-between items-center gap-6 mx-auto">
-      <a href="https://youngaileadersdortmund.github.io/" target="_blank">
-        <img
-          src={`${base}logo.png`}
-          className="h-20 md:h-24 object-contain"
-          alt="logo"
-        />
-      </a>
-      <a href="https://www.un.org/sustainabledevelopment/" target="_blank">
-        <img
-          src={`${base}E_SDG_logo_without_UN_emblem_horizontal_Transparent_WEB.png`}
-          className="h-16 md:h-20 object-contain"
-          alt="sdg"
-        />
-      </a>
-      <a href="https://www.un.org/sustainabledevelopment/education/" target="_blank">
-        <img
-          src={`${base}E-WEB-Goal-04.png`}
-          className="h-16 md:h-20 object-contain"
-          alt="goal"
-        />
-      </a>
-    </div>
+      <div className="w-full max-w-[90%] md:max-w-[40%] my-8 flex flex-col md:flex-row justify-between items-center gap-6 mx-auto">
+        <a href="https://youngaileaders-dortmund.de/" target="_blank">
+          <img
+            src={`${base}logo.png`}
+            className="h-24 object-contain"
+            alt="logo"
+          />
+        </a>
+        <a href="https://www.un.org/sustainabledevelopment/" target="_blank">
+          <img
+            src={`${base}E_SDG_logo_without_UN_emblem_horizontal_Transparent_WEB.png`}
+            className="h-20 object-contain"
+            alt="sdg"
+          />
+        </a>
+        <a href="https://www.un.org/sustainabledevelopment/education/" target="_blank">
+          <img
+            src={`${base}E-WEB-Goal-04.png`}
+            className="h-20 object-contain"
+            alt="goal"
+          />
+        </a>
+      </div>
 
       {/* partner info */}
       <div

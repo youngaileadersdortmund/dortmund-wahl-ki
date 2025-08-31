@@ -80,7 +80,7 @@ If you use or refer to our work, please link back to this README, for example vi
 ```
 
 If you have any feedback or questions, feel free to reach out!
-- 🌍 [Website](https://youngaileadersdortmund.github.io/)
+- 🌍 [Website](https://youngaileaders-dortmund.de/)
 - 🔗 [LinkedIn](https://www.linkedin.com/company/young-ai-leaders-dortmund/)
 - 📧 dortmundhub.youngaileaders [at] gmail.com
 
