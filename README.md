@@ -72,7 +72,7 @@ If you use or refer to our work, please link back to this README, for example vi
 ```bibtex
 @misc{yail_dortmund_politics_2025,
   author       = {Raphael Fischer and Nico Koltermann and Jan Krawiec and Louisa von Essen and Youssef Abdelrahim and Tareq Khouja},
-  title        = {{Young} {AI} {Leaders} - {GenAI} for {Dortmund} {Elections}},
+  title        = `{{Young} {AI} {Leaders} - {GenAI} for {Dortmund} {Elections}}`,
   year         = {2025},
   howpublished = {https://dortmund-wahl-ki.de},
   note         = {Experimental project applying generative AI for political education and local elections in Dortmund}
