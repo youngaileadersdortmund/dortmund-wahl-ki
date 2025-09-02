@@ -49,7 +49,7 @@ export default function ProjectPage() {
         className="w-full lg:max-w-[50%] my-2"
         dangerouslySetInnerHTML={{ __html: t("projekt.text_top2") }}
       />
-      <div className="w-full max-w-[40%] my-8 flex flex-row justify-between items-center gap-4 mx-auto">
+      <div className="w-full max-w-[90%] md:max-w-[40%] my-8 flex flex-col md:flex-row justify-between items-center gap-6 mx-auto">
         <a href="https://youngaileaders-dortmund.de/" target="_blank">
           <img
             src={`${base}logo.png`}
@@ -78,29 +78,31 @@ export default function ProjectPage() {
         className="w-full lg:max-w-[50%] my-2"
         dangerouslySetInnerHTML={{ __html: t("projekt.text_top3") }}
       />
-      <div className="w-full max-w-[45%] my-8 flex flex-row justify-between items-center gap-4 mx-auto">
+ 
+      <div className="w-full max-w-[90%] md:max-w-[45%] my-8 flex flex-col md:flex-row justify-between items-center gap-6 mx-auto">
         <a href="https://lamarr-institute.org/" target="_blank">
           <img
             src={`${base}lamarr_logo.png`}
             alt="Lamarr Logo"
-            className="h-16 object-contain"
+            className="h-14 md:h-16 object-contain"
           />
         </a>
         <a href="https://www.jrdo.de/" target="_blank">
           <img
             src={`${base}logo-jugendring-do.svg`}
             alt="Jugendring Logo"
-            className="h-20 object-contain"
+            className="h-16 md:h-20 object-contain"
           />
         </a>
         <a href="https://bundestagswahl.ai/" target="_blank">
           <img
             src={`${base}btwai.png`}
             alt="bundestagswahl.ai Logo"
-            className="h-10 object-contain"
+            className="h-8 md:h-10 object-contain"
           />
         </a>
       </div>
+
       <div
         className="w-full lg:max-w-[50%] my-2"
         dangerouslySetInnerHTML={{ __html: t("projekt.text_top4") }}
@@ -114,6 +116,7 @@ export default function ProjectPage() {
         className="w-full lg:max-w-[50%]"
         dangerouslySetInnerHTML={{ __html: t("projekt.text_team1") }}
       />
+
       <div
         className="w-full
                     lg:max-w-[50%]
@@ -148,7 +151,7 @@ export default function ProjectPage() {
         dangerouslySetInnerHTML={{ __html: t("projekt.text_team2") }}
       />
 
-      <h1 className="justify-self-center text-secondary py-6 md:py-8 text-center whitespace-nowrap">
+      <h1 className="justify-self-center text-secondary py-6 md:py-8 text-center whitespace-normal md:whitespace-nowrap break-words">
         {t("projekt.heading_next")}
       </h1>
       <div

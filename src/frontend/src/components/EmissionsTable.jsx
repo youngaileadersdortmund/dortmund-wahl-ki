@@ -31,33 +31,34 @@ export default function EmissionsTable() {
   const totalEmissions = rows.reduce((sum, row) => sum + Number(row.emissions), 0);
 
   return (
-    <div style={{ padding: "24px" }}>
-      <table>
-        <thead>
-          <tr>
-            <th>{t("technik.tab_heading1")}</th>
-            <th>{t("technik.tab_heading2")}</th>
-            <th>{t("technik.tab_heading3")}</th>
-            <th>{t("technik.tab_heading4")}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, i) => (
-            <tr key={i}>
-              <td>{t(`technik.tab_${row.experiment_id}`)}</td>
-              <td>{(Number(row.duration) / 60).toFixed(2)} min</td>
-              <td>{Number(row.energy_consumed).toFixed(2)} kWh</td>
-              <td>{Number(row.emissions).toFixed(2)} CO2eq</td>
-            </tr>
-          ))}
-          <tr style={{ fontWeight: 'bold' }}>
-            <td>{t('technik.tab_total')}</td>
-            <td>{(totalDuration / 60).toFixed(2)} min</td>
-            <td>{totalEnergy.toFixed(2)} kWh</td>
-            <td>{totalEmissions.toFixed(2)} CO2eq</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div className="p-4">
+  <table className="w-full text-xs sm:text-sm md:text-base border-collapse border border-gray-300">
+    <thead className="bg-gray-100">
+      <tr>
+        <th className="px-1 py-1 sm:px-2 sm:py-2 text-left">{t("technik.tab_heading1")}</th>
+        <th className="px-1 py-1 sm:px-2 sm:py-2 text-left">{t("technik.tab_heading2")}</th>
+        <th className="px-1 py-1 sm:px-2 sm:py-2 text-left">{t("technik.tab_heading3")}</th>
+        <th className="px-1 py-1 sm:px-2 sm:py-2 text-left">{t("technik.tab_heading4")}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row, i) => (
+        <tr key={i} className="border-t border-gray-200">
+          <td className="px-1 py-1 sm:px-2 sm:py-2">{t(`technik.tab_${row.experiment_id}`)}</td>
+          <td className="px-1 py-1 sm:px-2 sm:py-2">{(Number(row.duration) / 60).toFixed(2)} min</td>
+          <td className="px-1 py-1 sm:px-2 sm:py-2">{Number(row.energy_consumed).toFixed(2)} kWh</td>
+          <td className="px-1 py-1 sm:px-2 sm:py-2">{Number(row.emissions).toFixed(2)} CO2eq</td>
+        </tr>
+      ))}
+      <tr className="font-bold border-t border-gray-400">
+        <td className="px-1 py-1 sm:px-2 sm:py-2">{t("technik.tab_total")}</td>
+        <td className="px-1 py-1 sm:px-2 sm:py-2">{(totalDuration / 60).toFixed(2)} min</td>
+        <td className="px-1 py-1 sm:px-2 sm:py-2">{totalEnergy.toFixed(2)} kWh</td>
+        <td className="px-1 py-1 sm:px-2 sm:py-2">{totalEmissions.toFixed(2)} CO2eq</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  
   );
 }
