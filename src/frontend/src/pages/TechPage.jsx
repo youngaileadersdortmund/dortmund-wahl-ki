@@ -18,7 +18,7 @@ export default function TechPage() {
       />
       <div className="w-full lg:max-w-[50%] my-8">
         <img
-          src={`${base}pipeline.png`}
+          src={`${base}pipeline_en.png`}
           className="w-full rounded"
           alt="pipeline"
         />
