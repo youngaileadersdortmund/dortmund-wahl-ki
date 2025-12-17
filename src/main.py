@@ -93,6 +93,8 @@ if __name__ == '__main__':
     parser.add_argument("--guidance", type=float, default=0., help="Prompt guidance strength")
     parser.add_argument("--num_steps", type=int, default=5, help="Diffusion steps")
     parser.add_argument("--n_images", type=int, default=5, help="Number of images to create")
+    parser.add_argument("--vlm", type=str, default="Qwen/Qwen2-VL-7B-Instruct")
+    # TODO: Evaluate mode #########################
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
