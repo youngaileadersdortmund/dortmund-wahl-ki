@@ -226,3 +226,33 @@ def impact_point_comparison_analysis(dirname, model_name="Qwen/Qwen3-30B-A3B"):
 
     print(print_str)
     return analysis
+
+def load_vlm(model_name: str = "Qwen/Qwen2-VL-7B-Instruct") -> tuple[transformers.Qwen2VLForConditionalGeneration, transformers.AutoProcessor]:
+    from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
+    model = Qwen2VLForConditionalGeneration.from_pretrained(
+        model_name, torch_dtype="auto", device_map="auto"
+    )
+    processor = AutoProcessor.from_pretrained(model_name)
+    return (model, processor)
+
+def describe_image_vlm(model: transformers.Qwen2VLForConditionalGeneration, processor: transformers.AutoProcessor, image_path: str) -> str:
+    from PIL import Image
+    image = Image.open(image_path).convert("RGB")
+    prompt = "Analyze this image of a city. Describe the visible elements related to urban infrastructure, public transportation, green spaces, and building styles. Mention any specific details that suggest a futuristic or policy-driven change."
+    messages = [
+        {
+            "role":"user",
+            "content": [
+                {"type": "image", "image": image},
+                {"type": "text", "text": prompt}
+            ]
+        }
+    ]
+    text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    inputs = processor(text=[text], images=[image], padding=True, return_tensors="pt").to(model.device)
+    
+    generated_ids = model.generate(**inputs, max_new_tokens=512)
+    generated_ids_trimmed = [out_ids[len(in_ids):] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)]
+    output_text = processor.batch_decode(generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False)
+    return output_text[0]
+

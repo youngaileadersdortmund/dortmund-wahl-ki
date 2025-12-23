@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 from codecarbon import OfflineEmissionsTracker
 
-from llm import load_llm, load_translation_model, translate, translate_pdf, reason_about_visual_points, summarize_content
+from llm import load_llm, load_translation_model, translate, translate_pdf, reason_about_visual_points, summarize_content, load_vlm, describe_image_vlm
 from images import load_model_diffusers, generate_images_diffusers
 
 
@@ -81,7 +81,7 @@ def translate_kommunalomat(model, fname, output_dir, only_approved=True):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Iterative processing of party programs.")
-    parser.add_argument("--mode", type=str, default='translate', choices=["translate", "summarize", "reason", "translate_results", "generate_images"], help="Processing mode")
+    parser.add_argument("--mode", type=str, default='translate', choices=["translate", "summarize", "reason", "translate_results", "generate_images", "describe_image"], help="Processing mode")
     parser.add_argument("--input_dir", type=str, default="programs", help="Directory containing party program pdfs")
     parser.add_argument("--output_dir", type=str, default="src/frontend/public/political_content_dortmund_2025", help="Output directory for results")
     parser.add_argument("--override", action='store_true', help="Override existing files")
@@ -93,7 +93,7 @@ if __name__ == '__main__':
     parser.add_argument("--guidance", type=float, default=0., help="Prompt guidance strength")
     parser.add_argument("--num_steps", type=int, default=5, help="Diffusion steps")
     parser.add_argument("--n_images", type=int, default=5, help="Number of images to create")
-    parser.add_argument("--vlm", type=str, default="Qwen/Qwen2-VL-7B-Instruct")
+    parser.add_argument("--vlm", type=str, default="Qwen/Qwen2-VL-7B-Instruct", help="Name of the vision language model for descriping images.")
     # TODO: Evaluate mode #########################
     args = parser.parse_args()
 
@@ -220,5 +220,44 @@ if __name__ == '__main__':
                             continue
                     print(f"Generating images for {save_path}")
                     generate_images_diffusers(model, input, save_path, args.guidance, args.num_steps, args.n_images)
+                    
+                                     
+    elif args.mode == "describe_image":
+        print('DESCRIBING IMAGES WITH VLM')
+        model, processor = load_vlm(args.vlm)
+        
+        for root, dirs, files in os.walk(args.output_dir):
+            for input_fname in files:
+                if os.path.basename(input_fname) == "prompt.txt":
+                    # Find corresponding image directory
+                    img_dir_name = f'img_{args.image_generator.split("/")[-1]}_guid{args.guidance}_nsteps{args.num_steps}'
+                    img_dir = os.path.join(root, img_dir_name)
+                    
+                    if not os.path.isdir(img_dir):
+                        continue
+                        
+                    # Output file for descriptions
+                    desc_file = os.path.join(root, f'images_description_{args.vlm.split("/")[-1]}.txt')
+                    if os.path.isfile(desc_file):
+                        if args.override:
+                            os.remove(desc_file)
+                        else:
+                            print(f"{desc_file} already exists, skipping.")
+                            continue
 
+                    print(f"Describing images in {img_dir}")
+                    descriptions = []
+                    
+                    # Process all images in the directory
+                    image_files = sorted([f for f in os.listdir(img_dir) if f.endswith(('.png', '.jpg', '.jpeg'))])
+                    for img_file in image_files:
+                        img_path = os.path.join(img_dir, img_file)
+                        print(f"  - Processing {img_file}...")
+                        description = describe_image_vlm(model, processor, img_path)
+                        descriptions.append(f"Image: {img_file}\nDescription: {description}\n")
+                    
+                    with open(desc_file, "w") as f:
+                        f.write("\n".join(descriptions))
+                    print(f"Saved descriptions to {desc_file}")
+                    
     tracker.stop()
