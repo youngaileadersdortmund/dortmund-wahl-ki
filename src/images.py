@@ -25,7 +25,7 @@ def generate_images_diffusers(model, visual_details, save_path, guidance=0., num
     import torch
     if not os.path.isdir(save_path):
         os.makedirs(save_path)
-    prompt = "Dortmund city, with additional " + visual_details
+    prompt = "City in Germany, with additional " + visual_details
     images = model(
         prompt,
         height=512,
