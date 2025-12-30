@@ -18,3 +18,9 @@ diffusers
 PyPDF2
 pycryptodome
 openpyxl
+tqdm
+nltk
+rouge_score
+sentence_transformers
+scikit-learn
+Pillow
