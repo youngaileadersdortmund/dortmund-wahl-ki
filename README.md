@@ -1,9 +1,9 @@
-# dortmund-wahl-ki - GenAI for Dortmund Elections
+# AI for Political Education - Supplementary Material (anonymized for reviewers)
 
-#### We asked AI – How is Dortmund 2025 changing through politics?
-This project explores how generative AI can support **political education** and **local voter engagement** in Dortmund. Using party programs and survey responses, we analyze content with large language models, generate visualizations of political visions, and make the results accessible via our [public webpage](https://dortmund-wahl-ki.de)!
+#### We asked AI – How is our city changing through municipal politics?
+This repository entails a modular AI pipeline as well as results from a broad user survey, allowing to explore how generative AI can best support **political education**. For our work, we have analyzed textual information from election platforms with large language models, generated visualizations of these political agendas, and collected feedback from society via a survey. 
 
-If you want to learn more about this project and its background, you can read our [publicly available research paper](https://arxiv.org/abs/2510.11749). As part of the global [Young AI Leaders](https://aiforgood.itu.int/young-ai-leaders-community/) community, our initiative promotes **UN SDG 4: Quality Education** through the transparent use of AI. 
+The respective research paper "Characterizing the Pros and Cons of Using AI for Political Education" is under review at FAccT '26. The link to the publicy launched webpage as well as obvious city-specific details were omitted for the sake of double-blind reviewing.
 
 ## 🚀 Running the AI
 
@@ -11,21 +11,15 @@ We implemented a central [main.py](src/main.py) script that allows to perform al
 
 If you want to run our solution locally, you can follow the steps below. Note we used AI models with up to 30B parameters, requiring a certain amount of processing power and VRAM. 
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/youngaileadersdortmund/dortmund-wahl-ki.git
-    cd dortmund-wahl-ki
-    ```
-
-2. Install dependencies:
+1. Install dependencies:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-3. Create a `programs` folder and use it to store the political programs that shall be analyzed.
+2. Create a `programs` folder and use it to store the political programs that shall be analyzed.
 
-4. Run the AI pipeline:
+3. Run the AI pipeline:
 
     ```bash
     for m in "translate" "summarize" "reason" "translate_results" "generate_images"
@@ -50,7 +44,7 @@ docker compose up
 
 ## 📖 About the Project
 
-- Data Sources: Party election programs and [Kommunalomat](https://xn--whlt-loa.nrw/start/kommunalomat/) responses (obtained from Jugendring Dortmund).
+- Data Sources: Party election programs and [Kommunalomat](https://xn--whlt-loa.nrw/start/kommunalomat/) responses.
 
 - Models:
 
@@ -64,35 +58,4 @@ docker compose up
 
 This project is experimental and aims to stimulate discourse. **It is not a voting recommendation.**
 
-## 📬 Contact and Use
-
-This project was conducted by the Young AI Leaders - Dortmund Hub.
-If you use or refer to our work, please link back to us, for example via the following Bibtex entries:
-
-```bibtex
-@misc{yail_dortmund_wahl_ki,
-      title={Benefits and Limitations of Using {GenAI} for Political Education and Municipal Elections}, 
-      author={Raphael Fischer and Youssef Abdelrahim and Katharina Poitz},
-      year={2025},
-      eprint={2510.11749},
-      doi={10.48550/arXiv.2510.11749},
-      url={https://arxiv.org/abs/2510.11749}, 
-}
-```
-
-```bibtex
-@misc{yail_dortmund_politics_2025,
-  author       = {Raphael Fischer and Nico Koltermann and Jan Krawiec and Louisa von Essen and Youssef Abdelrahim and Tareq Khouja},
-  title        = {{Young} {AI} {Leaders} - {GenAI} for {Dortmund} {Elections}},
-  year         = {2025},
-  howpublished = {https://dortmund-wahl-ki.de},
-  note         = {Experimental project applying generative AI for political education and local elections in Dortmund}
-}
-```
-
-If you have any feedback or questions, feel free to reach out!
-- 🌍 [Website](https://youngaileaders-dortmund.de/)
-- 🔗 [LinkedIn](https://www.linkedin.com/company/young-ai-leaders-dortmund/)
-- 📧 dortmundhub.youngaileaders [at] gmail.com
-
-© Young AI Leaders - Dortmund Hub
+© Authors of "Characterizing the Pros and Cons of Using AI for Political Education

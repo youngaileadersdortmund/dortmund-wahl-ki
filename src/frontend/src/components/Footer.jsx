@@ -13,17 +13,12 @@ const Footer = () => {
       >
         <div className="flex flex-col md:flex-row md:items-center md:justify-between items-center text-center">
           <a
-            href="https://youngaileaders-dortmund.de/"
+            href="https://github.com/tmplxz/ai-for-politics"
             className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
           >
-            <img
-              src={`${base}logo.png`}
-              className="h-12"
-              alt="Young AI Leaders Logo"
-            />
             <span className="text-black self-center text-xl whitespace-nowrap dark:text-white">
-              <p>Young AI Leaders</p>
-              <p>Dortmund Hub</p>
+              <p>Authors</p>
+              <p>(anonymized)</p>
             </span>
           </a>
             <ul className="flex flex-row items-center mb-6 text-sm font-medium text-gray-500 dark:text-gray-400 p-4">
@@ -49,10 +44,10 @@ const Footer = () => {
         <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400 text-center">
           © 2025{" "}
           <a
-            href="https://youngaileaders-dortmund.de/"
+            href="https://github.com/tmplxz/ai-for-politics"
             className="text-primary hover:underline hover:text-black"
           >
-            Young AI Leaders - Dortmund Hub
+            Authors (anonymized)
           </a>
           . All Rights Reserved.
         </span>
