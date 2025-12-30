@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 from codecarbon import OfflineEmissionsTracker
 
-from llm import load_llm, load_translation_model, translate, translate_pdf, reason_about_visual_points, summarize_content, load_vlm, describe_image_vlm
+from llm import load_llm, load_translation_model, translate, translate_pdf, reason_about_visual_points, summarize_content, load_vlm, describe_image_vlm, evaluate_similarity, evaluate_alignment_with_llm
 from images import load_model_diffusers, generate_images_diffusers
 
 
@@ -81,7 +81,7 @@ def translate_kommunalomat(model, fname, output_dir, only_approved=True):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Iterative processing of party programs.")
-    parser.add_argument("--mode", type=str, default='translate', choices=["translate", "summarize", "reason", "translate_results", "generate_images", "describe_image"], help="Processing mode")
+    parser.add_argument("--mode", type=str, default='translate', choices=["translate", "summarize", "reason", "translate_results", "generate_images", "describe_image", "evaluate"], help="Processing mode")
     parser.add_argument("--input_dir", type=str, default="programs", help="Directory containing party program pdfs")
     parser.add_argument("--output_dir", type=str, default="src/frontend/public/political_content_dortmund_2025", help="Output directory for results")
     parser.add_argument("--override", action='store_true', help="Override existing files")
@@ -94,7 +94,8 @@ if __name__ == '__main__':
     parser.add_argument("--num_steps", type=int, default=5, help="Diffusion steps")
     parser.add_argument("--n_images", type=int, default=5, help="Number of images to create")
     parser.add_argument("--vlm", type=str, default="Qwen/Qwen2-VL-7B-Instruct", help="Name of the vision language model for descriping images.")
-    # TODO: Evaluate mode #########################
+    # evaluation
+    parser.add_argument("--eval_method", type=str, default="embedding", choices=["embedding", "llm", "both"], help="Evaluation method: 'embedding' (BLEU/ROUGE/Cosine), 'llm' (LLM-as-Judge), or 'both'")
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -237,7 +238,14 @@ if __name__ == '__main__':
                         continue
                         
                     # Output file for descriptions
-                    desc_file = os.path.join(root, f'images_description_{args.vlm.split("/")[-1]}.txt')
+                    party_name = os.path.basename(os.path.dirname(root))
+                    result_folder_name = os.path.basename(root)
+                    source_type = "program" if "program" in result_folder_name else "kommunalomat"
+                    
+                    # Save in party directory (parent of root)
+                    party_dir = os.path.dirname(root)
+                    desc_file = os.path.join(party_dir, f'{party_name}_{source_type}_images_description_{args.vlm.split("/")[-1]}.txt')
+                    
                     if os.path.isfile(desc_file):
                         if args.override:
                             os.remove(desc_file)
@@ -246,18 +254,106 @@ if __name__ == '__main__':
                             continue
 
                     print(f"Describing images in {img_dir}")
-                    descriptions = []
                     
-                    # Process all images in the directory
+                    # Collect all image paths
                     image_files = sorted([f for f in os.listdir(img_dir) if f.endswith(('.png', '.jpg', '.jpeg'))])
-                    for img_file in image_files:
-                        img_path = os.path.join(img_dir, img_file)
-                        print(f"  - Processing {img_file}...")
-                        description = describe_image_vlm(model, processor, img_path)
-                        descriptions.append(f"Image: {img_file}\nDescription: {description}\n")
+                    image_paths = [os.path.join(img_dir, f) for f in image_files]
+                    
+                    if not image_paths:
+                        print(f"No images found in {img_dir}, skipping.")
+                        continue
+                    
+                    print(f"  - Processing {len(image_paths)} images together...")
+                    description = describe_image_vlm(model, processor, image_paths, n_points=args.n_points)
                     
                     with open(desc_file, "w") as f:
-                        f.write("\n".join(descriptions))
-                    print(f"Saved descriptions to {desc_file}")
+                        f.write(description)
+                    print(f"Saved description to {desc_file}")
+
+    elif args.mode == "evaluate":
+        print('EVALUATING SIMILARITY BETWEEN PROMPTS AND VLM DESCRIPTIONS')
+        print(f'Evaluation method: {args.eval_method}')
+        results = []
+        
+        # Load LLM if needed for LLM-based evaluation
+        llm = None
+        if args.eval_method in ["llm", "both"]:
+            print("Loading LLM for evaluation...")
+            llm = load_llm(args.llm)
+        
+        for party in party_dirs:
+            party_path = os.path.join(args.output_dir, party)
+            
+            for source_type in ["program", "kommunalomat"]:
+                # Find prompt.txt
+                results_dir = os.path.join(party_path, f'results_p{args.n_points}_{args.llm.replace("/", "_")}_{source_type}')
+                prompt_file = os.path.join(results_dir, "prompt.txt")
+                
+                # Find corresponding VLM description
+                desc_file = os.path.join(party_path, f'{party}_{source_type}_images_description_{args.vlm.split("/")[-1]}.txt')
+                
+                if not os.path.isfile(prompt_file):
+                    print(f"Prompt file not found: {prompt_file}, skipping.")
+                    continue
+                if not os.path.isfile(desc_file):
+                    print(f"Description file not found: {desc_file}, skipping.")
+                    continue
+                
+                # Read files
+                with open(prompt_file, "r") as f:
+                    reference = f.read().strip()
+                with open(desc_file, "r") as f:
+                    candidate = f.read().strip()
+                
+                print(f"Evaluating {party} - {source_type}")
+                print(f"  Reference: {reference}")
+                print(f"  Candidate: {candidate}")
+                
+                # Initialize scores dict
+                scores = {'party': party, 'source': source_type, 'reference': reference, 'candidate': candidate}
+                
+                # Compute embedding-based metrics (BLEU, ROUGE, Cosine)
+                if args.eval_method in ["embedding", "both"]:
+                    embedding_scores = evaluate_similarity(reference, candidate)
+                    scores.update(embedding_scores)
+                    print(f"  Embedding Scores: BLEU={embedding_scores['bleu']}, ROUGE-1={embedding_scores['rouge1_f']}, ROUGE-L={embedding_scores['rougeL_f']}, Cosine={embedding_scores['cosine_similarity']}")
+                
+                # Compute LLM-based evaluation
+                if args.eval_method in ["llm", "both"]:
+                    llm_scores = evaluate_alignment_with_llm(llm, reference, candidate)
+                    scores.update(llm_scores)
+                    print(f"  LLM Score: {llm_scores['llm_score']}/10 - {llm_scores['llm_reasoning']}")
+                
+                results.append(scores)
+        
+        # Save results to CSV
+        if results:
+            results_df = pd.DataFrame(results)
+            
+            # Determine column order based on eval method
+            base_cols = ['party', 'source']
+            metric_cols = []
+            if args.eval_method in ["embedding", "both"]:
+                metric_cols.extend(['bleu', 'rouge1_f', 'rouge2_f', 'rougeL_f', 'cosine_similarity'])
+            if args.eval_method in ["llm", "both"]:
+                metric_cols.extend(['llm_score', 'llm_reasoning'])
+            end_cols = ['reference', 'candidate']
+            
+            column_order = base_cols + metric_cols + end_cols
+            results_df = results_df[column_order]
+            
+            # Save with method-specific filename
+            csv_filename = f'evaluation_results_{args.eval_method}.csv'
+            csv_path = os.path.join(args.output_dir, csv_filename)
+            results_df.to_csv(csv_path, index=False)
+            print(f"\nSaved evaluation results to {csv_path}")
+            
+            # Print summary statistics
+            print("\n=== Summary Statistics ===")
+            if args.eval_method in ["embedding", "both"]:
+                print(results_df[['bleu', 'rouge1_f', 'rouge2_f', 'rougeL_f', 'cosine_similarity']].describe())
+            if args.eval_method in ["llm", "both"]:
+                print(f"\nLLM Score Statistics:")
+                print(results_df['llm_score'].describe())
                     
     tracker.stop()

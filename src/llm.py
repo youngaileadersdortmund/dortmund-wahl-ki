@@ -235,24 +235,108 @@ def load_vlm(model_name: str = "Qwen/Qwen2-VL-7B-Instruct") -> tuple[transformer
     processor = AutoProcessor.from_pretrained(model_name)
     return (model, processor)
 
-def describe_image_vlm(model: transformers.Qwen2VLForConditionalGeneration, processor: transformers.AutoProcessor, image_path: str) -> str:
+def describe_image_vlm(model: transformers.Qwen2VLForConditionalGeneration, processor: transformers.AutoProcessor, image_paths: list[str], n_points: int = 5) -> str:
     from PIL import Image
-    image = Image.open(image_path).convert("RGB")
-    prompt = "Analyze this image of a city. Describe the visible elements related to urban infrastructure, public transportation, green spaces, and building styles. Mention any specific details that suggest a futuristic or policy-driven change."
-    messages = [
-        {
-            "role":"user",
-            "content": [
-                {"type": "image", "image": image},
-                {"type": "text", "text": prompt}
-            ]
-        }
-    ]
-    text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    inputs = processor(text=[text], images=[image], padding=True, return_tensors="pt").to(model.device)
+    images = [Image.open(path).convert("RGB") for path in image_paths]
     
-    generated_ids = model.generate(**inputs, max_new_tokens=512)
+
+    content = [{"type": "image", "image": img} for img in images]
+    
+    content.append({"type": "text", "text": f"Analyze these {len(images)} images of the same city. Identify {n_points} key urban planning or policy-related visual aspects visible in these images. Focus on infrastructure, public spaces, transportation systems, environmental features, and architectural elements. Describe each aspect using a descriptive phrase of at least 2 words (e.g., adjective + noun). Do not use single words. Return ONLY a comma-separated list ending with a period, nothing else."})
+    
+    messages = [{"role": "user", "content": content}]
+    text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    inputs = processor(text=[text], images=images, padding=True, return_tensors="pt").to(model.device)
+    
+    generated_ids = model.generate(**inputs, max_new_tokens=128)
     generated_ids_trimmed = [out_ids[len(in_ids):] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)]
     output_text = processor.batch_decode(generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False)
     return output_text[0]
 
+def evaluate_similarity(reference: str, candidate: str) -> dict:
+    from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
+    from rouge_score import rouge_scorer
+    from sentence_transformers import SentenceTransformer
+    from sklearn.metrics.pairwise import cosine_similarity
+    
+    # Tokenize for BLEU (split by comma and clean up)
+    ref_tokens = [token.strip().lower() for token in reference.replace('.', '').split(',')]
+    cand_tokens = [token.strip().lower() for token in candidate.replace('.', '').split(',')]
+    
+    # BLEU score with smoothing (handles short sequences)
+    smoothie = SmoothingFunction().method1
+    bleu_score = sentence_bleu([ref_tokens], cand_tokens, smoothing_function=smoothie)
+    
+    # ROUGE scores
+    scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
+    rouge_scores = scorer.score(reference.lower(), candidate.lower())
+    
+    # Cosine similarity using sentence embeddings
+    embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+    ref_embedding = embedding_model.encode([reference])
+    cand_embedding = embedding_model.encode([candidate])
+    cos_sim = cosine_similarity(ref_embedding, cand_embedding)[0][0]
+    
+    return {
+        'bleu': round(bleu_score, 4),
+        'rouge1_f': round(rouge_scores['rouge1'].fmeasure, 4),
+        'rouge2_f': round(rouge_scores['rouge2'].fmeasure, 4),
+        'rougeL_f': round(rouge_scores['rougeL'].fmeasure, 4),
+        'cosine_similarity': round(float(cos_sim), 4)
+    }
+
+
+def evaluate_alignment_with_llm(llm, reference: str, candidate: str) -> dict:
+    model, tokenizer = llm
+    
+    judge_prompt = f"""You are an impartial evaluator assessing how well an AI-generated image represents intended policy impacts.
+
+    **Intended Policy Impacts (what the image should show):**
+    {reference}
+
+    **Observed Image Description (what the AI actually generated):**
+    {candidate}
+
+    **Your Task:**
+    1. Analyze how well the observed image description captures the key elements from the intended policy impacts.
+    2. Consider semantic similarity, not just exact word matches. For example, "bike lanes" and "cycling infrastructure" should be considered equivalent.
+    3. Rate the alignment on a scale of 1-10:
+    - 1-3: Poor alignment - Most key elements are missing or misrepresented
+    - 4-6: Moderate alignment - Some key elements are captured, but significant aspects are missing
+    - 7-9: Good alignment - Most key elements are well represented with minor omissions
+    - 10: Excellent alignment - All key elements are accurately represented
+
+    **Respond with ONLY a JSON object in this exact format (no other text):**
+    {{"score": <integer 1-10>, "reasoning": "<brief explanation in 1-2 sentences>"}}
+    
+    """
+
+    _, answer = reason(model, tokenizer, judge_prompt, max_new_tokens=512)
+    
+    # Parse the JSON response
+    try:
+        # Try to extract JSON from the answer
+        import re
+        json_match = re.search(r'\{[^}]+\}', answer)
+        if json_match:
+            result = json.loads(json_match.group())
+            score = int(result.get('score', 5))
+            reasoning = result.get('reasoning', 'No reasoning provided')
+        else:
+            # Fallback: try to parse the whole answer
+            result = json.loads(answer)
+            score = int(result.get('score', 5))
+            reasoning = result.get('reasoning', 'No reasoning provided')
+    except (json.JSONDecodeError, ValueError, AttributeError):
+        # If parsing fails, try to extract score from text
+        score = 5  # fallback score
+        reasoning = f"Failed to parse LLM response: {answer[:200]}"
+        # Try to find a number in the response
+        numbers = re.findall(r'\b([1-9]|10)\b', answer)
+        if numbers:
+            score = int(numbers[0])
+    
+    return {
+        'llm_score': score,
+        'llm_reasoning': reasoning
+    }
