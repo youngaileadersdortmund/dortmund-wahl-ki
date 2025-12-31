@@ -96,6 +96,8 @@ if __name__ == '__main__':
     parser.add_argument("--vlm", type=str, default="Qwen/Qwen2-VL-7B-Instruct", help="Name of the vision language model for descriping images.")
     # evaluation
     parser.add_argument("--eval_method", type=str, default="embedding", choices=["embedding", "llm", "both"], help="Evaluation method: 'embedding' (BLEU/ROUGE/Cosine), 'llm' (LLM-as-Judge), or 'both'")
+    parser.add_argument("--parties", type=str, nargs='+', default=None, help="Specific parties to evaluate (e.g., --parties spd cdu). If not specified, all parties are evaluated.")
+    parser.add_argument("--sources", type=str, nargs='+', default=None, choices=["program", "kommunalomat"], help="Specific sources to evaluate (e.g., --sources program). If not specified, both are evaluated.")
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
@@ -275,16 +277,32 @@ if __name__ == '__main__':
         print(f'Evaluation method: {args.eval_method}')
         results = []
         
+        # Filter parties if specified
+        parties_to_evaluate = args.parties if args.parties else party_dirs
+        if args.parties:
+            # Validate that specified parties exist
+            invalid_parties = [p for p in args.parties if p not in party_dirs]
+            if invalid_parties:
+                print(f"Warning: The following parties were not found: {invalid_parties}")
+            parties_to_evaluate = [p for p in args.parties if p in party_dirs]
+            print(f"Evaluating specific parties: {parties_to_evaluate}")
+        
         # Load LLM if needed for LLM-based evaluation
         llm = None
         if args.eval_method in ["llm", "both"]:
             print("Loading LLM for evaluation...")
             llm = load_llm(args.llm)
         
-        for party in party_dirs:
+        # Filter sources if specified
+        sources_to_evaluate = args.sources if args.sources else ["program", "kommunalomat"]
+        
+        total_evaluations = len(parties_to_evaluate) * len(sources_to_evaluate)
+        current_eval = 0
+        
+        for party in parties_to_evaluate:
             party_path = os.path.join(args.output_dir, party)
             
-            for source_type in ["program", "kommunalomat"]:
+            for source_type in sources_to_evaluate:
                 # Find prompt.txt
                 results_dir = os.path.join(party_path, f'results_p{args.n_points}_{args.llm.replace("/", "_")}_{source_type}')
                 prompt_file = os.path.join(results_dir, "prompt.txt")
@@ -305,26 +323,31 @@ if __name__ == '__main__':
                 with open(desc_file, "r") as f:
                     candidate = f.read().strip()
                 
-                print(f"Evaluating {party} - {source_type}")
+                current_eval += 1
+                print(f"\n[{current_eval}/{total_evaluations}] Evaluating {party} - {source_type}")
                 print(f"  Reference: {reference}")
                 print(f"  Candidate: {candidate}")
                 
                 # Initialize scores dict
                 scores = {'party': party, 'source': source_type, 'reference': reference, 'candidate': candidate}
                 
-                # Compute embedding-based metrics (BLEU, ROUGE, Cosine)
-                if args.eval_method in ["embedding", "both"]:
-                    embedding_scores = evaluate_similarity(reference, candidate)
-                    scores.update(embedding_scores)
-                    print(f"  Embedding Scores: BLEU={embedding_scores['bleu']}, ROUGE-1={embedding_scores['rouge1_f']}, ROUGE-L={embedding_scores['rougeL_f']}, Cosine={embedding_scores['cosine_similarity']}")
-                
-                # Compute LLM-based evaluation
-                if args.eval_method in ["llm", "both"]:
-                    llm_scores = evaluate_alignment_with_llm(llm, reference, candidate)
-                    scores.update(llm_scores)
-                    print(f"  LLM Score: {llm_scores['llm_score']}/10 - {llm_scores['llm_reasoning']}")
-                
-                results.append(scores)
+                try:
+                    # Compute embedding-based metrics (BLEU, ROUGE, Cosine)
+                    if args.eval_method in ["embedding", "both"]:
+                        embedding_scores = evaluate_similarity(reference, candidate)
+                        scores.update(embedding_scores)
+                        print(f"  Embedding Scores: BLEU={embedding_scores['bleu']}, ROUGE-1={embedding_scores['rouge1_f']}, ROUGE-L={embedding_scores['rougeL_f']}, Cosine={embedding_scores['cosine_similarity']}")
+                    
+                    # Compute LLM-based evaluation
+                    if args.eval_method in ["llm", "both"]:
+                        llm_scores = evaluate_alignment_with_llm(llm, reference, candidate)
+                        scores.update(llm_scores)
+                        print(f"  LLM Score: {llm_scores['llm_score']}/10 - {llm_scores['llm_reasoning']}")
+                    
+                    results.append(scores)
+                except Exception as e:
+                    print(f"  ERROR: Failed to evaluate {party} - {source_type}: {e}")
+                    print(f"  Continuing with next evaluation...")
         
         # Save results to CSV
         if results:
@@ -345,8 +368,19 @@ if __name__ == '__main__':
             # Save with method-specific filename
             csv_filename = f'evaluation_results_{args.eval_method}.csv'
             csv_path = os.path.join(args.output_dir, csv_filename)
+            
+            # If specific parties were selected and CSV exists, merge with existing data
+            if args.parties and os.path.isfile(csv_path):
+                existing_df = pd.read_csv(csv_path)
+                # Remove rows for the parties we just evaluated
+                existing_df = existing_df[~existing_df['party'].isin(parties_to_evaluate)]
+                # Combine existing data with new results
+                results_df = pd.concat([existing_df, results_df], ignore_index=True)
+                results_df = results_df.sort_values(['party', 'source']).reset_index(drop=True)
+                print(f"\nUpdated existing CSV with results for: {parties_to_evaluate}")
+            
             results_df.to_csv(csv_path, index=False)
-            print(f"\nSaved evaluation results to {csv_path}")
+            print(f"Saved evaluation results to {csv_path}")
             
             # Print summary statistics
             print("\n=== Summary Statistics ===")
