@@ -94,6 +94,7 @@ if __name__ == '__main__':
     parser.add_argument("--guidance", type=float, default=0., help="Prompt guidance strength")
     parser.add_argument("--num_steps", type=int, default=5, help="Diffusion steps")
     parser.add_argument("--n_images", type=int, default=5, help="Number of images to create")
+    # VLM describing
     parser.add_argument("--vlm", type=str, default="Qwen/Qwen2-VL-7B-Instruct", help="Name of the vision language model for descriping images.")
     # evaluation
     parser.add_argument("--eval_method", type=str, default="embedding", choices=["embedding", "llm", "both"], help="Evaluation method: 'embedding' (BLEU/ROUGE/Cosine), 'llm' (LLM-as-Judge), or 'both'")
@@ -432,7 +433,6 @@ if __name__ == '__main__':
                 metric_cols.extend(['llm_score', 'llm_reasoning'])
             end_cols = ['reference', 'candidate']
             
-            # Ensure all columns exist
             for col in base_cols + metric_cols + end_cols:
                 if col not in results_df.columns:
                     results_df[col] = None
@@ -445,8 +445,7 @@ if __name__ == '__main__':
             eval_dir = os.path.join(args.output_dir, "evaluations")
             os.makedirs(eval_dir, exist_ok=True)
             csv_path = os.path.join(eval_dir, csv_filename)
-            
-            # If specific parties were selected and CSV exists, merge with existing data
+
             if args.parties and os.path.isfile(csv_path):
                 existing_df = pd.read_csv(csv_path)
                 
@@ -455,8 +454,7 @@ if __name__ == '__main__':
                     existing_df['image_id'] = 'aggregated'
 
                 # Remove rows for the parties we just evaluated to avoid duplicates
-                # We filter out rows where party AND source match what we just processed
-                # But here we processed all sources for the selected parties.
+                # Processed all sources for the selected parties.
                 existing_df = existing_df[~existing_df['party'].isin(parties_to_evaluate)]
                 
                 # Combine existing data with new results
