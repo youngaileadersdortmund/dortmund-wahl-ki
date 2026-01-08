@@ -2,6 +2,7 @@ import os
 import argparse
 import shutil
 import glob
+from datetime import datetime
 
 import pandas as pd
 import numpy as np
@@ -103,7 +104,19 @@ if __name__ == '__main__':
     os.makedirs(args.output_dir, exist_ok=True)
     party_dirs = [d for d in os.listdir(args.output_dir) if os.path.isdir(os.path.join(args.output_dir, d))]
 
-    tracker = OfflineEmissionsTracker(log_level='error', country_iso_code="DEU", output_dir=args.output_dir, experiment_id=args.mode)
+    # Use a timestamp to ensure emissions are saved in separate files and not overriding
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    emissions_dir = os.path.join(args.output_dir, "emissions")
+    os.makedirs(emissions_dir, exist_ok=True)
+    emissions_filename = f"emissions_{args.mode}_{timestamp}.csv"
+    
+    tracker = OfflineEmissionsTracker(
+        log_level='error', 
+        country_iso_code="DEU", 
+        output_dir=emissions_dir, 
+        output_file=emissions_filename,
+        experiment_id=f"{args.mode}_{timestamp}"
+    )
     tracker.start()
 
     if args.mode == "translate":
@@ -227,9 +240,25 @@ if __name__ == '__main__':
                                      
     elif args.mode == "describe_image":
         print('DESCRIBING IMAGES WITH VLM')
+        
+        # Filter parties if specified
+        parties_to_process = args.parties if args.parties else party_dirs
+        if args.parties:
+             parties_to_process = [p for p in args.parties if p in party_dirs]
+             print(f"Processing specific parties: {parties_to_process}")
+        
         model, processor = load_vlm(args.vlm)
         
         for root, dirs, files in os.walk(args.output_dir):
+            # Optimisation: Check if current directory belongs to a selected party
+            rel_path = os.path.relpath(root, args.output_dir)
+            if rel_path == '.':
+                continue
+            
+            current_party = rel_path.split(os.sep)[0]
+            if current_party not in parties_to_process:
+                continue
+
             for input_fname in files:
                 if os.path.basename(input_fname) == "prompt.txt":
                     # Find corresponding image directory
@@ -246,14 +275,16 @@ if __name__ == '__main__':
                     
                     # Save in party directory (parent of root)
                     party_dir = os.path.dirname(root)
-                    desc_file = os.path.join(party_dir, f'{party_name}_{source_type}_images_description_{args.vlm.split("/")[-1]}.txt')
+                    desc_dir = os.path.join(party_dir, "descriptions")
+                    os.makedirs(desc_dir, exist_ok=True)
                     
-                    if os.path.isfile(desc_file):
-                        if args.override:
-                            os.remove(desc_file)
-                        else:
-                            print(f"{desc_file} already exists, skipping.")
-                            continue
+                    # Check if ANY description files already exist for this batch
+                    desc_pattern = os.path.join(desc_dir, f'{party_name}_{source_type}_images_description_{args.vlm.split("/")[-1]}_*.txt')
+                    existing_files = glob.glob(desc_pattern)
+                    
+                    if existing_files and not args.override:
+                         print(f"Description files for {party_name} already exist ({len(existing_files)} found) in {desc_dir}, skipping.")
+                         continue
 
                     print(f"Describing images in {img_dir}")
                     
@@ -265,12 +296,20 @@ if __name__ == '__main__':
                         print(f"No images found in {img_dir}, skipping.")
                         continue
                     
-                    print(f"  - Processing {len(image_paths)} images together...")
-                    description = describe_image_vlm(model, processor, image_paths, n_points=args.n_points)
+                    print(f"  - Processing {len(image_paths)} images individually...")
+                    descriptions = describe_image_vlm(model, processor, image_paths, n_points=args.n_points)
                     
-                    with open(desc_file, "w") as f:
-                        f.write(description)
-                    print(f"Saved description to {desc_file}")
+                    for i, (img_path, desc) in enumerate(zip(image_paths, descriptions)):
+
+                        img_filename = os.path.basename(img_path) 
+                        img_id = os.path.splitext(img_filename)[0]
+                        # If img filename is just a number, use it.
+                        
+                        desc_file = os.path.join(desc_dir, f'{party_name}_{source_type}_images_description_{args.vlm.split("/")[-1]}_{img_id}.txt')
+                        
+                        with open(desc_file, "w") as f:
+                            f.write(desc)
+                        print(f"Saved description to {desc_file}")
 
     elif args.mode == "evaluate":
         print('EVALUATING SIMILARITY BETWEEN PROMPTS AND VLM DESCRIPTIONS')
@@ -307,54 +346,85 @@ if __name__ == '__main__':
                 results_dir = os.path.join(party_path, f'results_p{args.n_points}_{args.llm.replace("/", "_")}_{source_type}')
                 prompt_file = os.path.join(results_dir, "prompt.txt")
                 
-                # Find corresponding VLM description
-                desc_file = os.path.join(party_path, f'{party}_{source_type}_images_description_{args.vlm.split("/")[-1]}.txt')
-                
                 if not os.path.isfile(prompt_file):
                     print(f"Prompt file not found: {prompt_file}, skipping.")
                     continue
-                if not os.path.isfile(desc_file):
-                    print(f"Description file not found: {desc_file}, skipping.")
+                
+                # Find all VLM description files for this party/source
+                vlm_model_name = args.vlm.split("/")[-1]
+                desc_prefix = f'{party}_{source_type}_images_description_{vlm_model_name}_'
+                
+                desc_files = []
+                desc_dir = os.path.join(party_path, "descriptions")
+                
+                # Check descriptions folder first
+                if os.path.isdir(desc_dir):
+                    for f in os.listdir(desc_dir):
+                        if f.startswith(desc_prefix) and f.endswith(".txt"):
+                             desc_files.append(os.path.join(desc_dir, f))
+                
+                # Fallback: check party dir (migration support)
+                if not desc_files and os.path.isdir(party_path):
+                     for f in os.listdir(party_path):
+                        if f.startswith(desc_prefix) and f.endswith(".txt"):
+                             desc_files.append(os.path.join(party_path, f))
+
+                # Fallback: check for the old aggregated file if no individual files found
+                if not desc_files:
+                    old_desc_file = os.path.join(party_path, f'{party}_{source_type}_images_description_{vlm_model_name}.txt')
+                    if os.path.isfile(old_desc_file):
+                         desc_files.append(old_desc_file)
+                
+                if not desc_files:
+                    print(f"No description files found for {party} - {source_type}, skipping.")
                     continue
                 
-                # Read files
-                with open(prompt_file, "r") as f:
-                    reference = f.read().strip()
-                with open(desc_file, "r") as f:
-                    candidate = f.read().strip()
-                
-                current_eval += 1
-                print(f"\n[{current_eval}/{total_evaluations}] Evaluating {party} - {source_type}")
-                print(f"  Reference: {reference}")
-                print(f"  Candidate: {candidate}")
-                
-                # Initialize scores dict
-                scores = {'party': party, 'source': source_type, 'reference': reference, 'candidate': candidate}
-                
-                try:
-                    # Compute embedding-based metrics (BLEU, ROUGE, Cosine)
-                    if args.eval_method in ["embedding", "both"]:
-                        embedding_scores = evaluate_similarity(reference, candidate)
-                        scores.update(embedding_scores)
-                        print(f"  Embedding Scores: BLEU={embedding_scores['bleu']}, ROUGE-1={embedding_scores['rouge1_f']}, ROUGE-L={embedding_scores['rougeL_f']}, Cosine={embedding_scores['cosine_similarity']}")
+                desc_files.sort()
+
+                for desc_file in desc_files:
+                    # Extract image ID from filename
+                    basename = os.path.basename(desc_file)
+                    if basename.startswith(desc_prefix):
+                         image_id = basename[len(desc_prefix):-4] # remove .txt
+                    else:
+                         image_id = "aggregated"
+
+                    # Read files
+                    with open(prompt_file, "r") as f:
+                        reference = f.read().strip()
+                    with open(desc_file, "r") as f:
+                        candidate = f.read().strip()
                     
-                    # Compute LLM-based evaluation
-                    if args.eval_method in ["llm", "both"]:
-                        llm_scores = evaluate_alignment_with_llm(llm, reference, candidate)
-                        scores.update(llm_scores)
-                        print(f"  LLM Score: {llm_scores['llm_score']}/10 - {llm_scores['llm_reasoning']}")
+                    current_eval += 1
+                    print(f"\n[{current_eval}/{total_evaluations}] Evaluating {party} - {source_type} - Image {image_id}")
                     
-                    results.append(scores)
-                except Exception as e:
-                    print(f"  ERROR: Failed to evaluate {party} - {source_type}: {e}")
-                    print(f"  Continuing with next evaluation...")
+                    # Initialize scores dict
+                    scores = {'party': party, 'source': source_type, 'image_id': image_id, 'reference': reference, 'candidate': candidate}
+                    
+                    try:
+                        # Compute embedding-based metrics (BLEU, ROUGE, Cosine)
+                        if args.eval_method in ["embedding", "both"]:
+                            embedding_scores = evaluate_similarity(reference, candidate)
+                            scores.update(embedding_scores)
+                            print(f"  Embedding Scores: BLEU={embedding_scores['bleu']}, Cosine={embedding_scores['cosine_similarity']}")
+                        
+                        # Compute LLM-based evaluation
+                        if args.eval_method in ["llm", "both"]:
+                            llm_scores = evaluate_alignment_with_llm(llm, reference, candidate)
+                            scores.update(llm_scores)
+                            print(f"  LLM Score: {llm_scores['llm_score']}/10")
+                        
+                        results.append(scores)
+                    except Exception as e:
+                        print(f"  ERROR: Failed to evaluate {party} - {source_type} - {image_id}: {e}")
+                        print(f"  Continuing with next evaluation...")
         
         # Save results to CSV
         if results:
             results_df = pd.DataFrame(results)
             
             # Determine column order based on eval method
-            base_cols = ['party', 'source']
+            base_cols = ['party', 'source', 'image_id']
             metric_cols = []
             if args.eval_method in ["embedding", "both"]:
                 metric_cols.extend(['bleu', 'rouge1_f', 'rouge2_f', 'rougeL_f', 'cosine_similarity'])
@@ -362,21 +432,36 @@ if __name__ == '__main__':
                 metric_cols.extend(['llm_score', 'llm_reasoning'])
             end_cols = ['reference', 'candidate']
             
+            # Ensure all columns exist
+            for col in base_cols + metric_cols + end_cols:
+                if col not in results_df.columns:
+                    results_df[col] = None
+
             column_order = base_cols + metric_cols + end_cols
             results_df = results_df[column_order]
             
             # Save with method-specific filename
             csv_filename = f'evaluation_results_{args.eval_method}.csv'
-            csv_path = os.path.join(args.output_dir, csv_filename)
+            eval_dir = os.path.join(args.output_dir, "evaluations")
+            os.makedirs(eval_dir, exist_ok=True)
+            csv_path = os.path.join(eval_dir, csv_filename)
             
             # If specific parties were selected and CSV exists, merge with existing data
             if args.parties and os.path.isfile(csv_path):
                 existing_df = pd.read_csv(csv_path)
-                # Remove rows for the parties we just evaluated
+                
+                # If existing DF doesn't have image_id, add it (backward compatibility)
+                if 'image_id' not in existing_df.columns:
+                    existing_df['image_id'] = 'aggregated'
+
+                # Remove rows for the parties we just evaluated to avoid duplicates
+                # We filter out rows where party AND source match what we just processed
+                # But here we processed all sources for the selected parties.
                 existing_df = existing_df[~existing_df['party'].isin(parties_to_evaluate)]
+                
                 # Combine existing data with new results
                 results_df = pd.concat([existing_df, results_df], ignore_index=True)
-                results_df = results_df.sort_values(['party', 'source']).reset_index(drop=True)
+                results_df = results_df.sort_values(['party', 'source', 'image_id']).reset_index(drop=True)
                 print(f"\nUpdated existing CSV with results for: {parties_to_evaluate}")
             
             results_df.to_csv(csv_path, index=False)

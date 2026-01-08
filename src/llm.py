@@ -235,23 +235,35 @@ def load_vlm(model_name: str = "Qwen/Qwen2-VL-7B-Instruct") -> tuple[transformer
     processor = AutoProcessor.from_pretrained(model_name)
     return (model, processor)
 
-def describe_image_vlm(model: transformers.Qwen2VLForConditionalGeneration, processor: transformers.AutoProcessor, image_paths: list[str], n_points: int = 5) -> str:
-    from PIL import Image
-    images = [Image.open(path).convert("RGB") for path in image_paths]
-    
+# Global cache for the embedding model to avoid reloading it for every evaluation
+_embedding_model_cache = None
 
-    content = [{"type": "image", "image": img} for img in images]
+def get_embedding_model():
+    global _embedding_model_cache
+    from sentence_transformers import SentenceTransformer
+    if _embedding_model_cache is None:
+        _embedding_model_cache = SentenceTransformer('all-MiniLM-L6-v2')
+    return _embedding_model_cache
+
+def describe_image_vlm(model: transformers.Qwen2VLForConditionalGeneration, processor: transformers.AutoProcessor, image_paths: list[str], n_points: int = 5) -> list[str]:
+    from PIL import Image
     
-    content.append({"type": "text", "text": f"Analyze these {len(images)} images of the same city. Identify {n_points} key urban planning or policy-related visual aspects visible in these images. Focus on infrastructure, public spaces, transportation systems, environmental features, and architectural elements. Describe each aspect using a descriptive phrase of at least 2 words (e.g., adjective + noun). Do not use single words. Return ONLY a comma-separated list ending with a period, nothing else."})
+    descriptions = []
     
-    messages = [{"role": "user", "content": content}]
-    text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    inputs = processor(text=[text], images=images, padding=True, return_tensors="pt").to(model.device)
-    
-    generated_ids = model.generate(**inputs, max_new_tokens=128)
-    generated_ids_trimmed = [out_ids[len(in_ids):] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)]
-    output_text = processor.batch_decode(generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False)
-    return output_text[0]
+    # Process each image individually
+    for img_path in image_paths:
+        image = Image.open(img_path).convert("RGB")
+        content = [{"type": "image", "image": image}]
+        content.append({"type": "text", "text": f"Analyze this image of a city. Identify {n_points} key urban planning or policy-related visual aspects visible in this image. Focus on infrastructure, public spaces, transportation systems, environmental features, and architectural elements. Describe each aspect using a descriptive phrase of at least 2 words (e.g., adjective + noun). Do not use single words. Return ONLY a comma-separated list ending with a period, nothing else."})
+        messages = [{"role": "user", "content": content}]
+        text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        inputs = processor(text=[text], images=[image], padding=True, return_tensors="pt").to(model.device)
+        generated_ids = model.generate(**inputs, max_new_tokens=128)
+        generated_ids_trimmed = [out_ids[len(in_ids):] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)]
+        output_text = processor.batch_decode(generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False)
+        descriptions.append(output_text[0])
+        
+    return descriptions
 
 def evaluate_similarity(reference: str, candidate: str) -> dict:
     from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
@@ -272,7 +284,7 @@ def evaluate_similarity(reference: str, candidate: str) -> dict:
     rouge_scores = scorer.score(reference.lower(), candidate.lower())
     
     # Cosine similarity using sentence embeddings
-    embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+    embedding_model = get_embedding_model()
     ref_embedding = embedding_model.encode([reference])
     cand_embedding = embedding_model.encode([candidate])
     cos_sim = cosine_similarity(ref_embedding, cand_embedding)[0][0]
