@@ -323,7 +323,7 @@ def evaluate_alignment_with_llm(llm, reference: str, candidate: str) -> dict:
     
     """
 
-    _, answer = reason(model, tokenizer, judge_prompt, max_new_tokens=1024)
+    _, answer = reason(model, tokenizer, judge_prompt, max_new_tokens=2048)
     
     # Parse the JSON response
     try:

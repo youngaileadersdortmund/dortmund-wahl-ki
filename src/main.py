@@ -242,7 +242,6 @@ if __name__ == '__main__':
     elif args.mode == "describe_image":
         print('DESCRIBING IMAGES WITH VLM')
         
-        # Filter parties if specified
         parties_to_process = args.parties if args.parties else party_dirs
         if args.parties:
              parties_to_process = [p for p in args.parties if p in party_dirs]
@@ -251,7 +250,6 @@ if __name__ == '__main__':
         model, processor = load_vlm(args.vlm)
         
         for root, dirs, files in os.walk(args.output_dir):
-            # Optimisation: Check if current directory belongs to a selected party
             rel_path = os.path.relpath(root, args.output_dir)
             if rel_path == '.':
                 continue
@@ -327,13 +325,11 @@ if __name__ == '__main__':
             parties_to_evaluate = [p for p in args.parties if p in party_dirs]
             print(f"Evaluating specific parties: {parties_to_evaluate}")
         
-        # Load LLM if needed for LLM-based evaluation
         llm = None
         if args.eval_method in ["llm", "both"]:
             print("Loading LLM for evaluation...")
             llm = load_llm(args.llm)
         
-        # Filter sources if specified
         sources_to_evaluate = args.sources if args.sources else ["program", "kommunalomat"]
         
         total_evaluations = len(parties_to_evaluate) * len(sources_to_evaluate)
@@ -343,7 +339,6 @@ if __name__ == '__main__':
             party_path = os.path.join(args.output_dir, party)
             
             for source_type in sources_to_evaluate:
-                # Find prompt.txt
                 results_dir = os.path.join(party_path, f'results_p{args.n_points}_{args.llm.replace("/", "_")}_{source_type}')
                 prompt_file = os.path.join(results_dir, "prompt.txt")
                 
@@ -383,14 +378,12 @@ if __name__ == '__main__':
                 desc_files.sort()
 
                 for desc_file in desc_files:
-                    # Extract image ID from filename
                     basename = os.path.basename(desc_file)
                     if basename.startswith(desc_prefix):
-                         image_id = basename[len(desc_prefix):-4] # remove .txt
+                         image_id = basename[len(desc_prefix):-4]
                     else:
                          image_id = "aggregated"
 
-                    # Read files
                     with open(prompt_file, "r") as f:
                         reference = f.read().strip()
                     with open(desc_file, "r") as f:
@@ -420,7 +413,6 @@ if __name__ == '__main__':
                         print(f"  ERROR: Failed to evaluate {party} - {source_type} - {image_id}: {e}")
                         print(f"  Continuing with next evaluation...")
         
-        # Save results to CSV
         if results:
             results_df = pd.DataFrame(results)
             
@@ -440,7 +432,6 @@ if __name__ == '__main__':
             column_order = base_cols + metric_cols + end_cols
             results_df = results_df[column_order]
             
-            # Save with method-specific filename
             csv_filename = f'evaluation_results_{args.eval_method}.csv'
             eval_dir = os.path.join(args.output_dir, "evaluations")
             os.makedirs(eval_dir, exist_ok=True)
@@ -449,7 +440,6 @@ if __name__ == '__main__':
             if args.parties and os.path.isfile(csv_path):
                 existing_df = pd.read_csv(csv_path)
                 
-                # If existing DF doesn't have image_id, add it (backward compatibility)
                 if 'image_id' not in existing_df.columns:
                     existing_df['image_id'] = 'aggregated'
 
