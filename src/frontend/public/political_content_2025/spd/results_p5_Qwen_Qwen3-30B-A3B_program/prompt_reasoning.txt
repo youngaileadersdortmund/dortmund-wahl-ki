@@ -1,5 +1,5 @@
 <think>
-Okay, let's tackle this query. The user wants me to analyze the election program summary for Dortmund and identify five important visual aspects of the city's appearance that would be affected by the SPD's program. Each aspect needs to be described in 3-6 words. 
+Okay, let's tackle this query. The user wants me to analyze the election program summary for ANON CITY and identify five important visual aspects of the city's appearance that would be affected by the SPD's program. Each aspect needs to be described in 3-6 words. 
 
 First, I need to read through the provided program carefully. The summary mentions a lot about housing, education, transportation, public spaces, and environmental initiatives. The key here is to focus on visual elements that would change due to these policies.
 

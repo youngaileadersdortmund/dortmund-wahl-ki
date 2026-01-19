@@ -24,7 +24,7 @@ Aber man muss prüfen, ob die Antworten diese erwähnen. Zum Beispiel: "mehr Fah
 Ja, diese scheinen abgedeckt zu sein. Jetzt stellen Sie sicher, dass jeder ein visueller Aspekt ist. Die Antwort sollte 5 Elemente mit jeweils 3-6 Wörtern sein, durch Kommas getrennt. Also:
 Radinfrastruktur, öffentliche Lernorte, Stadtgrün, öffentliche Einrichtungen, Zugänglichkeitsmerkmale
 Aber vielleicht etwas spezifischer. Ich werde die genauen Formulierungen aus den Antworten überprüfen:
-- "Fahrradverleih in Dortmund sollte kostenlos sein" - Radinfrastruktur
+- "Fahrradverleih in ANON CITY sollte kostenlos sein" - Radinfrastruktur
 - "Mehr Fahrradstellplätze" – Fahrradstellplätze
 - "Radwege müssen sicherer gemacht werden" – Radwege
 - "Öffentliche Lernorte wie Bibliotheken" - Bibliotheken
