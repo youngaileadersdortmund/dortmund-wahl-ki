@@ -44,18 +44,6 @@ docker compose up
 
 ## 📖 About the Project
 
-- Data Sources: Party election programs and [Kommunalomat](https://xn--whlt-loa.nrw/start/kommunalomat/) responses.
-
-- Models:
-
-    - [Qwen3-30B-A3B](https://huggingface.co/Qwen/Qwen3-30B-A3B) for analysis & reasoning
-
-    - [FLUX.1 [schnell]](https://huggingface.co/black-forest-labs/FLUX.1-schnell) for image generation
-
-    - [BART](https://huggingface.co/facebook/bart-large-cnn) for text summarization
-
-    - [TowerInstruct-13B](https://huggingface.co/Unbabel/TowerInstruct-13B-v0.1) for translation
-
 This project is experimental and aims to stimulate discourse. **It is not a voting recommendation.**
 
 © Authors of "Characterizing the Pros and Cons of Using AI for Political Education
